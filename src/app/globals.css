@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Graduate&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFFAFA;
+  --foreground: #2C3137;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,7 +22,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif, "Roboto";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -28,6 +31,10 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  color: #45496A;
+  color: #7e8aad;
+  color: #f1b2b2;
+  color: #e3857c;
 }
 
 a {
@@ -40,3 +47,4 @@ a {
     color-scheme: dark;
   }
 }
+
