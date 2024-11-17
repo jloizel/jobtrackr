@@ -1,18 +1,18 @@
+import Authentication from "../authentication/authentication";
 import styles from "./navbar.module.css"
 
-const Authentication = () => {
+const Navbar = () => {
 
   return (
-    <div className={styles.authentication}>
-      <div>
-        Log In
+    <div className={styles.navbar}>
+      <div className={styles.title}>
+        <span>Job</span>
+        <span>Trackr</span>
       </div>
-      <div>
-        Sign Up
-      </div>
+      <Authentication/>
     </div>
  );
 }
 
-export default Authentication
+export default Navbar
 

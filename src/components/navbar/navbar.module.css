@@ -2,4 +2,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.title {
+  color: #45496A;
+  font-family: "Roboto", sans-serif;
+}
+
+.title span:first-child {
+  font-weight: 500;
+}
+
+.title span:last-child {
+  font-weight: 700;
 }

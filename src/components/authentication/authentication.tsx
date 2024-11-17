@@ -1,13 +1,18 @@
-import styles from "./logIn.module.css"
+import styles from "./authentication.module.css"
 
-const LogIn = () => {
+const Authentication = () => {
 
   return (
-    <div className={styles.logIn}>
-      Log In
+    <div className={styles.authentication}>
+      <div>
+        Log in
+      </div>
+      <div>
+        Sign up for free
+      </div>
     </div>
  );
 }
 
-export default LogIn
+export default Authentication
 
