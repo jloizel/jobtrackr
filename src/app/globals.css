@@ -22,7 +22,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif, "Roboto";
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -31,12 +31,6 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  color: #45496A;
-  color: #7e8aad;
-  color: #f1b2b2;
-  color: #e3857c;
-  color: #FFFAFA;
-  color: #2C3137;
 }
 
 a {
@@ -48,5 +42,14 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.colours {
+  color: #45496A;
+  color: #7e8aad;
+  color: #f1b2b2;
+  color: #e3857c;
+  color: #FFFAFA;
+  color: #2C3137;
 }
 

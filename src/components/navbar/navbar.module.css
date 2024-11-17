@@ -7,14 +7,27 @@
 }
 
 .title {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
   color: #45496A;
-  font-family: "Roboto", sans-serif;
+  cursor: pointer;
 }
 
-.title span:first-child {
+.icon {
+  font-size: 40px;
+}
+
+.text {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+}
+
+.text span:first-child {
   font-weight: 500;
 }
 
-.title span:last-child {
+.text span:last-child {
   font-weight: 700;
 }
