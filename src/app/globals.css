@@ -8,6 +8,7 @@
   --secondary-text-color: #ffffff;
   --toggle-bg: #283452;
   --toggle-fg: #00a6ff;
+  --button-bg: #00a6ff;
   
 }
 
@@ -17,7 +18,8 @@
   --primary-text-color: #FFFAFA;
   --secondary-text-color: #0a0a0a;
   --toggle-bg: #283452;
-  --toggle-fg: #00a6ff;
+  --toggle-fg: #f1b2b2;
+  --button-bg: #f1b2b2;
 }
 
 html,
@@ -32,6 +34,7 @@ body {
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
 }
 
 * {
@@ -60,5 +63,17 @@ a {
   color: #2C3137;
   color: #00a6ff;
   color: #283452;
+}
+
+@media (max-width: 767px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+
+}
+
+@media (min-width: 1024px) {
+
 }
 
