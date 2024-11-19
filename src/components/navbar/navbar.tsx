@@ -9,6 +9,7 @@ const Navbar = () => {
 
   return (
     <div className={styles.navbar}>
+      
       <ThemeToggle/>
       <a className={styles.title} href={"/"}>
         <GiFishing className={styles.icon}/>

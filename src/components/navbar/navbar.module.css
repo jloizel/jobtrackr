@@ -11,7 +11,7 @@
   flex-direction: row;
   gap: 5px;
   align-items: center;
-  color: #45496A;
+  color: var(--foreground-color);
   cursor: pointer;
 }
 

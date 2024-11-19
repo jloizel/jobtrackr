@@ -3,7 +3,7 @@
 
 :root {
   --background-color: #FFFAFA;
-  --foreground-color: #2C3137;
+  --foreground-color: #45496A;
   --primary-text-color: #2C3137;
   --secondary-text-color: #ffffff;
   --toggle-bg: #283452;
@@ -12,7 +12,7 @@
 }
 
 [data-theme="dark"] {
-  --background-color: #2C3137;
+  --background-color: #45496A;
   --foreground-color: #FFFAFA;
   --primary-text-color: #FFFAFA;
   --secondary-text-color: #0a0a0a;

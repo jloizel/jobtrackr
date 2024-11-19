@@ -4,3 +4,16 @@
   align-items: center;
   gap: 20px;
 }
+
+.login, .signup {
+  font-weight: 700;
+  color: var(--foreground-color);
+}
+
+.login {
+
+}
+
+.signup {
+
+}

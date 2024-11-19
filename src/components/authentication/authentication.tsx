@@ -4,11 +4,11 @@ const Authentication = () => {
 
   return (
     <div className={styles.authentication}>
-      <div>
+      <div className={styles.login}>
         Log in
       </div>
-      <div>
-        Sign up for free
+      <div className={styles.signup}>
+        Sign up
       </div>
     </div>
  );
