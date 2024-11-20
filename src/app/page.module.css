@@ -4,7 +4,7 @@
   align-items: center;
   justify-items: center;
   min-height: 100svh;
-  padding: 30px;
+  padding: 25px;
   gap: 64px;
   background-color: var(--background-color);
   color: var(--primary-text-color);
