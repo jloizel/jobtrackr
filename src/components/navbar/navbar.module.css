@@ -6,7 +6,22 @@
   width: 100%;
 }
 
+.toggleContainer, .authenticationContainer {
+  width: 25%;
+  display: flex;
+}
+
+.toggleContainer {
+  justify-content: flex-start;
+}
+
+.authenticationContainer {
+  justify-content: flex-end;
+}
+
 .title {
+  width: 50%;
+  justify-content: center;
   display: flex;
   flex-direction: row;
   gap: 5px;

@@ -7,8 +7,9 @@ const Navbar = () => {
   
   return (
     <div className={styles.navbar}>
-
-      <ThemeToggle/>
+      <div className={styles.toggleContainer}>
+        <ThemeToggle/>
+      </div>
       <a className={styles.title} href={"/"}>
         <GiFishing className={styles.icon}/>
         <div className={styles.text}>
@@ -16,7 +17,9 @@ const Navbar = () => {
           <span>Trackr</span> 
         </div>
       </a>
-      <Authentication/>
+      <div className={styles.authenticationContainer}>
+        <Authentication/>
+      </div>
     </div>
  );
 }
