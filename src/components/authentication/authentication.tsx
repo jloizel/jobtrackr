@@ -38,7 +38,14 @@ const Authentication = () => {
           <Hamburger toggled={openMenu} toggle={setOpenMenu} size={20} rounded hideOutline={true}/>
           <Drawer open={openMenu} onClose={handleMenuClose} anchor={"right"} PaperProps={{sx: { width: "100%",  marginTop: "100px" }}}>
             <div  className={styles.drawerContent}>
-              test
+              <div className={styles.buttonContainer}>
+                <div className={styles.login}>
+                  Log in
+                </div>
+                <div className={styles.signup}>
+                  Sign up
+                </div>
+              </div>
             </div>
           </Drawer>
         </>
