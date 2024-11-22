@@ -6,8 +6,8 @@
   font-size: 22px;
 }
 
-.drawer {
-  width: 100%;
+.drawerContent {
+  padding: 80px;
 }
 
 .buttonContainer {
