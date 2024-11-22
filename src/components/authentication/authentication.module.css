@@ -6,6 +6,10 @@
   font-size: 22px;
 }
 
+.drawer {
+  width: 100%;
+}
+
 .buttonContainer {
   display: flex;
   flex-direction: row;
