@@ -8,6 +8,8 @@
 
 .drawerContent {
   padding: 80px;
+  background-color: var(--background-color);
+  height: 100%;
 }
 
 .buttonContainer {
