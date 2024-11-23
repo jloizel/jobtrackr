@@ -36,7 +36,7 @@ const Authentication = () => {
       {isMobile ? (
         <>
           <Hamburger toggled={openMenu} toggle={setOpenMenu} size={20} rounded hideOutline={true}/>
-          <Drawer open={openMenu} onClose={handleMenuClose} anchor={"right"} PaperProps={{sx: { width: "100%",  marginTop: "100px" }}}>
+          <Drawer open={openMenu} onClose={handleMenuClose} anchor={"right"} PaperProps={{sx: { width: "100%",  marginTop: "100px" }}} BackdropProps={{ invisible: true }}>
             <div  className={styles.drawerContent}>
               <div className={styles.buttonContainer}>
                 <div className={styles.login}>

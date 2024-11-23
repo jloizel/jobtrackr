@@ -12,15 +12,23 @@
 
 .buttonContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   gap: 20px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 }
 
 .login, .signup {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 20px;
   cursor: pointer;
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
 }
 
 .login {
