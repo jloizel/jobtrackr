@@ -13,7 +13,7 @@ const Navbar = () => {
       <a className={styles.title} href={"/"}>
         <GiFishing className={styles.icon}/>
         <div className={styles.text}>
-          <span>Job</span>
+          <span>job</span>
           <span>Trackr</span> 
         </div>
       </a>
