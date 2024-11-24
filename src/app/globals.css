@@ -2,8 +2,8 @@
 
 
 :root {
-  --background-color: #FFFAFA;
-  --foreground-color: #45496A;
+  --background-color: #fbfbff;
+  --foreground-color: #06283D;
   --primary-text-color: #2C3137;
   --secondary-text-color: #ffffff;
   --toggle-bg: #283452;
@@ -12,13 +12,13 @@
 }
 
 [data-theme="dark"] {
-  --background-color: #45496A;
+  --background-color: #06283D;
   --foreground-color: #FFFAFA;
   --primary-text-color: #FFFAFA;
   --secondary-text-color: #0a0a0a;
   --toggle-bg: #283452;
-  --toggle-fg: #f1b2b2;
-  --button-bg: #f1b2b2;
+  --toggle-fg: #8EBBFF;
+  --button-bg: #8EBBFF;
 }
 
 html,
@@ -69,6 +69,8 @@ a {
   color: #2C3137;
   color: #00a6ff;
   color: #283452;
+  color: #256D85;
+  color: #47B5FF;
 }
 
 @media (max-width: 767px) {
@@ -87,9 +89,4 @@ a {
   min-height: 100vh;
   background-color: var(--background-color);
   color: var(--primary-text-color);
-  padding: 25px;
-
-  @media (min-width: 768px) and (max-width: 1023px) {
-    padding: 80px;
-  }
 }

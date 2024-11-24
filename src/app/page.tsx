@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import Navbar from "@/components/navbar/navbar";
 import { useContext, useEffect } from "react";
 import { ThemeContext } from "../utils/theme";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
   const { theme } = useContext(ThemeContext);
@@ -12,6 +13,14 @@ export default function Home() {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session?.user?.email) {
+      localStorage.setItem("userEmail", session.user.email); 
+    }
+  }, [session]);
 
   return (
     <div className={styles.page}>
