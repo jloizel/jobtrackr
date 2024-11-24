@@ -90,4 +90,12 @@ a {
   min-height: 100vh;
   background-color: var(--background-color);
   color: var(--primary-text-color);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.wrapper {
+  width: 80%;
+  max-width: 1200px;
 }

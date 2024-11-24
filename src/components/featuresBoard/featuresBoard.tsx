@@ -1,6 +1,9 @@
-"use client";
-
 import styles from "./featuresBoard.module.css";
+import { HiOutlineBriefcase } from "react-icons/hi2";
+import { CgFileDocument } from "react-icons/cg";
+import { FaRegEnvelope } from "react-icons/fa";
+import { PiBriefcaseBold } from "react-icons/pi";
+
 
 const FeaturesBoard = () => {
   
@@ -8,13 +11,16 @@ const FeaturesBoard = () => {
     <div className={styles.container}>
       <div className={styles.buttonContainer}>
         <div className={styles.button}>
-          Job Tracker
+          <PiBriefcaseBold/>
+          <span>Job Tracker</span>
         </div>
         <div className={styles.button}>
-          CV Upload
+          <CgFileDocument/>
+          <span>CV Upload</span>
         </div>
         <div className={styles.button}>
-          Cover Letter Upload
+          <FaRegEnvelope/>
+          <span>Cover Letter Upload</span>
         </div>
       </div>
     </div>
