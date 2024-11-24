@@ -1,3 +1,5 @@
+"use client"
+
 import { GiFishing } from "react-icons/gi";
 import Authentication from "../authentication/authentication";
 import ThemeToggle from "../themeToggle/themeToggle";

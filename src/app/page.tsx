@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Navbar from "@/components/navbar/navbar";
 import { useContext, useEffect } from "react";
-import { ThemeContext } from "./theme";
+import { ThemeContext } from "../utils/theme";
 
 export default function Home() {
   const { theme } = useContext(ThemeContext);
@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      <Navbar/>
+      {/* <Navbar/> */}
     </div>
   );
 }

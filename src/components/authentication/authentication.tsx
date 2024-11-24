@@ -1,15 +1,17 @@
+"use client"
+
 import styles from "./authentication.module.css"
-import { IoIosMenu } from "react-icons/io";
-import { FiMenu } from "react-icons/fi";
-import { SlMenu } from "react-icons/sl";
-import { RxHamburgerMenu } from "react-icons/rx";
 import { createTheme, Drawer, useMediaQuery } from '@mui/material';
 import { useState } from "react";
 import Hamburger from "hamburger-react";
-
+import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
 const Authentication = () => {
   const [openMenu, setOpenMenu] = useState(false)
+
+  const { status } = useSession();
+
 
   const handleMenuClose = () => {
     setOpenMenu(false)
@@ -39,12 +41,15 @@ const Authentication = () => {
           <Drawer open={openMenu} onClose={handleMenuClose} anchor={"right"} PaperProps={{sx: { width: "100%",  marginTop: "100px" }}} BackdropProps={{ invisible: true }}>
             <div  className={styles.drawerContent}>
               <div className={styles.buttonContainer}>
-                <div className={styles.login}>
-                  Log in
-                </div>
-                <div className={styles.signup}>
-                  Sign up
-                </div>
+                {status === "unauthenticated" ? (
+                  <Link href="/login" className={styles.login}>
+                    Log in
+                  </Link>
+                ):(
+                  <div className={styles.signup} onClick={() => signOut()}>
+                    Sign out
+                  </div>
+                )}
               </div>
             </div>
           </Drawer>
@@ -52,12 +57,15 @@ const Authentication = () => {
         
       ):(
         <div className={styles.buttonContainer}>
-          <div className={styles.login}>
-            Log in
-          </div>
-          <div className={styles.signup}>
-            Sign up
-          </div>
+          {status === "unauthenticated" ? (
+            <Link href="/login" className={styles.login}>
+              Log in
+            </Link>
+          ):(
+            <div className={styles.signup} onClick={() => signOut()}>
+              Sign out
+            </div>
+          )}
         </div>
       )}
     </div>
