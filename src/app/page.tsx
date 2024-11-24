@@ -14,17 +14,25 @@ export default function Home() {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  const { data: session } = useSession();
-
-  useEffect(() => {
-    if (session?.user?.email) {
-      localStorage.setItem("userEmail", session.user.email); 
-    }
-  }, [session]);
-
   return (
     <div className={styles.page}>
-      {/* <Navbar/> */}
+      <div className={styles.leftContainer}>
+        <div className={styles.headerText}>
+          <span className={styles.headerText1}>
+            Organised, Easy
+          </span>
+          <div className={styles.headerText2}>
+            <span>Job</span>
+            <span>Tracking</span>
+          </div>
+          <span className={styles.headerText3}>
+            jobTrackr takes the stress out of job applications with a seamless organisation of your job search, so you never miss an opportunity.
+          </span>
+        </div>
+      </div>
+      <div className={styles.rightContainer}>
+
+      </div>
     </div>
   );
 }

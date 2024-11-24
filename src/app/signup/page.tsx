@@ -1,11 +1,11 @@
 "use client";
 
 import { signIn, useSession } from "next-auth/react";
-import styles from "./logIn.module.css";
+import styles from "./signUp.module.css";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-const LoginPage = () => {
+const SignUpPage = () => {
   const { status } = useSession();
 
   const router = useRouter();
@@ -26,11 +26,11 @@ const LoginPage = () => {
         <div className={styles.socialButton} onClick={() => signIn("google")}>
           Sign in with Google
         </div>
-        <div className={styles.socialButton} onClick={() => signIn("github")}>Sign in with Github</div>
-        {/* <div className={styles.socialButton}>Sign in with Facebook</div> */}
+        {/* <div className={styles.socialButton}>Sign in with Github</div>
+        <div className={styles.socialButton}>Sign in with Facebook</div> */}
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignUpPage;

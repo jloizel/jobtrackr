@@ -31,8 +31,6 @@ const Authentication = () => {
   
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  
-
   return (
     <div className={styles.authentication}>
       {isMobile ? (
@@ -42,9 +40,14 @@ const Authentication = () => {
             <div  className={styles.drawerContent}>
               <div className={styles.buttonContainer}>
                 {status === "unauthenticated" ? (
-                  <Link href="/login" className={styles.login}>
-                    Log in
-                  </Link>
+                  <>
+                    <Link href="/login" className={styles.login}>
+                      Log in
+                    </Link>
+                    <Link href="/signup" className={styles.signup}>
+                      Sign up for free
+                    </Link>
+                  </>
                 ):(
                   <div className={styles.signup} onClick={() => signOut()}>
                     Sign out
@@ -58,9 +61,14 @@ const Authentication = () => {
       ):(
         <div className={styles.buttonContainer}>
           {status === "unauthenticated" ? (
-            <Link href="/login" className={styles.login}>
-              Log in
-            </Link>
+            <>
+              <Link href="/login" className={styles.login}>
+                Log in
+              </Link>
+              <Link href="/signup" className={styles.signup}>
+                Sign up for free
+              </Link>
+            </>
           ):(
             <div className={styles.signup} onClick={() => signOut()}>
               Sign out
