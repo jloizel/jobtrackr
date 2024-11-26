@@ -52,7 +52,7 @@ const TrackrPage = () => {
         const userJobs = await getAllJobs(); 
         setJobs(userJobs); 
       } catch (err) {
-        setError('Failed to fetch jobs');
+        setError('Failed to fetch jobs.');
         console.error('Error fetching jobs:', err);
       } finally {
         setLoading(false); 
