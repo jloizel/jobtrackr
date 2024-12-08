@@ -1,38 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<a id="readme-top"></a>
 
-To be updated soon, create medium post
+<br />
+<div align="center">
+  <a href="https://github.com/jloizel/hackrApp">
+    <img src="https://github.com/jloizel/hackrApp/blob/main/assets/images/hackr.png" alt="Logo" width="auto" height="300">
+  </a>
 
-## Getting Started 
+<h2 align="center">Hackr</h2>
 
-First, run the development server:
+  <p align="center">
+    Hackr is an interactive coding challenge app designed to help you develop your programming skills through engaging daily coding puzzles.
+    <br />
+    <br />
+    <a href="https://github.com/jloizel/hackrApp"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+  </p>
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<!-- ABOUT THE PROJECT -->
+## 📝 About The Project
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Jobtrackr is a mobile application built to empower job seekers in organizing their job search effectively. With features for tracking applications, statuses, and deadlines, users can stay on top of their job hunt and maintain a structured approach.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This app allows users to log into their personal account, add details about job applications, and track their progress, from submission to offer. The platform offers a clean and intuitive interface, ensuring that users can focus on finding the right opportunity without getting lost in administrative tasks.
 
-## Learn More
+The development of this project enhanced my experience with user authentication, database integration, and building mobile-friendly workflows.
 
-To learn more about Next.js, take a look at the following resources:
+### Built With (***non-exhaustive***)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/react-color.svg" alt="react native" height="35px"/></code>
+<code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/typescript-color.svg" alt="typescript" height="35px"/></code>
+<code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/openai-color.svg" alt="openapi" height="35px"/></code>
+<code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/expo-color.svg" alt="expo" height="35px"/></code>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+</br>
 
-## Deploy on Vercel
+## 🎮 How to Play
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Choose a coding language from the available options.
+2. Solve the coding problem.
+3. Submit your solution and get immediate feedback.
+4. Check your playing history and results through the calendar tab.
+5. Track your stats and achievements through your player profile.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📸 Media
+
+Here are some screenshots of **Hackr** live:
+
+<div align="center">
+  <img src="https://github.com/jloizel/hackrApp/blob/main/assets/images/Hackr_dark2.jpeg" alt="Screenshot 1" width="30%" style="margin: 10px;"/>
+  <img src="https://github.com/jloizel/hackrApp/blob/main/assets/images/Hackr_dark1.jpeg" alt="Screenshot 2" width="30%" style="margin: 10px;"/>
+  <img src="https://github.com/jloizel/hackrApp/blob/main/assets/images/Hackr_dark3.jpeg" alt="Screenshot 3" width="30%" style="margin: 10px;"/>
+</div>
+
+<div align="center">
+  <img src="https://github.com/jloizel/hackrApp/blob/main/assets/images/Hackr_light2.jpeg" alt="Screenshot 4" width="30%" style="margin: 10px;"/>
+  <img src="https://github.com/jloizel/hackrApp/blob/main/assets/images/Hackr_light1.jpeg" alt="Screenshot 5" width="30%" style="margin: 10px;"/>
+  <img src="https://github.com/jloizel/hackrApp/blob/main/assets/images/Hackr_light3.jpeg" alt="Screenshot 6" width="30%" style="margin: 10px;"/>
+</div>
+
+## 🚀 Getting Started
+
+Follow these steps to clone and run **Hackr** on your local machine:
+
+### Prerequisites
+
+Make sure you have the following tools installed on your system:
+
+- [Node.js](https://nodejs.org/) (v16 or higher)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/) (for running the React Native app)
+- A mobile simulator (such as Xcode for iOS or Android Studio for Android) or a physical device with the Expo Go app.
+
+### Installation
+
+Some feautures have been commented out for testing purposes (the use of AsyncStorage to keep track of user's game history mainly, timer once submitted etc)
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/jloizel/hackrApp.git
+   ```
+
+2. Install dependencies
+
+   ```bash
+   npm install
+   ```
+
+3. Start the app
+
+   ```bash
+    npx expo start
+   ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
