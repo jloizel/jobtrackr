@@ -7,8 +7,6 @@ import { IoMoonOutline } from "react-icons/io5";
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
-  console.log(theme)
-
   return (
     <div className={styles.themeToggle}>
       {theme === "dark"? (

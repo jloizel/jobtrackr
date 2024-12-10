@@ -28,11 +28,11 @@ const ThemeProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const refreshTheme = () => {
+    if (typeof window !== "undefined") {
+      const root = document.documentElement;
+      root.setAttribute("data-theme", theme);
       localStorage.setItem("theme", theme);
-    };
-
-    refreshTheme();
+    }
   }, [theme]);
 
   return (

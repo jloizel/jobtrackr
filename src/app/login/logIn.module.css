@@ -6,6 +6,12 @@
   height: 100%;
 }
 
+.toggleContainer {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
 .logoContainer {
   position: absolute;
   top: 0;

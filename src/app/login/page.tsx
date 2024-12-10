@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { GiFishing } from "react-icons/gi";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
+import ThemeToggle from "@/components/themeToggle/themeToggle";
 
 const LoginPage = () => {
   const { status } = useSession();
@@ -31,6 +32,9 @@ const LoginPage = () => {
           <span>Job</span>
           <span>Trackr</span> 
         </div>
+      </div>
+      <div className={styles.toggleContainer}>
+        <ThemeToggle/>
       </div>
       <div className={styles.wrapper}>
         <div className={styles.header}>Log In</div>

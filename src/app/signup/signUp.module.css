@@ -8,7 +8,7 @@
 
 .toggleContainer {
   position: absolute;
-  top: 0;
+  top: 20px;
   right: 20px;
 }
 
@@ -91,6 +91,12 @@
   border: solid 2px #00a6ff;
 }
 
+.socialButton span {
+  color: #06283D;
+  font-size: 14px;
+  font-weight: 500;
+}
+
 .socialIcon {
   height: 20px;
 }
@@ -98,11 +104,6 @@
 .githubIcon {
   font-size: 20px;
   color: #171515;
-}
-
-.socialButton span {
-  font-size: 14px;
-  font-weight: 500;
 }
 
 .textContainer {
