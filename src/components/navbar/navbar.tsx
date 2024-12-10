@@ -25,8 +25,8 @@ const Navbar = () => {
       </Link>
       <div className={styles.rightContainer}>
       {status === "authenticated" && (
-        <Link href="/trackr">
-          Trackr 
+        <Link href="/tracker">
+          Tracker 
         </Link>
       )}
         <Authentication/>

@@ -1,55 +1,117 @@
 .container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 60px;
+  height: 100%;
+}
+
+.logoContainer {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  color: var(--primary-text-color);
+  cursor: pointer;
+  width: max-content;
+  padding: 20px 0px;
+}
+
+.icon {
+  font-size: 40px;
+  color: #00a6ff
+}
+
+.text {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+}
+
+.text span:first-child {
+  font-weight: 500;
+}
+
+.text span:last-child {
+  font-weight: 700;
 }
 
 .wrapper {
-  background-color: var(--softBg);
-  padding: 150px 200px;
+  width: 350px;
   display: flex;
   flex-direction: column;
-  gap: 50px;
-  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+}
+
+.header {
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 40px;
+}
+
+.buttonsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .socialButton {
-  padding: 20px;
-  border-radius: 5px;
-  border: none;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
+  background-color: white;
+  height: 40px;
+  border-radius: 10px;
+  box-shadow: rgba(25, 4, 69, 0.05) 0px 3px 6px;
+  border: 1px solid rgba(25, 4, 69, 0.15);
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: 10px;
+  cursor: pointer;
 }
 
-.socialButton:first-child {
+.socialButton:hover {
+  border: solid 2px #00a6ff;
+}
+
+.socialIcon {
+  height: 20px;
+}
+
+.githubIcon {
+  font-size: 20px;
+  color: #171515;
+}
+
+.socialButton span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* .googleButton {
   background-color: #ff5555;
 }
 
-.socialButton:nth-child(2) {
+.githubButton {
   background-color: #111;
+} */
+
+.textContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin-top: 20px;
 }
 
-.socialButton:nth-child(3) {
-  background-color: #087bea;
+.textContainer span {
+  font-size: 14px;
+  font-weight: 500;
 }
 
-@media screen and (max-width: 768px) {
-  .wrapper {
-    padding: 50px 100px;
-  }
-}
-@media screen and (max-width: 640px) {
-  .wrapper {
-    padding: 30px;
-  }
-
-  .socialButton{
-    font-weight: 400;
-    font-size: 14px;
-  }
+.textContainer span:last-child {
+  color: #00a6ff;
 }

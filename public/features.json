@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Job Tracker",
+    "color": "#EFF9FF",
+    "border": "#18A8FF",
+    "icon": "PiBriefcaseBold",
+    "image": "",
+    "description": [
+      {
+        "title": "",
+        "content": ""
+      },
+      {
+        "title": "",
+        "content": ""
+      },
+      {
+        "title": "",
+        "content": ""
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "CV Upload",
+    "color": "#FFF6DF",
+    "border": "#F8B407",
+    "icon": "CgFileDocument"
+  },
+  {
+    "id": 3,
+    "name": "Cover Letter Upload",
+    "color": "#EDFFFB",
+    "border": "#13B793",
+    "icon": "FaRegEnvelope"
+  }
+]

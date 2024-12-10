@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from '../utils/theme'
 import AuthProvider from "@/providers/AuthProvider";
 import Navbar from "@/components/navbar/navbar";
+import ConditionalNavbar from "./conditionalRender";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,6 +15,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <body>
@@ -21,7 +23,7 @@ export default function RootLayout({
           <ThemeProvider>
             <div className="container">
               <div className="wrapper">
-                <Navbar />
+                <ConditionalNavbar />
                 {children}
               </div>
             </div>

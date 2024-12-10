@@ -5,14 +5,15 @@ import React, { useEffect, createContext, useState } from "react";
 const ThemeContext = createContext();
 
 const getTheme = () => {
-  const theme = localStorage.getItem("theme");
-  // Default theme is taken as dark-theme
-  if (!theme) {
-    localStorage.setItem("theme", "dark");
-    return "dark";
-  } else {
+  if (typeof window !== "undefined") {
+    const theme = localStorage.getItem("theme");
+    if (!theme) {
+      localStorage.setItem("theme", "dark");
+      return "dark";
+    }
     return theme;
   }
+  return "dark";
 };
 
 const ThemeProvider = ({ children }) => {
