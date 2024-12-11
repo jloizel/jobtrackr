@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/jloizel/hackrApp">
-    <img src="https://github.com/jloizel/hackrApp/blob/main/assets/images/hackr.png" alt="Logo" width="auto" height="300">
+    <img src="" alt="Logo" width="auto" height="300">
   </a>
 
 <h2 align="center">Hackr</h2>
