@@ -17,15 +17,17 @@ const TrackrPage = () => {
   const [error, setError] = useState<string | null>(null);
 
   const handleCreateJob = async (e: React.FormEvent) => {
-    const { data: session, status } = useSession()
+    const { status } = useSession();
     const router = useRouter();
     e.preventDefault();
     setLoading(true); 
 
-    if (status === 'unauthenticated') {
-      router.push('/'); // redirect to homepage if unauthenticated
-      return <p>Access Denied</p>;
-    }
+    useEffect(() => {
+      if (status === 'unauthenticated') {
+        router.push('/');
+      }
+      console.log(status)
+    }, [status, router])
 
     const jobData = {
       title,

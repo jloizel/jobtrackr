@@ -9,9 +9,7 @@ import Link from "next/link";
 
 const Authentication = () => {
   const [openMenu, setOpenMenu] = useState(false)
-
   const { status } = useSession();
-
 
   const handleMenuClose = () => {
     setOpenMenu(false)

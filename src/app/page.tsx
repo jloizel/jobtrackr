@@ -11,6 +11,7 @@ import Link from "next/link";
 
 export default function Home() {
   const { theme } = useContext(ThemeContext);
+  const { status } = useSession();
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -32,9 +33,11 @@ export default function Home() {
               jobTrackr takes the stress out of job applications with a seamless organisation of your job search, so you never miss an opportunity.
             </span>
           </div>
-          <Link href="/signup" className={styles.signup}>
-            Sign up for free
-          </Link>
+          {status === "unauthenticated" && (
+            <Link href="/signup" className={styles.signup}>
+              Sign up for free
+            </Link>
+          )}
         </div>
         <div className={styles.rightContainer}>
 
