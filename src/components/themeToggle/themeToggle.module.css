@@ -14,7 +14,7 @@
 
 .icon:hover {
   /* background-color: #e2e2e2cb; */
-  background-color: var(--toggle-bg);
-  color: var(--toggle-fg);
+  background-color: #283452;
+  color: #00a6ff;
 }
 

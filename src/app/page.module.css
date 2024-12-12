@@ -56,7 +56,8 @@
 .signup {
   box-shadow: 0px 4px 10px rgba(25,4,69,0.2);
   /* background-color: var(--button-bg); */
-  background-color: var(--button-bg);
+  background-color: #00a6ff;
+  border: solid 2px #00a6ff;
   color: white;
   border-radius: 8px;
   padding: 10px 18px;
@@ -70,6 +71,12 @@
   @media (min-width: 768px) {
     font-size: 16px;
   }
+}
+
+.signup:hover {
+  border: solid 2px #00a6ff;
+  color: #00a6ff;
+  background-color: transparent;
 }
 
 

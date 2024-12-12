@@ -24,6 +24,10 @@
   font-weight: 500;
 }
 
+/* .button:hover .buttonText {
+  color: #06283D;
+} */
+
 .icon {
   line-height: 1; 
   font-size: 20px; 

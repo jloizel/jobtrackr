@@ -26,13 +26,13 @@ const LoginPage = () => {
   
   return (
     <div className={styles.container}>
-      <div className={styles.logoContainer}>
+      <Link className={styles.logoContainer} href="/">
         <GiFishing className={styles.icon}/>
         <div className={styles.text}>
           <span>Job</span>
           <span>Trackr</span> 
         </div>
-      </div>
+      </Link>
       <div className={styles.toggleContainer}>
         <ThemeToggle/>
       </div>

@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { createJob, getAllJobs, Job } from '../API';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const TrackrPage = () => {
   const [title, setTitle] = useState('');
@@ -15,9 +17,15 @@ const TrackrPage = () => {
   const [error, setError] = useState<string | null>(null);
 
   const handleCreateJob = async (e: React.FormEvent) => {
+    const { data: session, status } = useSession()
+    const router = useRouter();
     e.preventDefault();
-    
     setLoading(true); 
+
+    if (status === 'unauthenticated') {
+      router.push('/'); // redirect to homepage if unauthenticated
+      return <p>Access Denied</p>;
+    }
 
     const jobData = {
       title,

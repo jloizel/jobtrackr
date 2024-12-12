@@ -6,20 +6,14 @@
   --background-color: #fbfbff;
   --foreground-color: #06283D;
   --primary-text-color: #283452;
-  --secondary-text-color: #ffffff;
-  --toggle-bg: #283452;
-  --toggle-fg: #00a6ff;
-  --button-bg: #47B5FF;
+  --secondary-text-color: #fbfbff;
 }
 
 [data-theme="dark"] {
   --background-color: #06283D;
-  --foreground-color: #FFFAFA;
-  --primary-text-color: #FFFAFA;
+  --foreground-color: #fbfbff;
+  --primary-text-color: #fbfbff;
   --secondary-text-color: #0a0a0a;
-  --toggle-bg: #283452;
-  --toggle-fg: #8EBBFF;
-  --button-bg: #47B5FF;
 }
 
 html,

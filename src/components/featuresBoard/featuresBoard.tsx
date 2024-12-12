@@ -84,6 +84,9 @@ const FeaturesBoard = () => {
             }`,
             fontWeight: isHovered || isActive ? 600 : "", 
           };
+          const buttonTextStyles = {
+            color: isHovered || isActive ? "#06283D" : ""
+          }
           const iconStyles = {
             color: isHovered || isActive ? feature.border : "",
           };
@@ -103,7 +106,7 @@ const FeaturesBoard = () => {
               >
                 {renderIcon(feature.icon)}
               </span>
-              <span className={styles.buttonText}>{feature.name}</span>
+              <span className={styles.buttonText} style={buttonTextStyles}>{feature.name}</span>
             </div>
           );
         })}
