@@ -22,10 +22,10 @@ export default function RootLayout({
         <AuthProvider>
           <ThemeProvider>
             <div className="container">
-              <div className="wrapper">
                 <ConditionalNavbar />
-                {children}
-              </div>
+                <div className="wrapper">
+                  {children}
+                </div>
             </div>
           </ThemeProvider>
         </AuthProvider>

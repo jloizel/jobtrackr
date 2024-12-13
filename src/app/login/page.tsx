@@ -8,6 +8,7 @@ import { GiFishing } from "react-icons/gi";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import ThemeToggle from "@/components/themeToggle/themeToggle";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const LoginPage = () => {
   const { status } = useSession();
@@ -21,7 +22,7 @@ const LoginPage = () => {
   }, [status, router]);
 
   if (status === "loading") {
-    return <div className={styles.loading}>Loading...</div>;
+    return <div className={styles.container}><ClipLoader color={"#00a6ff"}/></div>;
   }
   
   return (

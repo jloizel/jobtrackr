@@ -87,12 +87,16 @@ a {
   background-color: var(--background-color);
   color: var(--primary-text-color);
   display: flex;
-  justify-content: center;
   width: 100%;
   position: relative;
+  flex-direction: column;
+  align-items: center;
 }
 
 .wrapper {
   width: 80%;
   max-width: 1200px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }

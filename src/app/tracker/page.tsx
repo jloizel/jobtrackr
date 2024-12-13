@@ -1,90 +1,97 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
+import styles from './tracker.module.css'
 import { createJob, getAllJobs, Job } from '../API';
+import withAuth from '@/utils/withAuth';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import ClipLoader from 'react-spinners/ClipLoader';
 
-const TrackrPage = () => {
+const TrackerPage = () => {
+  const session = useSession();
+  const router = useRouter();
+
   const [title, setTitle] = useState('');
   const [company, setCompany] = useState('');
   const [salary, setSalary] = useState('');
   const [location, setLocation] = useState('');
-  const [status, setStatus] = useState('');
+  const [jobStatus, setJobStatus] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false); 
   const [jobs, setJobs] = useState<Job[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  const handleCreateJob = async (e: React.FormEvent) => {
-    const { status } = useSession();
-    const router = useRouter();
-    e.preventDefault();
-    setLoading(true); 
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
+  
+  // if (error) {
+  //   return <div>{error}</div>;
+  // }
 
-    useEffect(() => {
-      if (status === 'unauthenticated') {
-        router.push('/');
-      }
-      console.log(status)
-    }, [status, router])
+  // useEffect(() => {
+  //   if (session.status === "unauthenticated") {
+  //     router.push('/'); // Redirect to the dashboard
+  //   }
+  // }, [session.status, router]);
 
-    const jobData = {
-      title,
-      company,
-      salary,
-      location,
-      status,
-    };
+  
 
-    try {
-      const job = await createJob(jobData);
+  // const handleCreateJob = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setLoading(true); 
 
-      setMessage('Job created successfully!');
-      setLoading(false); 
+  //   const jobData = {
+  //     title,
+  //     company,
+  //     salary,
+  //     location,
+  //     jobStatus,
+  //   };
 
-      // Reset form after submission
-      setTitle('');
-      setCompany('');
-      setSalary('');
-      setLocation('');
-      setStatus('');
-    } catch (error) {
-      setMessage('Error creating job.');
-      setLoading(false); 
-      console.error(error);
-    }
-  };
+  //   try {
+  //     const job = await createJob(jobData);
 
-  useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        const userJobs = await getAllJobs(); 
-        setJobs(userJobs); 
-      } catch (err) {
-        setError('Failed to fetch jobs.');
-        console.error('Error fetching jobs:', err);
-      } finally {
-        setLoading(false); 
-      }
-    };
+  //     setMessage('Job created successfully!');
+  //     setLoading(false); 
 
-    fetchJobs();
-  }, []);
+  //     // Reset form after submission
+  //     setTitle('');
+  //     setCompany('');
+  //     setSalary('');
+  //     setLocation('');
+  //     setJobStatus('');
+  //   } catch (error) {
+  //     setMessage('Error creating job.');
+  //     setLoading(false); 
+  //     console.error(error);
+  //   }
+  // };
 
-  if (loading) {
-    return <div>Loading...</div>; 
-  }
-
-  if (error) {
-    return <div>{error}</div>; 
-  }
-
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     const fetchJobs = async () => {
+  //       try {
+  //         const userJobs = await getAllJobs();
+  //         setJobs(userJobs);
+  //       } catch (err) {
+  //         setError('Failed to fetch jobs.');
+  //         console.error('Error fetching jobs:', err);
+  //       } finally {
+  //         setLoading(false);
+  //       }
+  //     };
+  
+  //     fetchJobs();
+  //   }
+  // }, []);
+  
   return (
     <div>
       <h1>Create a Job</h1>
 
-      <form onSubmit={handleCreateJob}>
+      {/* <form onSubmit={handleCreateJob}>
         <div>
           <label htmlFor="title">Job Title</label>
           <input
@@ -135,7 +142,7 @@ const TrackrPage = () => {
             type="text"
             id="status"
             value={status}
-            onChange={(e) => setStatus(e.target.value)}
+            onChange={(e) => setJobStatus(e.target.value)}
             required
           />
         </div>
@@ -143,7 +150,7 @@ const TrackrPage = () => {
         <button type="submit" disabled={loading}>
           {loading ? 'Creating Job...' : 'Create Job'}
         </button>
-      </form>
+      </form> */}
 
       {message && <p>{message}</p>}
 
@@ -159,7 +166,7 @@ const TrackrPage = () => {
               <p>{job.company}</p>
               <p>{job.location}</p>
               <p>{job.salary}</p>
-              <p>Status: {job.status}</p>
+              <p>Status: {job.jobStatus}</p>
             </li>
           ))}
         </ul>
@@ -167,6 +174,8 @@ const TrackrPage = () => {
     </div>
     </div>
   );
-};
+}
 
-export default TrackrPage;
+// export default withAuth(TrackerPage);
+export default TrackerPage;
+
