@@ -9,13 +9,16 @@ import Link from "next/link";
 
 const Navbar = () => {
   
-  const { status } = useSession();
+  const { data: session } = useSession();
+
+  const links = [
+    { name: 'Tracker', path: session ? '/mytracker' : '/product/tracker' },
+    { name: 'CV Upload', path: session ? '/mycv' : '/product/cv-upload' },
+    { name: 'Cover Letter Upload', path: session ? '/mycoverletter' : '/product/cover-letter-upload' },
+  ];
 
   return (
     <div className={styles.navbar}>
-      <div className={styles.toggleContainer}>
-        <ThemeToggle/>
-      </div>
       <Link className={styles.title} href={"/"}>
         <GiFishing className={styles.icon}/>
         <div className={styles.text}>
@@ -23,13 +26,18 @@ const Navbar = () => {
           <span>Trackr</span> 
         </div>
       </Link>
+      <div className={styles.linkContainer}>
+        {links.map((link) => (
+          <div key={link.name}>
+            <Link href={link.path} className={styles.link}>
+              {link.name}
+            </Link>
+          </div>
+        ))}
+      </div>
       <div className={styles.rightContainer}>
-      {status === "authenticated" && (
-        <Link href="/tracker">
-          Tracker 
-        </Link>
-      )}
         <Authentication/>
+        <ThemeToggle/>
       </div>
     </div>
  );
