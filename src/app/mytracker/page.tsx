@@ -95,7 +95,7 @@ const TrackerPage: React.FC = () => {
 
         <form onSubmit={handleCreateJob}>
           <div>
-            <label htmlFor="title">Job Title</label>
+            <div>Job Title</div>
             <input
               type="text"
               id="title"
@@ -104,7 +104,16 @@ const TrackerPage: React.FC = () => {
               required
             />
           </div>
-          {/* Other form fields... */}
+          <div>
+            <div>Company</div>
+            <input
+              type="text"
+              id="title"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+              required
+            />
+          </div>
         </form>
 
         {message && <p>{message}</p>}
@@ -115,7 +124,7 @@ const TrackerPage: React.FC = () => {
           {error && <p>{error}</p>}
           {!loading && jobs.length === 0 && <p>No jobs available.</p>}
           {!loading && jobs.length > 0 && (
-            <ul>
+            <div>
               {jobs.map((job) => (
                 <li key={job._id}>
                   <h3>{job.title}</h3>
@@ -125,7 +134,7 @@ const TrackerPage: React.FC = () => {
                   <p>Status: {job.jobStatus}</p>
                 </li>
               ))}
-            </ul>
+            </div>
           )}
         </div>
       </div>
