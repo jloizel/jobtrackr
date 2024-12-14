@@ -90,8 +90,22 @@ const TrackerPage: React.FC = () => {
 
   if (status === 'authenticated') {
     return (
-      <div>
-        <h1>Job Tracker</h1>
+      <div className={styles.tracker}>
+        <div className={styles.headerContainer}>
+          <div className={styles.header}>My Job Tracker</div>
+          <div className={styles.filter}>
+
+          </div>
+          <div className={styles.submenuContainer}>
+            <div className={styles.submenuContainer}>
+              Tracker
+            </div>
+            <div className={styles.submenuContainer}>
+              Statistics
+            </div>
+          </div>
+        </div>
+        
 
         <form onSubmit={handleCreateJob}>
           <div>
