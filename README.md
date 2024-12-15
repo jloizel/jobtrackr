@@ -65,34 +65,4 @@ Here are some screenshots of **Hackr** live:
 
 Follow these steps to clone and run **Hackr** on your local machine:
 
-### Prerequisites
-
-Make sure you have the following tools installed on your system:
-
-- [Node.js](https://nodejs.org/) (v16 or higher)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-- [Expo CLI](https://docs.expo.dev/get-started/installation/) (for running the React Native app)
-- A mobile simulator (such as Xcode for iOS or Android Studio for Android) or a physical device with the Expo Go app.
-
-### Installation
-
-Some feautures have been commented out for testing purposes (the use of AsyncStorage to keep track of user's game history mainly, timer once submitted etc)
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/jloizel/hackrApp.git
-   ```
-
-2. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-3. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
