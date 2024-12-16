@@ -30,7 +30,7 @@ api.interceptors.request.use((config) => {
 export interface Job {
   _id: string;
   userEmail: string;
-  jobStatus: string;  
+  status: string;  
   title: string;
   company: string;
   salary: string;
@@ -39,7 +39,7 @@ export interface Job {
 
 // Create a new job
 export const createJob = async (jobData: {
-  jobStatus: string;  
+  status: string;  
   title: string;
   company: string;
   salary: string;
@@ -83,7 +83,7 @@ export const getAllJobs = async (): Promise<Job[]> => {
 
 // Update a job
 export const updateJob = async (jobId: string, jobData: {
-  jobStatus: string;  
+  status: string;  
   title: string;
   company: string;
   salary: string;

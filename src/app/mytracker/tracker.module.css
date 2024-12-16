@@ -17,7 +17,7 @@
 
 .headerContainer {
   width: 100%;
-  padding: 15px;
+  padding: 10px 20px;
   background-color: #FFFFFF;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -30,7 +30,7 @@
 
 .header {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .filter {
@@ -48,5 +48,84 @@
   flex-direction: row;
   align-items: center;
   gap: 5px;
-  color: #776B92;
+  color: #7e8aad;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 8px;
+  width: max-content;
+  text-wrap: nowrap;
+  transition: all 0.2s ease-in;
+}
+
+.submenu:hover {
+  color: #283452;
+  background-color: var(--button-bg-color);
+}
+
+.jobsContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.jobColumn {
+  width: 25%;
+  padding: 0 10px;
+}
+
+.jobColumn:nth-child(2), .jobColumn:nth-child(3), .jobColumn:nth-child(4) {
+  border-left: solid 2px #dfdfe252;
+}
+
+.jobColumnHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 20px;
+}
+
+.jobColumnHeader span:first-child {
+  color: #7e8aad;
+  font-size: 20px;
+}
+
+.jobColumnHeader span:nth-child(2) {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.jobColumnHeader span:last-child {
+  color: #7e8aad;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.jobCard {
+  background: #FFFFFF;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.button {
+  display: flex;
+  width: 100%;
+  background-color: #FFFFFF;
+  justify-content: center;
+  border: solid 2px #dfdfe252;
+  box-shadow: rgba(25, 4, 69, 0.05) 0px 3px 6px;
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: #00a6ff;
+  color: #FFFFFF;
 }
