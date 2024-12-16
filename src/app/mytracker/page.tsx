@@ -6,6 +6,8 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { createJob, getAllJobs } from '../API';
 import { ClipLoader } from 'react-spinners';
+import { PiBriefcaseBold } from "react-icons/pi";
+import { IoIosStats } from "react-icons/io";
 
 type Job = {
   _id: string;
@@ -97,10 +99,12 @@ const TrackerPage: React.FC = () => {
 
           </div>
           <div className={styles.submenuContainer}>
-            <div className={styles.submenuContainer}>
+            {/* <div className={styles.submenu}>
+              <PiBriefcaseBold/>
               Tracker
-            </div>
-            <div className={styles.submenuContainer}>
+            </div> */}
+            <div className={styles.submenu}>
+              <IoIosStats/>
               Statistics
             </div>
           </div>

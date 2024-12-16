@@ -22,9 +22,31 @@
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   border-bottom: solid 2px #dfdfe252;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: center;
 }
 
 .header {
   font-weight: 600;
   font-size: 14px;
+}
+
+.filter {
+
+}
+
+.submenuContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.submenu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  color: #776B92;
 }
