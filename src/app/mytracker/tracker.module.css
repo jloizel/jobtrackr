@@ -123,15 +123,6 @@
   flex: 1;
 }
 
-.line {
-  /* content: '';
-  width: 0; */
-  /* height: max-content; */
-  /* position: absolute; */
-  /* top: 0;
-  left: 0; */
-}
-
 .button {
   display: flex;
   width: 100%;
@@ -148,4 +139,8 @@
 .button:hover {
   background-color: #00a6ff;
   color: #FFFFFF;
+}
+
+.jobs {
+
 }

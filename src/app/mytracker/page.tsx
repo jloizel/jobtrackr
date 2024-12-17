@@ -223,7 +223,7 @@ const TrackerPage: React.FC = () => {
                 <div className={styles.button}>
                   <FaPlus/>
                 </div>
-                <div>
+                <div className={styles.jobs}>
                   {jobs
                     .filter((job) => job.status === status.name)
                     .map((job) => (
