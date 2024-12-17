@@ -110,6 +110,9 @@
   border-radius: 8px;
   padding: 5px;
   margin-bottom: 12px;
+  display: flex;
+  /* flex-direction: row; */
+  align-items: stretch;
 }
 
 .jobCardContent {
@@ -117,15 +120,16 @@
   flex-direction: column;
   position: relative;
   padding-left: 10px;
+  flex: 1;
 }
 
-.jobCardContent::before {
-  content: '';
-  width: 0;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+.line {
+  /* content: '';
+  width: 0; */
+  /* height: max-content; */
+  /* position: absolute; */
+  /* top: 0;
+  left: 0; */
 }
 
 .button {

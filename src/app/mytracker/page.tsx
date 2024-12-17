@@ -228,6 +228,7 @@ const TrackerPage: React.FC = () => {
                     .filter((job) => job.status === status.name)
                     .map((job) => (
                       <div key={job._id} className={styles.jobCard}>
+                        <div className={styles.line} style={{border: `solid 2px ${status.color}`}}></div>
                         <div className={styles.jobCardContent}>
                           <h4>{job.title}</h4>
                           <p>Company: {job.company}</p>
