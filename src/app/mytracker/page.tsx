@@ -28,28 +28,33 @@ interface JobStatus {
   id: number;
   name: string;
   icon: string;
+  color: string;
 }
 
 const jobStatuses: JobStatus[] = [
   {
     id: 1,
     name: "Applied",
-    icon: "FaPaperPlane"
+    icon: "FaPaperPlane",
+    color: "#a963ff"
   },
   {
     id: 2,
     name: "Interviewed",
-    icon: "MdEvent"
+    icon: "MdEvent",
+    color: "#FFC107"
   },
   {
     id: 3,
     name: "Offered",
-    icon: "FaHandshake"
+    icon: "FaHandshake",
+    color: "#34eb67"
   },
   {
     id: 4,
     name: "Rejected",
-    icon: "FaTimes"
+    icon: "FaTimes",
+    color: "#fa5252"
   },
 ]
 
@@ -69,7 +74,7 @@ const TrackerPage: React.FC = () => {
 
   useEffect(() => {
     if (status === 'unauthenticated') {
-      router.push('/'); // Redirect to homepage if not authenticated
+      router.push('/'); // redirect to homepage if not authenticated
     } else if (status === 'authenticated') {
       const fetchJobs = async () => {
         setLoading(true);
@@ -104,10 +109,10 @@ const TrackerPage: React.FC = () => {
       const job = await createJob(jobData);
       setMessage('Job created successfully!');
 
-      // Add the new job to the list
+      // add the new job to the list
       setJobs((prevJobs) => [...prevJobs, job]);
 
-      // Reset form
+      // reset form
       setTitle('');
       setCompany('');
       setSalary('');
@@ -211,7 +216,7 @@ const TrackerPage: React.FC = () => {
             return (
               <div key={status.id} className={styles.jobColumn}>
                 <div className={styles.jobColumnHeader}>
-                  <span>{renderIcon(status.icon)} </span>
+                  <span style={{color: status.color}}>{renderIcon(status.icon)} </span>
                   <span>{status.name}</span>
                   <span>{jobStatusNumber} JOBS</span>
                 </div>
@@ -223,10 +228,12 @@ const TrackerPage: React.FC = () => {
                     .filter((job) => job.status === status.name)
                     .map((job) => (
                       <div key={job._id} className={styles.jobCard}>
-                        <h4>{job.title}</h4>
-                        <p>Company: {job.company}</p>
-                        <p>Location: {job.location}</p>
-                        <p>Salary: {job.salary}</p>
+                        <div className={styles.jobCardContent}>
+                          <h4>{job.title}</h4>
+                          <p>Company: {job.company}</p>
+                          <p>Location: {job.location}</p>
+                          <p>Salary: {job.salary}</p>
+                        </div>
                       </div>
                     ))}
                 </div>
