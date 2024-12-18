@@ -104,24 +104,7 @@
   font-weight: 500;
 }
 
-.jobCard {
-  background: #FFFFFF;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 5px;
-  margin-bottom: 12px;
-  display: flex;
-  /* flex-direction: row; */
-  align-items: stretch;
-}
 
-.jobCardContent {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  padding-left: 10px;
-  flex: 1;
-}
 
 .button {
   display: flex;
@@ -142,5 +125,33 @@
 }
 
 .jobs {
+  margin-top: 20px;
+}
 
+.jobCard {
+  background: #FFFFFF;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 5px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: stretch;
+}
+
+.jobCardContent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 10px;
+  flex: 1;
+}
+
+.jobCardContent div {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.jobCardContent span {
+  color: #7e8aad;
+  font-size: 15px;
 }

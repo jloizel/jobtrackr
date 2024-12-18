@@ -35,6 +35,8 @@ export interface Job {
   company: string;
   salary: string;
   location: string;
+  createdAt: string;
+  updatedAt: string
 }
 
 // Create a new job

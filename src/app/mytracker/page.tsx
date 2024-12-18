@@ -8,7 +8,7 @@ import { createJob, getAllJobs } from '../API';
 import { ClipLoader } from 'react-spinners';
 import { PiBriefcaseBold } from "react-icons/pi";
 import { IoIosStats } from "react-icons/io";
-import { FaPaperPlane } from "react-icons/fa";
+import { FaPaperPlane, FaSyncAlt } from "react-icons/fa";
 import { MdEvent } from "react-icons/md";
 import { FaHandshake } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
@@ -22,6 +22,8 @@ type Job = {
   salary: string;
   location: string;
   status: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 interface JobStatus {
@@ -145,6 +147,33 @@ const TrackerPage: React.FC = () => {
     }
   };
 
+  function getRelativeTime(date: string | number | Date): string {
+    const now = new Date();
+    const past = new Date(date);
+    const diffMs = now.getTime() - past.getTime(); // Difference in milliseconds
+    const diffMinutes = Math.floor(diffMs / 60000); // Difference in minutes
+  
+    if (diffMinutes < 60) {
+      return `${diffMinutes}m`; // Less than an hour
+    }
+  
+    const diffHours = Math.floor(diffMinutes / 60); // Difference in hours
+    if (diffHours < 24) {
+      return `${diffHours}h`; // Less than a day
+    }
+  
+    const diffDays = Math.floor(diffHours / 24); // Difference in days
+    return `${diffDays}d`; // 1 day or more
+  }
+  
+
+  function isRecentlyUpdated(createdAt: string | number | Date, updatedAt: string | number | Date): boolean {
+    const createdTime = new Date(createdAt).getTime();
+    const updatedTime = new Date(updatedAt).getTime();
+  
+    // If `updatedAt` is more recent than `createdAt`, it has been updated
+    return updatedTime > createdTime;
+  }
 
   if (status === 'authenticated') {
     return (
@@ -230,11 +259,18 @@ const TrackerPage: React.FC = () => {
                       <div key={job._id} className={styles.jobCard}>
                         <div className={styles.line} style={{border: `solid 2px ${status.color}`}}></div>
                         <div className={styles.jobCardContent}>
-                          <h4>{job.title}</h4>
-                          <p>Company: {job.company}</p>
-                          <p>Location: {job.location}</p>
-                          <p>Salary: {job.salary}</p>
+                          <div>{job.title}</div>
+                          <span>{job.company}</span>
                         </div>
+                        <div className={styles.date}>
+                          {getRelativeTime(job.createdAt || job.updatedAt)}
+                        </div>
+                        {isRecentlyUpdated(job.createdAt, job.updatedAt) && (
+    <span className={styles.updatedIcon}>
+      {/* Use your preferred icon, e.g., a "refresh" or "updated" symbol */}
+      <FaSyncAlt title="Recently Updated" />
+    </span>
+  )}
                       </div>
                     ))}
                 </div>
