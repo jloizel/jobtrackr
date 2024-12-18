@@ -151,20 +151,20 @@ const TrackerPage: React.FC = () => {
   function getRelativeTime(date: string | number | Date): string {
     const now = new Date();
     const past = new Date(date);
-    const diffMs = now.getTime() - past.getTime(); // Difference in milliseconds
-    const diffMinutes = Math.floor(diffMs / 60000); // Difference in minutes
+    const diffMs = now.getTime() - past.getTime(); // difference in milliseconds
+    const diffMinutes = Math.floor(diffMs / 60000); // difference in minutes
   
     if (diffMinutes < 60) {
-      return `${diffMinutes}m`; // Less than an hour
+      return `${diffMinutes}m`;
     }
   
-    const diffHours = Math.floor(diffMinutes / 60); // Difference in hours
+    const diffHours = Math.floor(diffMinutes / 60); // difference in hours
     if (diffHours < 24) {
-      return `${diffHours}h`; // Less than a day
+      return `${diffHours}h`;
     }
   
-    const diffDays = Math.floor(diffHours / 24); // Difference in days
-    return `${diffDays}d`; // 1 day or more
+    const diffDays = Math.floor(diffHours / 24); // difference in days
+    return `${diffDays}d`;
   }
   
 
