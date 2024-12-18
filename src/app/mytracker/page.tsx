@@ -13,6 +13,7 @@ import { MdEvent } from "react-icons/md";
 import { FaHandshake } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
+import { IoIosAddCircleOutline } from "react-icons/io";
 
 
 type Job = {
@@ -171,7 +172,7 @@ const TrackerPage: React.FC = () => {
     const createdTime = new Date(createdAt).getTime();
     const updatedTime = new Date(updatedAt).getTime();
   
-    // If `updatedAt` is more recent than `createdAt`, it has been updated
+    // if `updatedAt` is more recent than `createdAt`, it has been updated
     return updatedTime > createdTime;
   }
 
@@ -265,12 +266,14 @@ const TrackerPage: React.FC = () => {
                         <div className={styles.date}>
                           {getRelativeTime(job.createdAt || job.updatedAt)}
                         </div>
-                        {isRecentlyUpdated(job.createdAt, job.updatedAt) && (
-    <span className={styles.updatedIcon}>
-      {/* Use your preferred icon, e.g., a "refresh" or "updated" symbol */}
-      <FaSyncAlt title="Recently Updated" />
-    </span>
-  )}
+                        {isRecentlyUpdated(job.createdAt, job.updatedAt) ? (
+                          <span className={styles.updatedIcon}>
+                            {/* Use your preferred icon, e.g., a "refresh" or "updated" symbol */}
+                            <FaSyncAlt title="Recently Updated" />
+                          </span>
+                        ):(
+                          <IoIosAddCircleOutline/>
+                        )}
                       </div>
                     ))}
                 </div>
