@@ -149,6 +149,9 @@
 .jobCardContent div {
   font-weight: 600;
   font-size: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .jobCardContent span {
