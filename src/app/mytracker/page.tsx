@@ -263,7 +263,7 @@ const MyTrackerPage: React.FC = () => {
                         <div className={styles.jobCardContent}>
                           <span className={styles.jobTitle}>{job.title}</span>
                           <span className={styles.jobCompany}>{job.company}</span>
-                          <a href="https://logo.dev" alt="Logo API">Logos provided by Logo.dev</a>
+                          <a href="https://logo.dev">Logos provided by Logo.dev</a>
                           <div className={styles.jobCardInfo}>
                             <div className={styles.date}>
                               {getRelativeTime(job.createdAt || job.updatedAt)}
