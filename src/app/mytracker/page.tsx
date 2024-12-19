@@ -14,6 +14,7 @@ import { FaHandshake } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { RxUpdate } from "react-icons/rx";
 
 
 type Job = {
@@ -61,7 +62,7 @@ const jobStatuses: JobStatus[] = [
   },
 ]
 
-const TrackerPage: React.FC = () => {
+const MyTrackerPage: React.FC = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -258,22 +259,21 @@ const TrackerPage: React.FC = () => {
                     .filter((job) => job.status === status.name)
                     .map((job) => (
                       <div key={job._id} className={styles.jobCard}>
-                        <div className={styles.line} style={{border: `solid 2px ${status.color}`}}></div>
+                        <div className={styles.line} style={{border: `solid 1px ${status.color}`}}></div>
                         <div className={styles.jobCardContent}>
-                          <div>{job.title}</div>
-                          <span>{job.company}</span>
+                          <span className={styles.jobTitle}>{job.title}</span>
+                          <span className={styles.jobCompany}>{job.company}</span>
+                          <div className={styles.jobCardInfo}>
+                            <div className={styles.date}>
+                              {getRelativeTime(job.createdAt || job.updatedAt)}
+                            </div>
+                            {isRecentlyUpdated(job.createdAt, job.updatedAt) ? (
+                              <RxUpdate className={styles.icon}/>
+                            ):(
+                              <IoIosAddCircleOutline className={styles.icon}/>
+                            )}
+                          </div>
                         </div>
-                        <div className={styles.date}>
-                          {getRelativeTime(job.createdAt || job.updatedAt)}
-                        </div>
-                        {isRecentlyUpdated(job.createdAt, job.updatedAt) ? (
-                          <span className={styles.updatedIcon}>
-                            {/* Use your preferred icon, e.g., a "refresh" or "updated" symbol */}
-                            <FaSyncAlt title="Recently Updated" />
-                          </span>
-                        ):(
-                          <IoIosAddCircleOutline/>
-                        )}
                       </div>
                     ))}
                 </div>
@@ -289,4 +289,4 @@ const TrackerPage: React.FC = () => {
   return null;
 };
 
-export default TrackerPage;
+export default MyTrackerPage;

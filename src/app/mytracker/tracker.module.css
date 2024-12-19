@@ -104,8 +104,6 @@
   font-weight: 500;
 }
 
-
-
 .button {
   display: flex;
   width: 100%;
@@ -136,6 +134,7 @@
   margin-bottom: 12px;
   display: flex;
   align-items: stretch;
+  box-shadow: 0 0px 2px rgba(0, 0, 0, 0.1);
 }
 
 .jobCardContent {
@@ -144,17 +143,38 @@
   position: relative;
   padding-left: 10px;
   flex: 1;
+  gap: 5px;
 }
 
-.jobCardContent div {
+.jobTitle {
   font-weight: 600;
-  font-size: 15px;
+  font-size: 16px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.jobCardContent span {
+.jobCompany  {
   color: #7e8aad;
-  font-size: 15px;
+  font-size: 16px;
+}
+
+.jobCardInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  margin-top: 20px;
+  justify-content: flex-end;
+}
+
+.date {
+  font-weight: 400;
+  font-size: 14px;
+  color: #7e8aad;
+}
+
+.icon {
+  font-size: 16px;
+  color: #7e8aad;
 }
