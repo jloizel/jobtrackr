@@ -74,12 +74,12 @@ export const Autocomplete = ({ onSubmit, placeholder }: IAutocomplete) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.brandInfo}>
+      {/* <div className={styles.brandInfo}>
         Provided by{" "}
         <a href="https://brandfetch.com/" rel="noreferrer" target="_blank">
           Brandfetch
         </a>
-      </div>
+      </div> */}
 
       <div className={styles.formWrapper}>
         <form onSubmit={handleSubmit} className={styles.form}>

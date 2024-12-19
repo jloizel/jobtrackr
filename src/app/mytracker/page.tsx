@@ -19,6 +19,7 @@ import { IoIosSearch } from "react-icons/io";
 import { Modal } from '@mui/material';
 import { Autocomplete } from '@/components/autocomplete/autocomplete';
 import { GoQuestion } from "react-icons/go";
+import { MdEdit } from "react-icons/md";
 
 
 type Job = {
@@ -107,6 +108,11 @@ const MyTrackerPage: React.FC = () => {
       fetchJobs();
     }
   }, [status, router]);
+
+  const handlePlusButtonClick = (statusName: string) => {
+    setModalOpen(true)
+    setJobStatus(statusName)
+  }
 
   const handleCompanySelect = (data: { value: string; query?: { name: string; domain: string; icon:string } }) => {
     if (data.query) {
@@ -197,10 +203,6 @@ const MyTrackerPage: React.FC = () => {
     return updatedTime > createdTime; // if `updatedAt` is more recent than `createdAt`, it has been updated
   }
 
-  const handlePlusButtonClick = () => {
-    setModalOpen(true)
-  }
-
   if (status === 'authenticated') {
     return (
       <div className={styles.tracker}>
@@ -222,7 +224,7 @@ const MyTrackerPage: React.FC = () => {
           </div>
         </div>
         
-        <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        <Modal open={modalOpen} className={styles.modalWrapper} onClose={() => setModalOpen(false)}>
           <div className={styles.modalContent}>
             <form onSubmit={handleCreateJob}>
               <div>
@@ -237,13 +239,7 @@ const MyTrackerPage: React.FC = () => {
               <div>
                 <div>Company</div>
                 <Autocomplete
-                  onSubmit={(data) => {
-                    if (data.query) {
-                      setCompany(data.query.name);
-                      setDomain(data.query.domain);
-                      setLogoUrl(data.query.icon); 
-                    }
-                  }}
+                  onSubmit={handleCompanySelect}
                   placeholder="Search for a company"
                 />
               </div>
@@ -280,8 +276,8 @@ const MyTrackerPage: React.FC = () => {
                   <span>{status.name}</span>
                   <span>{jobStatusNumber} JOBS</span>
                 </div>
-                <div className={styles.button}>
-                  <FaPlus onClick={handlePlusButtonClick}/>
+                <div className={styles.button} onClick={() => handlePlusButtonClick(status.name)}>
+                  <FaPlus/>
                 </div>
                 <div className={styles.jobs}>
                   {jobs
@@ -292,7 +288,7 @@ const MyTrackerPage: React.FC = () => {
                         <div className={styles.jobCardContent}>
                           <span className={styles.jobTitle}>{job.title}</span>
                           <div className={styles.companyContainer}>
-                            {logoUrl ? (
+                            {job.logoUrl ? (
                               <img
                               src={job.logoUrl}
                               alt={`${job.company} logo`}
@@ -313,6 +309,7 @@ const MyTrackerPage: React.FC = () => {
                               <IoIosAddCircleOutline className={styles.icon}/>
                             )}
                           </div>
+                          <MdEdit className={styles.editButton}/>
                         </div>
                       </div>
                     ))}

@@ -71,6 +71,23 @@
   background-color: var(--button-bg-color);
 }
 
+.modalWrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalContent {
+  width: 60%;
+  max-width: 1200px;
+  background-color: #FDFDFF;
+  display: flex;
+  flex-direction: column;
+  outline: none;
+}
+
 .jobsContainer {
   display: flex;
   flex-direction: row;
@@ -159,6 +176,7 @@
   padding-left: 10px;
   flex: 1;
   gap: 5px;
+  position: relative;
 }
 
 .jobTitle {
@@ -206,3 +224,16 @@
   font-size: 16px;
   color: #7e8aad;
 }
+
+.editButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #7e8aad;
+  transition: all 0.2s ease-in-out;
+}
+
+.editButton:hover {
+  color: #283452;
+}
+
