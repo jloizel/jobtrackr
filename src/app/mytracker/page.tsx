@@ -17,6 +17,8 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { RxUpdate } from "react-icons/rx";
 import { IoIosSearch } from "react-icons/io";
 import { Modal } from '@mui/material';
+import { Autocomplete } from '@/components/autocomplete/autocomplete';
+import { GoQuestion } from "react-icons/go";
 
 
 type Job = {
@@ -24,6 +26,7 @@ type Job = {
   title: string;
   company: string;
   domain: string;
+  logoUrl: string;
   salary: string;
   location: string;
   status: string;
@@ -73,9 +76,10 @@ const MyTrackerPage: React.FC = () => {
   const [title, setTitle] = useState<string>('');
   const [company, setCompany] = useState<string>('');
   const [domain, setDomain] = useState<string>('');
+  const [logoUrl, setLogoUrl] = useState<string>('');
   const [salary, setSalary] = useState<string>('');
   const [location, setLocation] = useState<string>('');
-  const [jobStatus, setJobStatus] = useState<string>('');
+  const [jobStatus, setJobStatus] = useState<string>('Applied');
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
   const [error, setError] = useState<string>('');
@@ -103,6 +107,15 @@ const MyTrackerPage: React.FC = () => {
       fetchJobs();
     }
   }, [status, router]);
+
+  const handleCompanySelect = (data: { value: string; query?: { name: string; domain: string; icon:string } }) => {
+    if (data.query) {
+      setCompany(data.query.name);
+      setDomain(data.query.domain);
+      setLogoUrl(data.query.icon)
+      console.log(logoUrl)
+    }
+  };
   
   const handleCreateJob = async (e: FormEvent) => {
     e.preventDefault();
@@ -113,6 +126,7 @@ const MyTrackerPage: React.FC = () => {
         title,
         company,
         domain,
+        logoUrl,
         salary,
         location,
         status: jobStatus,
@@ -128,6 +142,7 @@ const MyTrackerPage: React.FC = () => {
       setLocation('');
       setJobStatus('');
       setDomain('');
+      setLogoUrl('');
     } catch (error) {
       setMessage('Error creating job.');
       console.error(error);
@@ -207,53 +222,51 @@ const MyTrackerPage: React.FC = () => {
           </div>
         </div>
         
-        <Modal
-          open={modalOpen}
-          onClose={() => setModalOpen(false)}
-        >
-          <div>
-            <div>
-              Text in a modal
-            </div>
-            <div>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </div>
+        <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+          <div className={styles.modalContent}>
+            <form onSubmit={handleCreateJob}>
+              <div>
+                <div>Job Title</div>
+                <input
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
+                />
+              </div>
+              <div>
+                <div>Company</div>
+                <Autocomplete
+                  onSubmit={(data) => {
+                    if (data.query) {
+                      setCompany(data.query.name);
+                      setDomain(data.query.domain);
+                      setLogoUrl(data.query.icon); 
+                    }
+                  }}
+                  placeholder="Search for a company"
+                />
+              </div>
+              <div>
+                <div>Salary</div>
+                <input
+                  type="text"
+                  value={salary}
+                  onChange={(e) => setSalary(e.target.value)}
+                />
+              </div>
+              <div>
+                <div>Location</div>
+                <input
+                  type="text"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                />
+              </div>
+              <button type="submit">Submit</button>
+            </form>
           </div>
         </Modal>
-
-        {/* <form onSubmit={handleCreateJob}>
-          <div>
-            <div>Job Title</div>
-            <input
-              type="text"
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <div>Company</div>
-            <input
-              type="text"
-              id="title"
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <div>Domain</div>
-            <input
-              type="text"
-              id="domain"
-              value={domain}
-              onChange={(e) => setDomain(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit">Submit</button>
-        </form> */}
 
         {/* {message && <p>{message}</p>} */}
 
@@ -279,11 +292,15 @@ const MyTrackerPage: React.FC = () => {
                         <div className={styles.jobCardContent}>
                           <span className={styles.jobTitle}>{job.title}</span>
                           <div className={styles.companyContainer}>
-                            <img
-                              src={`https://cdn.brandfetch.io/${job.domain}?c=${apiKey}`}
+                            {logoUrl ? (
+                              <img
+                              src={job.logoUrl}
                               alt={`${job.company} logo`}
                               className={styles.companyLogo}
                             />
+                            ):(
+                              <GoQuestion/>
+                            )}
                             <span className={styles.jobCompany}>{job.company}</span>
                           </div>
                           <div className={styles.jobCardInfo}>

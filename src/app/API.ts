@@ -47,7 +47,7 @@ export const createJob = async (jobData: {
   title: string;
   company: string;
   domain: string;
-  logoUrl?: string;
+  logoUrl: string;
   salary: string;
   location: string;
 }): Promise<Job> => {
