@@ -33,6 +33,8 @@ export interface Job {
   status: string;  
   title: string;
   company: string;
+  domain: string;
+  logoUrl: string;
   salary: string;
   location: string;
   createdAt: string;
@@ -44,6 +46,8 @@ export const createJob = async (jobData: {
   status: string;  
   title: string;
   company: string;
+  domain: string;
+  logoUrl?: string;
   salary: string;
   location: string;
 }): Promise<Job> => {
@@ -88,6 +92,8 @@ export const updateJob = async (jobId: string, jobData: {
   status: string;  
   title: string;
   company: string;
+  domain: string;
+  logoUrl: string;
   salary: string;
   location: string;
 }): Promise<Job> => {

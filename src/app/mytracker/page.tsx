@@ -15,12 +15,15 @@ import { FaTimes } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { RxUpdate } from "react-icons/rx";
+import { IoIosSearch } from "react-icons/io";
+import { Modal } from '@mui/material';
 
 
 type Job = {
   _id: string;
   title: string;
   company: string;
+  domain: string;
   salary: string;
   location: string;
   status: string;
@@ -69,12 +72,16 @@ const MyTrackerPage: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [title, setTitle] = useState<string>('');
   const [company, setCompany] = useState<string>('');
+  const [domain, setDomain] = useState<string>('');
   const [salary, setSalary] = useState<string>('');
   const [location, setLocation] = useState<string>('');
   const [jobStatus, setJobStatus] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [modalOpen, setModalOpen] = useState(false)
+
+  const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -96,32 +103,31 @@ const MyTrackerPage: React.FC = () => {
       fetchJobs();
     }
   }, [status, router]);
-
+  
   const handleCreateJob = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
-    const jobData = {
-      title,
-      company,
-      salary,
-      location,
-      status,
-    };
-
-    try {
+  
+    try {  
+      const jobData = {
+        title,
+        company,
+        domain,
+        salary,
+        location,
+        status: jobStatus,
+      };
+  
       const job = await createJob(jobData);
       setMessage('Job created successfully!');
-
-      // add the new job to the list
+  
       setJobs((prevJobs) => [...prevJobs, job]);
-
-      // reset form
       setTitle('');
       setCompany('');
       setSalary('');
       setLocation('');
       setJobStatus('');
+      setDomain('');
     } catch (error) {
       setMessage('Error creating job.');
       console.error(error);
@@ -129,7 +135,7 @@ const MyTrackerPage: React.FC = () => {
       setLoading(false);
     }
   };
-
+  
   if (status === 'loading') {
     return <div className={styles.loading}><ClipLoader color={"#00a6ff"}/></div>;
   }
@@ -173,8 +179,11 @@ const MyTrackerPage: React.FC = () => {
     const createdTime = new Date(createdAt).getTime();
     const updatedTime = new Date(updatedAt).getTime();
   
-    // if `updatedAt` is more recent than `createdAt`, it has been updated
-    return updatedTime > createdTime;
+    return updatedTime > createdTime; // if `updatedAt` is more recent than `createdAt`, it has been updated
+  }
+
+  const handlePlusButtonClick = () => {
+    setModalOpen(true)
   }
 
   if (status === 'authenticated') {
@@ -183,7 +192,8 @@ const MyTrackerPage: React.FC = () => {
         <div className={styles.headerContainer}>
           <div className={styles.header}>My Job Tracker</div>
           <div className={styles.filter}>
-
+            <IoIosSearch/>
+            Filter
           </div>
           <div className={styles.submenuContainer}>
             {/* <div className={styles.submenu}>
@@ -197,6 +207,19 @@ const MyTrackerPage: React.FC = () => {
           </div>
         </div>
         
+        <Modal
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
+        >
+          <div>
+            <div>
+              Text in a modal
+            </div>
+            <div>
+              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            </div>
+          </div>
+        </Modal>
 
         {/* <form onSubmit={handleCreateJob}>
           <div>
@@ -219,28 +242,21 @@ const MyTrackerPage: React.FC = () => {
               required
             />
           </div>
+          <div>
+            <div>Domain</div>
+            <input
+              type="text"
+              id="domain"
+              value={domain}
+              onChange={(e) => setDomain(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit">Submit</button>
         </form> */}
 
         {/* {message && <p>{message}</p>} */}
 
-        {/* <div>
-          {loading && <p>Loading jobs...</p>}
-          {error && <p>{error}</p>}
-          {!loading && jobs.length === 0 && <p>No jobs available.</p>}
-          {!loading && jobs.length > 0 && (
-            <div>
-              {jobs.map((job) => (
-                <li key={job._id}>
-                  <h3>{job.title}</h3>
-                  <p>Company: {job.company}</p>
-                  <p>Location: {job.location}</p>
-                  <p>Salary: {job.salary}</p>
-                  <p>Status: {job.status}</p>
-                </li>
-              ))}
-            </div>
-          )}
-        </div> */}
         <div className={styles.jobsContainer}>
           {jobStatuses.map((status) => {
             const jobStatusNumber = jobs.filter((job) => job.status === status.name).length;
@@ -252,7 +268,7 @@ const MyTrackerPage: React.FC = () => {
                   <span>{jobStatusNumber} JOBS</span>
                 </div>
                 <div className={styles.button}>
-                  <FaPlus/>
+                  <FaPlus onClick={handlePlusButtonClick}/>
                 </div>
                 <div className={styles.jobs}>
                   {jobs
@@ -262,7 +278,14 @@ const MyTrackerPage: React.FC = () => {
                         <div className={styles.line} style={{border: `solid 1px ${status.color}`}}></div>
                         <div className={styles.jobCardContent}>
                           <span className={styles.jobTitle}>{job.title}</span>
-                          <span className={styles.jobCompany}>{job.company}</span>
+                          <div className={styles.companyContainer}>
+                            <img
+                              src={`https://cdn.brandfetch.io/${job.domain}?c=${apiKey}`}
+                              alt={`${job.company} logo`}
+                              className={styles.companyLogo}
+                            />
+                            <span className={styles.jobCompany}>{job.company}</span>
+                          </div>
                           <div className={styles.jobCardInfo}>
                             <div className={styles.date}>
                               {getRelativeTime(job.createdAt || job.updatedAt)}
