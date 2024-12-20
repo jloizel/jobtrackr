@@ -30,9 +30,7 @@ export const Autocomplete = ({ onSubmit, placeholder }: IAutocomplete) => {
   const [value, setValue] = useState({ text: "", active: false });
   const [queries, setQueries] = useState<TQuery[]>([]);
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-
+  const handleSearch = () => {
     const text = queries?.[0]?.domain || value.text;
     onSubmit({ value: text, query: undefined, queries });
     setValue({ text, active: false });
@@ -41,7 +39,7 @@ export const Autocomplete = ({ onSubmit, placeholder }: IAutocomplete) => {
 
   const handleClick = (query: TQuery) => {
     onSubmit({ value: value.text, query, queries });
-    setValue({ text: query.domain, active: false });
+    setValue({ text: query.name, active: false });
   };
 
   const reset = () => {
@@ -73,16 +71,9 @@ export const Autocomplete = ({ onSubmit, placeholder }: IAutocomplete) => {
   }, [getQueries, value.text]);
 
   return (
-    <div className={styles.container}>
-      {/* <div className={styles.brandInfo}>
-        Provided by{" "}
-        <a href="https://brandfetch.com/" rel="noreferrer" target="_blank">
-          Brandfetch
-        </a>
-      </div> */}
-
+    <div className={styles.container} style={{ position: "relative" }}>
       <div className={styles.formWrapper}>
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.form}>
           <div className={styles.iconPrefix}>
             <IoIosSearch />
           </div>
@@ -93,13 +84,14 @@ export const Autocomplete = ({ onSubmit, placeholder }: IAutocomplete) => {
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setValue({ text: e.target.value, active: true })
             }
+            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
           />
           {value.text !== "" && (
             <div className={styles.iconSuffix} onClick={reset}>
               <FaTimes />
             </div>
           )}
-        </form>
+        </div>
       </div>
 
       {value.active && value.text !== "" && (
@@ -116,7 +108,6 @@ export const Autocomplete = ({ onSubmit, placeholder }: IAutocomplete) => {
                     <img src={query.icon} alt={query.name} />
                   </div>
                   <div className={styles.queryName}>{query.name || query.domain}</div>
-                  {/* <div className={styles.queryDomain}>{query.domain}</div> */}
                 </div>
               ))}
             </div>
@@ -132,3 +123,4 @@ export const Autocomplete = ({ onSubmit, placeholder }: IAutocomplete) => {
     </div>
   );
 };
+

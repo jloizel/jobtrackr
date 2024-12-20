@@ -37,6 +37,7 @@ export interface Job {
   logoUrl: string;
   salary: string;
   location: string;
+  postUrl: string;
   createdAt: string;
   updatedAt: string
 }
@@ -50,6 +51,7 @@ export const createJob = async (jobData: {
   logoUrl: string;
   salary: string;
   location: string;
+  postUrl: string;
 }): Promise<Job> => {
   try {
     const response: AxiosResponse<Job> = await api.post('/jobs/create', jobData);
@@ -96,6 +98,7 @@ export const updateJob = async (jobId: string, jobData: {
   logoUrl: string;
   salary: string;
   location: string;
+  postUrl: string;
 }): Promise<Job> => {
   try {
     const response: AxiosResponse<Job> = await api.patch(`/jobs/update/${jobId}`, jobData);
