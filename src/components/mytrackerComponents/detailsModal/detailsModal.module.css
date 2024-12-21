@@ -21,9 +21,10 @@
   background-color: #FFFFFF;
   font-weight: 500;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  /* justify-content: center; */
   border-bottom: solid 2px #dfdfe252;
-  padding: 10px;
+  padding: 40px 20px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   position: relative;
@@ -32,7 +33,7 @@
 .closeIcon {
   position: absolute;
   top: 10px;
-  left: 10px;
+  right: 10px;
   cursor: pointer;
   font-size: 20px;
   color: #7e8aad;
@@ -43,75 +44,15 @@
   color: #283452;
 }
 
-.formContent {
+.company {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  gap: 15px;
-}
-
-.formInput {
-  display: flex;
-  flex-direction: column;
-  /* justify-content: flex-start; */
-  gap: 5px;
-  width: 60%;
-}
-
-.formInput span {
-  font-weight: 500;
-  font-size: 15px;
-}
-
-.input {
-  font-size: 14px;
-  display: flex;
-  align-items: center;
   flex-direction: row;
-  border: 1px solid #dfdfe2b4;
-  box-shadow: rgba(25, 4, 69, 0.05) 0px 1px 4px;
-  border-radius: 5px;
-  padding: 10px 10px;
-  width: 100%;
-  outline: none;
-  font-family: "Roboto", sans-serif;
-  color: #283452;
+  gap: 5px;
+  align-items: center;
 }
 
-.input:focus {
-  outline: solid 2px #00a6ff;
-}
-
-.input::placeholder {
-  font-family: "Roboto", sans-serif;
-  color: #7e8aad;
-}
-
-.submitButtonContainer {
+.companyLogo {
+  width: 25px;
+  border-radius: 50%;
   display: flex;
-  justify-content: center;
-  padding: 20px;
-}
-
-.submitButtonContainer button {
-  padding: 8px 20px;
-  font-family: "Roboto", sans-serif;
-  border-radius: 6px;
-  outline: none;
-  border: 1px solid #dfdfe2b4;
-  box-shadow: rgba(25, 4, 69, 0.05) 0px 1px 4px;
-  background-color: #00a6ff;
-  color: #FFFFFF;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 16px;
-  transition: all 0.2s ease-in-out;
-}
-
-.submitButtonContainer button:hover {
-  background-color: #FFFFFF;
-  color: #00a6ff;
-  border: solid 1px #00a6ff;
 }

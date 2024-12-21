@@ -68,99 +68,19 @@ export const DetailsModal: React.FC<DetailsModalProps> = ({
   }, [job, open, setTitle, setCompany, setDomain, setLogoUrl, setSalary, setLocation, setPostUrl]);
 
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-
-    if (job) {
-      const updatedJob: Job = {
-        ...job,
-        title,
-        company,
-        domain,
-        logoUrl,
-        salary,
-        location,
-        postUrl,
-      };
-
-      onSubmit(updatedJob);
-    }
-  };
-
-
   return (
     <Modal open={open} className={styles.modalWrapper} onClose={onClose} disableScrollLock>
       <div className={styles.modalContent}>
-        <form onSubmit={handleSubmit}>
+        
           <div className={styles.modalHeader}>
-            Update Job
+            <span>{title}</span>
+            <div className={styles.company}>
+              <img src={logoUrl} alt={company} className={styles.companyLogo}/>
+              <span>{company}</span>
+            </div>
+            
             <IoMdClose className={styles.closeIcon} onClick={onClose} />
           </div>
-          <div className={styles.formContent}>
-            <div className={styles.formInput}>
-              <span>Company</span>
-              <Autocomplete
-                onSubmit={(data) => {
-                  if (data.query) {
-                    setCompany(data.query.name);
-                    setDomain(data.query.domain);
-                    setLogoUrl(data.query.icon);
-                  }
-                }}
-                placeholder="Search for a company"
-                initialValue={{
-                  name: job?.company || "", 
-                  icon: job?.logoUrl || "",  
-                  domain: job?.domain || ""   
-                }}
-              />
-            </div>
-            <div className={styles.formInput}>
-              <span>Job Title</span>
-              <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className={styles.input}
-                placeholder="Enter the job title"
-                required
-              />
-            </div>
-            <div className={styles.formInput}>
-              <span>Location</span>
-              <input
-                type="text"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                className={styles.input}
-                placeholder="Enter the job location"
-              />
-            </div>
-            <div className={styles.formInput}>
-              <span>Salary</span>
-              <input
-                type="text"
-                value={salary}
-                onChange={(e) => setSalary(e.target.value)}
-                className={styles.input}
-                placeholder="Enter the job salary"
-              />
-            </div>
-            <div className={styles.formInput}>
-              <span>Post URL</span>
-              <input
-                type="text"
-                value={postUrl}
-                onChange={(e) => setPostUrl(e.target.value)}
-                className={styles.input}
-                placeholder="Enter the job post URL"
-              />
-            </div>
-          </div>
-          <div className={styles.submitButtonContainer}>
-            <button type="submit">Update</button>
-          </div>
-        </form>
       </div>
     </Modal>
   );
