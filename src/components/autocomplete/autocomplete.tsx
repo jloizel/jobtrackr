@@ -29,6 +29,7 @@ interface IAutocomplete {
 export const Autocomplete = ({ onSubmit, placeholder }: IAutocomplete) => {
   const [value, setValue] = useState({ text: "", active: false });
   const [queries, setQueries] = useState<TQuery[]>([]);
+  const [icon, setIcon] = useState({ text: "", active: false });
 
   const handleSearch = () => {
     const text = queries?.[0]?.domain || value.text;
@@ -40,11 +41,13 @@ export const Autocomplete = ({ onSubmit, placeholder }: IAutocomplete) => {
   const handleClick = (query: TQuery) => {
     onSubmit({ value: value.text, query, queries });
     setValue({ text: query.name, active: false });
+    setIcon({ text: query.icon, active: true });
   };
 
   const reset = () => {
     setQueries([]);
     setValue({ text: "", active: false });
+    setIcon({ text: "", active: false });
   };
 
   const getQueries = useCallback(async (searchValue: string) => {
@@ -86,6 +89,9 @@ export const Autocomplete = ({ onSubmit, placeholder }: IAutocomplete) => {
             }
             onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
           />
+          {icon.active && (
+            <img src={icon.text} alt="Selected company icon" className={styles.selectedIcon}/>
+          )}
           {value.text !== "" && (
             <div className={styles.iconSuffix} onClick={reset}>
               <FaTimes />
@@ -93,6 +99,8 @@ export const Autocomplete = ({ onSubmit, placeholder }: IAutocomplete) => {
           )}
         </div>
       </div>
+
+      
 
       {value.active && value.text !== "" && (
         <div className={styles.queryWrapper}>
@@ -114,8 +122,8 @@ export const Autocomplete = ({ onSubmit, placeholder }: IAutocomplete) => {
           ) : (
             <div className={styles.notFound}>
               <IoIosSearch className={styles.notFoundIcon} />
-              <p className={styles.bold}>Nothing found...</p>
-              <p>Search by entering its website URL for better results.</p>
+              <span className={styles.bold}>Nothing found...</span>
+              {/* <p>Search by entering its website URL for better results.</p> */}
             </div>
           )}
         </div>

@@ -21,6 +21,8 @@ import { Autocomplete } from '@/components/autocomplete/autocomplete';
 import { GoQuestion } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
+import { JobModal } from '@/components/mytrackerComponents/jobModal/jobModal';
+import { EditModal } from '@/components/mytrackerComponents/editModal/editModal';
 
 
 type Job = {
@@ -87,7 +89,8 @@ const MyTrackerPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
   const [error, setError] = useState<string>('');
-  const [modalOpen, setModalOpen] = useState(false)
+  const [jobModalOpen, setJobModalOpen] = useState(false)
+  const [editModalOpen, setEditModalOpen] = useState(false)
 
   const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
@@ -113,7 +116,7 @@ const MyTrackerPage: React.FC = () => {
   }, [status, router]);
 
   const handlePlusButtonClick = (statusName: string) => {
-    setModalOpen(true)
+    setJobModalOpen(true)
     setJobStatus(statusName)
   }
 
@@ -143,7 +146,6 @@ const MyTrackerPage: React.FC = () => {
       };
   
       const job = await createJob(jobData);
-  
       const updatedJobs = await getAllJobs();
       setJobs(updatedJobs);
 
@@ -156,7 +158,7 @@ const MyTrackerPage: React.FC = () => {
       setLogoUrl('');
       setPostUrl('');
 
-      setModalOpen(false);
+      setJobModalOpen(false);
     } catch (error) {
       setMessage('Error creating job.');
       console.error(error);
@@ -164,6 +166,10 @@ const MyTrackerPage: React.FC = () => {
       setLoading(false);
     }
   };
+
+  const handleCardClick = () => {
+    setEditModalOpen(true)
+  }
   
   if (status === 'loading') {
     return <div className={styles.loading}><ClipLoader color={"#00a6ff"}/></div>;
@@ -232,69 +238,25 @@ const MyTrackerPage: React.FC = () => {
           </div>
         </div>
         
-        <Modal open={modalOpen} className={styles.modalWrapper} onClose={() => setModalOpen(false)}>
-          <div className={styles.modalContent}>
-            <form onSubmit={handleCreateJob}>
-              <div className={styles.modalHeader}>
-                Add job
-                <IoMdClose className={styles.closeIcon} onClick={() => setModalOpen(false)}/>
-              </div>
-              <div className={styles.formContent}>
-                <div className={styles.formInput}>
-                  <span>Company</span>
-                  <Autocomplete
-                    onSubmit={handleCompanySelect}
-                    placeholder="Search for a company"
-                  />
-                </div>
-                <div className={styles.formInput}>
-                  <span>Job Title</span>
-                  <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    className={styles.input}
-                    placeholder="Enter the job title"
-                    required
-                  />
-                </div>
-                <div className={styles.formInput}>
-                  <span>Location</span>
-                  <input
-                    type="text"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    className={styles.input}
-                    placeholder="Enter the job location"
-                  />
-                </div>
-                <div className={styles.formInput}>
-                  <span>Salary</span>
-                  <input
-                    type="text"
-                    value={salary}
-                    onChange={(e) => setSalary(e.target.value)}
-                    className={styles.input}
-                    placeholder="Enter the job salary"
-                  />
-                </div>
-                <div className={styles.formInput}>
-                  <span>Post Url</span>
-                  <input
-                    type="text"
-                    value={postUrl}
-                    onChange={(e) => setPostUrl(e.target.value)}
-                    className={styles.input}
-                    placeholder="Enter the job post Url"
-                  />
-                </div>
-              </div>
-              <div className={styles.submitButtonContainer}>
-                <button type="submit">Save</button>
-              </div>
-            </form>
-          </div>
-        </Modal>
+        <JobModal
+          open={jobModalOpen}
+          onClose={() => setJobModalOpen(false)}
+          onSubmit={handleCreateJob}
+          title={title}
+          setTitle={setTitle}
+          company={company}
+          setCompany={setCompany}
+          domain={domain}
+          setDomain={setDomain}
+          logoUrl={logoUrl}
+          setLogoUrl={setLogoUrl}
+          salary={salary}
+          setSalary={setSalary}
+          location={location}
+          setLocation={setLocation}
+          postUrl={postUrl}
+          setPostUrl={setPostUrl}
+        />
 
         {/* {message && <p>{message}</p>} */}
 
@@ -320,7 +282,7 @@ const MyTrackerPage: React.FC = () => {
                     {jobs
                       .filter((job) => job.status === status.name)
                       .map((job) => (
-                        <div key={job._id} className={styles.jobCard}>
+                        <div key={job._id} className={styles.jobCard} onClick={handleCardClick}>
                           <div className={styles.line} style={{border: `solid 1px ${status.color}`}}></div>
                           <div className={styles.jobCardContent}>
                             <span className={styles.jobTitle}>{job.title}</span>
@@ -348,16 +310,36 @@ const MyTrackerPage: React.FC = () => {
                             </div>
                             <MdEdit className={styles.editButton}/>
                           </div>
+                          <EditModal
+                            open={editModalOpen}
+                            onClose={() => setEditModalOpen(false)}
+                            onSubmit={handleCreateJob}
+                            title={title}
+                            setTitle={setTitle}
+                            company={company}
+                            setCompany={setCompany}
+                            domain={domain}
+                            setDomain={setDomain}
+                            logoUrl={logoUrl}
+                            setLogoUrl={setLogoUrl}
+                            salary={salary}
+                            setSalary={setSalary}
+                            location={location}
+                            setLocation={setLocation}
+                            postUrl={postUrl}
+                            setPostUrl={setPostUrl}
+                          />
                         </div>
-                      ))}
+
+                      ))
+                      
+                    }
                   </div>
                 </div>
               );
             })
           )}
         </div>
-
-
       </div>
     );
   }
