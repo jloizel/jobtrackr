@@ -2,10 +2,10 @@ import React, { FormEvent, useEffect } from "react";
 import { Modal } from "@mui/material";
 import { IoMdClose } from "react-icons/io";
 import { Autocomplete } from "@/components/mytrackerComponents/autocomplete/autocomplete";
-import styles from "./updateModal.module.css";
+import styles from "./detailsModal.module.css";
 import { Job } from "@/app/API";
 
-type UpdateModalProps = {
+type DetailsModalProps = {
   open: boolean;
   onClose: () => void;
   onSubmit: (updatedJob: Job) => Promise<void>;
@@ -26,7 +26,7 @@ type UpdateModalProps = {
   setPostUrl: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const UpdateModal: React.FC<UpdateModalProps> = ({
+export const DetailsModal: React.FC<DetailsModalProps> = ({
   open,
   onClose,
   onSubmit,
@@ -57,7 +57,6 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
       setLocation(job.location);
       setPostUrl(job.postUrl);
     } else if (!open) {
-      // Clear the fields when the modal is closed
       setTitle("");
       setCompany("");
       setDomain("");

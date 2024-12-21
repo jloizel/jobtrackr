@@ -85,6 +85,7 @@
 
 .input::placeholder {
   font-family: "Roboto", sans-serif;
+  color: #7e8aad;
 }
 
 .submitButtonContainer {

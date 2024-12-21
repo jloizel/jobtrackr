@@ -24,6 +24,7 @@ import { IoMdClose } from "react-icons/io";
 import { JobModal } from '@/components/mytrackerComponents/jobModal/jobModal';
 import { UpdateModal } from '@/components/mytrackerComponents/updateModal/updateModal';
 import RelativeTime from '@/components/mytrackerComponents/relativeTime/relativeTime';
+import { DetailsModal } from '@/components/mytrackerComponents/detailsModal/detailsModal';
 
 
 type Job = {
@@ -93,6 +94,7 @@ const MyTrackerPage: React.FC = () => {
   const [jobModalOpen, setJobModalOpen] = useState(false)
   const [updateModalOpen, setUpdateModalOpen] = useState(false)
   const [selectedJob, setSelectedJob] = useState<Job | null>(null)
+  const [detailsModalOpen, setDetailsModalOpen] = useState(false)
 
   const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
@@ -193,6 +195,7 @@ const MyTrackerPage: React.FC = () => {
 
   const handleCardClick = (job: Job) => {
     setSelectedJob(job);
+    setDetailsModalOpen(true)
   };
   
   
@@ -267,6 +270,30 @@ const MyTrackerPage: React.FC = () => {
           open={updateModalOpen}
           onClose={() => {
             setUpdateModalOpen(false);
+            setSelectedJob(null);
+          }}
+          onSubmit={handleUpdateJob}
+          title={title}
+          setTitle={setTitle}
+          company={company}
+          setCompany={setCompany}
+          domain={domain}
+          setDomain={setDomain}
+          logoUrl={logoUrl}
+          setLogoUrl={setLogoUrl}
+          salary={salary}
+          setSalary={setSalary}
+          location={location}
+          setLocation={setLocation}
+          postUrl={postUrl}
+          setPostUrl={setPostUrl}
+          job={selectedJob}
+        />
+
+        <DetailsModal
+          open={detailsModalOpen}
+          onClose={() => {
+            setDetailsModalOpen(false);
             setSelectedJob(null);
           }}
           onSubmit={handleUpdateJob}

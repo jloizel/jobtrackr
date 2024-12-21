@@ -24,12 +24,14 @@ export type TAutocomplete = {
 interface IAutocomplete {
   onSubmit: ({ value, queries, query }: TAutocomplete) => void;
   placeholder: string;
+  initialValue?: TQuery;
 }
 
-export const Autocomplete = ({ onSubmit, placeholder }: IAutocomplete) => {
-  const [value, setValue] = useState({ text: "", active: false });
+export const Autocomplete = ({ onSubmit, placeholder, initialValue }: IAutocomplete) => {
+  const [value, setValue] = useState({ text: initialValue?.name || "", active: false });
   const [queries, setQueries] = useState<TQuery[]>([]);
-  const [icon, setIcon] = useState({ text: "", active: false });
+  const [icon, setIcon] = useState({ text: initialValue?.icon || "", active: !!initialValue?.icon });
+
 
   const handleSearch = () => {
     const text = queries?.[0]?.domain || value.text;
