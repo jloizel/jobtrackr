@@ -4,7 +4,7 @@ import { useEffect, useState, FormEvent } from 'react';
 import styles from "./mytracker.module.css"
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { createJob, getAllJobs } from '../API';
+import { createJob, getAllJobs, updateJob } from '../API';
 import { ClipLoader } from 'react-spinners';
 import { PiBriefcaseBold } from "react-icons/pi";
 import { IoIosStats } from "react-icons/io";
@@ -17,12 +17,13 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { RxUpdate } from "react-icons/rx";
 import { IoIosSearch } from "react-icons/io";
 import { Modal } from '@mui/material';
-import { Autocomplete } from '@/components/autocomplete/autocomplete';
+import { Autocomplete } from '@/components/mytrackerComponents/autocomplete/autocomplete';
 import { GoQuestion } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import { JobModal } from '@/components/mytrackerComponents/jobModal/jobModal';
-import { EditModal } from '@/components/mytrackerComponents/editModal/editModal';
+import { UpdateModal } from '@/components/mytrackerComponents/updateModal/updateModal';
+import RelativeTime from '@/components/mytrackerComponents/relativeTime/relativeTime';
 
 
 type Job = {
@@ -90,7 +91,8 @@ const MyTrackerPage: React.FC = () => {
   const [message, setMessage] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [jobModalOpen, setJobModalOpen] = useState(false)
-  const [editModalOpen, setEditModalOpen] = useState(false)
+  const [updateModalOpen, setUpdateModalOpen] = useState(false)
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null)
 
   const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
@@ -167,9 +169,32 @@ const MyTrackerPage: React.FC = () => {
     }
   };
 
-  const handleCardClick = () => {
-    setEditModalOpen(true)
-  }
+  const handleEditClick = (job: Job) => {
+    setSelectedJob(job);
+    setUpdateModalOpen(true);
+  };
+
+  const handleUpdateJob = async (updatedJob: Job) => {
+    setLoading(true);
+    try {
+      const { _id, ...jobData } = updatedJob; 
+      await updateJob(_id, jobData);
+      const updatedJobs = await getAllJobs(); 
+      setJobs(updatedJobs);
+    } catch (error) {
+      setMessage('Error updating job.');
+      console.error(error);
+    } finally {
+      setLoading(false);
+      setUpdateModalOpen(false);
+      setSelectedJob(null);
+    }
+  };
+
+  const handleCardClick = (job: Job) => {
+    setSelectedJob(job);
+  };
+  
   
   if (status === 'loading') {
     return <div className={styles.loading}><ClipLoader color={"#00a6ff"}/></div>;
@@ -189,26 +214,6 @@ const MyTrackerPage: React.FC = () => {
         return null;
     }
   };
-
-  function getRelativeTime(date: string | number | Date): string {
-    const now = new Date();
-    const past = new Date(date);
-    const diffMs = now.getTime() - past.getTime(); // difference in milliseconds
-    const diffMinutes = Math.floor(diffMs / 60000); // difference in minutes
-  
-    if (diffMinutes < 60) {
-      return `${diffMinutes}m`;
-    }
-  
-    const diffHours = Math.floor(diffMinutes / 60); // difference in hours
-    if (diffHours < 24) {
-      return `${diffHours}h`;
-    }
-  
-    const diffDays = Math.floor(diffHours / 24); // difference in days
-    return `${diffDays}d`;
-  }
-  
 
   function isRecentlyUpdated(createdAt: string | number | Date, updatedAt: string | number | Date): boolean {
     const createdTime = new Date(createdAt).getTime();
@@ -258,6 +263,30 @@ const MyTrackerPage: React.FC = () => {
           setPostUrl={setPostUrl}
         />
 
+        <UpdateModal
+          open={updateModalOpen}
+          onClose={() => {
+            setUpdateModalOpen(false);
+            setSelectedJob(null);
+          }}
+          onSubmit={handleUpdateJob}
+          title={title}
+          setTitle={setTitle}
+          company={company}
+          setCompany={setCompany}
+          domain={domain}
+          setDomain={setDomain}
+          logoUrl={logoUrl}
+          setLogoUrl={setLogoUrl}
+          salary={salary}
+          setSalary={setSalary}
+          location={location}
+          setLocation={setLocation}
+          postUrl={postUrl}
+          setPostUrl={setPostUrl}
+          job={selectedJob}
+        />
+
         {/* {message && <p>{message}</p>} */}
 
         <div className={styles.jobsContainer}>
@@ -281,59 +310,39 @@ const MyTrackerPage: React.FC = () => {
                   <div className={styles.jobs}>
                     {jobs
                       .filter((job) => job.status === status.name)
-                      .map((job) => (
-                        <div key={job._id} className={styles.jobCard} onClick={handleCardClick}>
-                          <div className={styles.line} style={{border: `solid 1px ${status.color}`}}></div>
-                          <div className={styles.jobCardContent}>
-                            <span className={styles.jobTitle}>{job.title}</span>
-                            <div className={styles.companyContainer}>
-                              {job.logoUrl ? (
-                                <img
-                                src={job.logoUrl}
-                                alt={`${job.company} logo`}
-                                className={styles.companyLogo}
-                              />
-                              ):(
-                                <GoQuestion/>
-                              )}
-                              <span className={styles.jobCompany}>{job.company}</span>
-                            </div>
-                            <div className={styles.jobCardInfo}>
-                              <div className={styles.date}>
-                                {getRelativeTime(job.createdAt || job.updatedAt)}
+                      .map((job) => {
+                        return (
+                          <div key={job._id} className={styles.jobCard} onClick={() => handleCardClick(job)}>
+                            <div className={styles.line} style={{ border: `solid 1px ${status.color}` }}></div>
+                            <div className={styles.jobCardContent}>
+                              <span className={styles.jobTitle}>{job.title}</span>
+                              <div className={styles.companyContainer}>
+                                {job.logoUrl ? (
+                                  <img
+                                    src={job.logoUrl}
+                                    alt={`${job.company} logo`}
+                                    className={styles.companyLogo}
+                                  />
+                                ) : (
+                                  <GoQuestion />
+                                )}
+                                <span className={styles.jobCompany}>{job.company}</span>
                               </div>
-                              {isRecentlyUpdated(job.createdAt, job.updatedAt) ? (
-                                <RxUpdate className={styles.icon}/>
-                              ):(
-                                <IoIosAddCircleOutline className={styles.icon}/>
-                              )}
+                              <div className={styles.jobCardInfo}>
+                                <div className={styles.date}>
+                                  <RelativeTime date={job.updatedAt}/>
+                                </div>
+                                {isRecentlyUpdated(job.createdAt, job.updatedAt) ? (
+                                  <RxUpdate className={styles.icon} />
+                                ) : (
+                                  <IoIosAddCircleOutline className={styles.icon} />
+                                )}
+                              </div>
+                              <MdEdit className={styles.editButton} onClick={() => handleEditClick(job)} />
                             </div>
-                            <MdEdit className={styles.editButton}/>
                           </div>
-                          <EditModal
-                            open={editModalOpen}
-                            onClose={() => setEditModalOpen(false)}
-                            onSubmit={handleCreateJob}
-                            title={title}
-                            setTitle={setTitle}
-                            company={company}
-                            setCompany={setCompany}
-                            domain={domain}
-                            setDomain={setDomain}
-                            logoUrl={logoUrl}
-                            setLogoUrl={setLogoUrl}
-                            salary={salary}
-                            setSalary={setSalary}
-                            location={location}
-                            setLocation={setLocation}
-                            postUrl={postUrl}
-                            setPostUrl={setPostUrl}
-                          />
-                        </div>
-
-                      ))
-                      
-                    }
+                        );
+                      })}
                   </div>
                 </div>
               );

@@ -1,13 +1,15 @@
-import React, { FormEvent } from "react";
+import React, { FormEvent, useEffect } from "react";
 import { Modal } from "@mui/material";
 import { IoMdClose } from "react-icons/io";
-import { Autocomplete } from "@/components/autocomplete/autocomplete";
-import styles from "./editModal.module.css";
+import { Autocomplete } from "@/components/mytrackerComponents/autocomplete/autocomplete";
+import styles from "./updateModal.module.css";
+import { Job } from "@/app/API";
 
-type EditModalProps = {
+type UpdateModalProps = {
   open: boolean;
   onClose: () => void;
-  onSubmit: (e: FormEvent) => void;
+  onSubmit: (updatedJob: Job) => Promise<void>;
+  job: Job | null;
   title: string;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   company: string;
@@ -24,10 +26,11 @@ type EditModalProps = {
   setPostUrl: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const EditModal: React.FC<EditModalProps> = ({
+export const UpdateModal: React.FC<UpdateModalProps> = ({
   open,
   onClose,
   onSubmit,
+  job,
   title,
   setTitle,
   company,
@@ -51,18 +54,71 @@ export const EditModal: React.FC<EditModalProps> = ({
     }
   };
 
+  useEffect(() => {
+    if (job && open) {
+      setTitle(job.title);
+      setCompany(job.company);
+      setDomain(job.domain);
+      setLogoUrl(job.logoUrl);
+      setSalary(job.salary);
+      setLocation(job.location);
+      setPostUrl(job.postUrl);
+    } else if (!open) {
+      // Clear the fields when the modal is closed
+      setTitle("");
+      setCompany("");
+      setDomain("");
+      setLogoUrl("");
+      setSalary("");
+      setLocation("");
+      setPostUrl("");
+    }
+  }, [job, open, setTitle, setCompany, setDomain, setLogoUrl, setSalary, setLocation, setPostUrl]);
+
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    if (job) {
+      const updatedJob: Job = {
+        ...job,
+        title,
+        company,
+        domain,
+        logoUrl,
+        salary,
+        location,
+        postUrl,
+      };
+
+      onSubmit(updatedJob);
+    }
+  };
+  
+  
+
   return (
     <Modal open={open} className={styles.modalWrapper} onClose={onClose} disableScrollLock>
       <div className={styles.modalContent}>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className={styles.modalHeader}>
-            Add Job
+            Update Job
             <IoMdClose className={styles.closeIcon} onClick={onClose} />
           </div>
           <div className={styles.formContent}>
             <div className={styles.formInput}>
               <span>Company</span>
-              <Autocomplete onSubmit={handleCompanySelect} placeholder="Search for a company" />
+              <Autocomplete
+                onSubmit={(data) => {
+                  if (data.query) {
+                    setCompany(data.query.name);
+                    setDomain(data.query.domain);
+                    setLogoUrl(data.query.icon);
+                  }
+                }}
+                placeholder="Search for a company"
+                // initialValue={job?.company || ""}
+              />
             </div>
             <div className={styles.formInput}>
               <span>Job Title</span>
@@ -107,7 +163,7 @@ export const EditModal: React.FC<EditModalProps> = ({
             </div>
           </div>
           <div className={styles.submitButtonContainer}>
-            <button type="submit">Save</button>
+            <button type="submit">Update</button>
           </div>
         </form>
       </div>

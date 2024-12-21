@@ -75,6 +75,8 @@
   padding: 10px 10px;
   width: 100%;
   outline: none;
+  font-family: "Roboto", sans-serif;
+  color: #283452;
 }
 
 .input:focus {

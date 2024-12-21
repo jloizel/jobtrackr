@@ -29,7 +29,7 @@ api.interceptors.request.use((config) => {
 // Define types for request data and response data
 export interface Job {
   _id: string;
-  userEmail: string;
+  userEmail?: string;
   status: string;  
   title: string;
   company: string;

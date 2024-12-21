@@ -1,7 +1,7 @@
 import React, { FormEvent } from "react";
 import { Modal } from "@mui/material";
 import { IoMdClose } from "react-icons/io";
-import { Autocomplete } from "@/components/autocomplete/autocomplete";
+import { Autocomplete } from "@/components/mytrackerComponents/autocomplete/autocomplete";
 import styles from "./jobModal.module.css";
 
 type JobModalProps = {
