@@ -4,6 +4,7 @@ import { IoMdClose } from "react-icons/io";
 import { Autocomplete } from "@/components/mytrackerComponents/autocomplete/autocomplete";
 import styles from "./detailsModal.module.css";
 import { Job } from "@/app/API";
+import { MdOpenInNew } from "react-icons/md";
 
 type DetailsModalProps = {
   open: boolean;
@@ -81,9 +82,15 @@ export const DetailsModal: React.FC<DetailsModalProps> = ({
             
             <IoMdClose className={styles.closeIcon} onClick={onClose} />
           </div>
-          <div className={styles.detailsContainer}>
-            <span>{salary}</span>
-            <span>{location}</span>
+          <div className={styles.detailsWrapper}>
+            <div className={styles.detailContainer}>
+              <span className={styles.detailHeader}>Salary</span>
+              <span className={styles.detail}>{salary}</span>
+            </div>
+            <div className={styles.detailContainer}>
+              <span className={styles.detailHeader}>Location</span>
+              <span className={styles.detail}>{location}</span>
+            </div>
           </div>
       </div>
     </Modal>

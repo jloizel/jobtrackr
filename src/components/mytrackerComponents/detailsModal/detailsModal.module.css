@@ -69,7 +69,20 @@
   font-size: 18px;
 }
 
-.detailsContainer {
+.detailsWrapper {
   display: flex;
   flex-direction: column;
+}
+
+.detailContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.detailHeader {
+
+}
+
+.detail {
+  
 }
