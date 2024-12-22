@@ -73,13 +73,16 @@ export const DetailsModal: React.FC<DetailsModalProps> = ({
       <div className={styles.modalContent}>
         
           <div className={styles.modalHeader}>
-            <span>{title}</span>
+            <span className={styles.title}>{title}</span>
             <div className={styles.company}>
               <img src={logoUrl} alt={company} className={styles.companyLogo}/>
               <span>{company}</span>
             </div>
             
             <IoMdClose className={styles.closeIcon} onClick={onClose} />
+          </div>
+          <div className={styles.detailsContainer}>
+            Details
           </div>
       </div>
     </Modal>
