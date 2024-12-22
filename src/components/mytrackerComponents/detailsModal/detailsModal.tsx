@@ -82,7 +82,8 @@ export const DetailsModal: React.FC<DetailsModalProps> = ({
             <IoMdClose className={styles.closeIcon} onClick={onClose} />
           </div>
           <div className={styles.detailsContainer}>
-            Details
+            <span>{salary}</span>
+            <span>{location}</span>
           </div>
       </div>
     </Modal>
