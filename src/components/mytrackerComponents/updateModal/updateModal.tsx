@@ -57,7 +57,6 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
       setLocation(job.location);
       setPostUrl(job.postUrl);
     } else if (!open) {
-      // Clear the fields when the modal is closed
       setTitle("");
       setCompany("");
       setDomain("");
@@ -66,8 +65,7 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
       setLocation("");
       setPostUrl("");
     }
-  }, [job, open, setTitle, setCompany, setDomain, setLogoUrl, setSalary, setLocation, setPostUrl]);
-
+  }, [open]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
