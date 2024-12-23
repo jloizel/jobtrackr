@@ -102,7 +102,6 @@ export const DetailsModal: React.FC<DetailsModalProps> = ({
   return (
     <Modal open={open} className={styles.modalWrapper} onClose={onClose} disableScrollLock>
       <div className={styles.modalContent}>
-        
           <div className={styles.modalHeader}>
             <span className={styles.title}>{title}</span>
             <div className={styles.company}>
@@ -132,20 +131,24 @@ export const DetailsModal: React.FC<DetailsModalProps> = ({
             )}
           </div>
           <div className={styles.detailsWrapper}>
-            <div className={styles.detailContainer}>
-              <span className={styles.detailHeader}>
-                <GiMoneyStack className={styles.icon}/>
-                Salary
-              </span>
-              <span className={styles.detail}>£{salary}</span>
-            </div>
-            <div className={styles.detailContainer}>
-              <span className={styles.detailHeader}>
-                <FaLocationDot className={styles.icon}/>
-                Location
-              </span>
-              <span className={styles.detail}>{location}</span>
-            </div>
+            {salary && (
+              <div className={styles.detailContainer}>
+                <span className={styles.detailHeader}>
+                  <GiMoneyStack className={styles.icon}/>
+                  Salary
+                </span>
+                <span className={styles.detail}>£{salary}</span>
+              </div>
+            )}
+            {location && (
+              <div className={styles.detailContainer}>
+                <span className={styles.detailHeader}>
+                  <FaLocationDot className={styles.icon}/>
+                  Location
+                </span>
+                <span className={styles.detail}>{location}</span>
+              </div>
+            )}
             <div className={styles.detailContainer}>
               <span className={styles.detailHeader}>
                 <FaClipboard className={styles.icon}/>

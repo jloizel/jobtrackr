@@ -13,8 +13,13 @@ const RelativeTime: React.FC<{ date: string | number | Date }> = ({ date }) => {
         const now = new Date();
         const past = new Date(date);
         const diffMs = now.getTime() - past.getTime();
-        const diffMinutes = Math.floor(diffMs / 60000);
   
+        if (diffMs < 0) {
+          // Handle future dates
+          return "Just now";
+        }
+  
+        const diffMinutes = Math.floor(diffMs / 60000);
         if (diffMinutes < 60) {
           return `${diffMinutes}m`;
         }
@@ -37,8 +42,9 @@ const RelativeTime: React.FC<{ date: string | number | Date }> = ({ date }) => {
       return () => clearInterval(interval);
     }, [date]);
   
-    return typeof window === "undefined" ? "" : relativeTime; 
+    return typeof window === "undefined" ? "" : relativeTime;
   }
+  
   return <span>{relativeTime}</span>;
 };
 

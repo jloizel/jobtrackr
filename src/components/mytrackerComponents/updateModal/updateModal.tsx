@@ -46,49 +46,52 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
   postUrl,
   setPostUrl,
 }) => {
+  const [formData, setFormData] = React.useState({
+    title: "",
+    company: "",
+    domain: "",
+    logoUrl: "",
+    salary: "",
+    location: "",
+    postUrl: "",
+  });
 
   useEffect(() => {
-    if (job && open) {
-      setTitle(job.title);
-      setCompany(job.company);
-      setDomain(job.domain);
-      setLogoUrl(job.logoUrl);
-      setSalary(job.salary);
-      setLocation(job.location);
-      setPostUrl(job.postUrl);
-    } else if (!open) {
-      setTitle("");
-      setCompany("");
-      setDomain("");
-      setLogoUrl("");
-      setSalary("");
-      setLocation("");
-      setPostUrl("");
+    if (job) {
+      setFormData({
+        title: job.title,
+        company: job.company,
+        domain: job.domain,
+        logoUrl: job.logoUrl,
+        salary: job.salary,
+        location: job.location,
+        postUrl: job.postUrl,
+      });
     }
   }, [open]);
 
+  const handleInputChange = (field: keyof typeof formData, value: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+  };
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
+  
     if (job) {
       const updatedJob: Job = {
         ...job,
-        title,
-        company,
-        domain,
-        logoUrl,
-        salary,
-        location,
-        postUrl,
+        ...formData,
       };
-
+  
       onSubmit(updatedJob);
     }
   };
 
-
   return (
-    <Modal open={open} className={styles.modalWrapper} onClose={onClose} disableScrollLock>
+    <Modal open={open} className={styles.modalWrapper} onClose={onClose} disableScrollLock key={job?._id || "default"}>
       <div className={styles.modalContent}>
         <form onSubmit={handleSubmit}>
           <div className={styles.modalHeader}>
@@ -100,17 +103,18 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
               <span>Company</span>
               <Autocomplete
                 onSubmit={(data) => {
-                  if (data.query) {
-                    setCompany(data.query.name);
-                    setDomain(data.query.domain);
-                    setLogoUrl(data.query.icon);
-                  }
+                  setFormData((prevData) => ({
+                    ...prevData,
+                    company: data.query?.name || "",  
+                    domain: data.query?.domain || "",  
+                    logoUrl: data.query?.icon || "", 
+                  }));
                 }}
                 placeholder="Search for a company"
                 initialValue={{
-                  name: job?.company || "", 
-                  icon: job?.logoUrl || "",  
-                  domain: job?.domain || ""   
+                  name: formData.company,
+                  icon: formData.logoUrl,
+                  domain: formData.domain,
                 }}
               />
             </div>
@@ -118,11 +122,10 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
               <span>Job Title</span>
               <input
                 type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={formData.title}
+                onChange={(e) => handleInputChange("title", e.target.value)}
                 className={styles.input}
-                placeholder="Enter the job title"
-                required
+                placeholder={title}
               />
             </div>
             <div className={styles.formInput}>
