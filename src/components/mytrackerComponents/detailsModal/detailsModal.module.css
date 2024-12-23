@@ -19,8 +19,8 @@
 
 .closeIcon {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  right: 20px;
   cursor: pointer;
   font-size: 20px;
   color: #7e8aad;
@@ -37,7 +37,7 @@
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-  border-bottom: solid 2px #dfdfe252;
+  border-bottom: solid 2px #dfdfe284;
   padding: 30px 20px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -47,6 +47,7 @@
 
 .title {
   font-size: 26px;
+  color: #06283D;
 }
 
 .company {
@@ -64,25 +65,89 @@
 }
 
 .company span {
-  color: #7e8aad;
+  color: #283452;
   font-weight: 400;
   font-size: 18px;
 }
 
+.dateContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  align-items: center;
+  position: absolute;
+  bottom: 30px;
+  right: 25px;
+  /* align-self: flex-end; */
+}
+
+.dateContainer div {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  align-items: center;
+  color: #7e8aad;
+  font-weight: 400;
+}
+
+.dateIcon {
+  font-size: 18px;
+}
+
+.date {
+  font-weight: 400;
+  color: #7e8aad;
+  display: flex;
+}
+
+
+
 .detailsWrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  padding: 20px;
+  gap: 20px;
 }
 
 .detailContainer {
   display: flex;
   flex-direction: column;
+  gap: 5px;
+  background-color: #EFEEF6;
+  width: max-content;
+  border-radius: 8px;
+  padding: 5px 10px;
 }
 
 .detailHeader {
-
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #283452;
+  font-size: 14px;
 }
 
 .detail {
-  
+  color: #283452;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+}
+
+.icon {
+  font-size: 18px;
+}
+
+.linkIcon {
+  align-self: center;
+  color: #283452;
+  font-size: 22px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.linkIcon:hover {
+  color: #7e8aad;
 }

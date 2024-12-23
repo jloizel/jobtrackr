@@ -95,6 +95,7 @@ const MyTrackerPage: React.FC = () => {
   const [updateModalOpen, setUpdateModalOpen] = useState(false)
   const [selectedJob, setSelectedJob] = useState<Job | null>(null)
   const [detailsModalOpen, setDetailsModalOpen] = useState(false)
+  const [recentlyUpdated, setRecentlyUpdated] = useState(false)
 
   const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
@@ -297,6 +298,8 @@ const MyTrackerPage: React.FC = () => {
             setSelectedJob(null);
           }}
           onSubmit={handleUpdateJob}
+          createdAt={selectedJob?.createdAt}
+          updatedAt={selectedJob?.updatedAt}
           title={title}
           setTitle={setTitle}
           company={company}
@@ -365,7 +368,13 @@ const MyTrackerPage: React.FC = () => {
                                   <IoIosAddCircleOutline className={styles.icon} />
                                 )}
                               </div>
-                              <MdEdit className={styles.editButton} onClick={() => handleEditClick(job)} />
+                              <MdEdit 
+                                className={styles.editButton} 
+                                onClick={(event) => {
+                                  event.stopPropagation(); // prevent triggering parent click
+                                  handleEditClick(job);
+                                }}
+                              />
                             </div>
                           </div>
                         );
