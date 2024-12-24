@@ -4,6 +4,10 @@ import { IoMdClose } from "react-icons/io";
 import { Autocomplete } from "@/components/mytrackerComponents/autocomplete/autocomplete";
 import styles from "./updateModal.module.css";
 import { Job } from "@/app/API";
+import { ImBin } from "react-icons/im";
+import { jobStatuses } from "@/app/mytracker/page";
+import { MdEvent } from "react-icons/md";
+import { FaPaperPlane, FaHandshake, FaTimes } from "react-icons/fa";
 
 type UpdateModalProps = {
   open: boolean;
@@ -11,19 +15,13 @@ type UpdateModalProps = {
   onSubmit: (updatedJob: Job) => Promise<void>;
   job: Job | null;
   title: string;
-  setTitle: React.Dispatch<React.SetStateAction<string>>;
   company: string;
-  setCompany: React.Dispatch<React.SetStateAction<string>>;
   domain: string;
-  setDomain: React.Dispatch<React.SetStateAction<string>>;
   logoUrl: string;
-  setLogoUrl: React.Dispatch<React.SetStateAction<string>>;
   salary: string;
-  setSalary: React.Dispatch<React.SetStateAction<string>>;
   location: string;
-  setLocation: React.Dispatch<React.SetStateAction<string>>;
   postUrl: string;
-  setPostUrl: React.Dispatch<React.SetStateAction<string>>;
+  handleDeleteJob: (jobId: string) => void
 };
 
 export const UpdateModal: React.FC<UpdateModalProps> = ({
@@ -32,19 +30,10 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
   onSubmit,
   job,
   title,
-  setTitle,
-  company,
-  setCompany,
-  domain,
-  setDomain,
-  logoUrl,
-  setLogoUrl,
   salary,
-  setSalary,
   location,
-  setLocation,
   postUrl,
-  setPostUrl,
+  handleDeleteJob
 }) => {
   const [formData, setFormData] = React.useState({
     title: "",
@@ -68,7 +57,7 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
         postUrl: job.postUrl,
       });
     }
-  }, [open]);
+  }, [open, job]);
 
   const handleInputChange = (field: keyof typeof formData, value: string) => {
     setFormData((prevData) => ({
@@ -90,15 +79,49 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
     }
   };
 
+  const handleDeleteClick = () => {
+    if (job && confirm('Are you sure you want to delete this job?')) {
+      handleDeleteJob(job._id);
+    }
+  };
+
+  const renderIcon = (icon: string) => {
+    switch (icon) {
+      case "FaPaperPlane":
+        return <FaPaperPlane className={styles.statusIcon}/>;
+      case "MdEvent":
+        return <MdEvent className={styles.statusIcon}/>;
+      case "FaHandshake":
+        return <FaHandshake className={styles.statusIcon}/>;
+      case "FaTimes":
+        return <FaTimes className={styles.statusIcon}/>;
+      default:
+        return null;
+    }
+  };
+  
+  const getJobStatusDetails = (statusName: string | undefined) => {
+    return jobStatuses.find((status) => status.name === statusName);
+  };
+
+  const jobStatusDetails = getJobStatusDetails(job?.status);
+
   return (
     <Modal open={open} className={styles.modalWrapper} onClose={onClose} disableScrollLock key={job?._id || "default"}>
       <div className={styles.modalContent}>
         <form onSubmit={handleSubmit}>
           <div className={styles.modalHeader}>
-            Update Job
             <IoMdClose className={styles.closeIcon} onClick={onClose} />
+            Update Job
+            <ImBin className={styles.binIcon} onClick={handleDeleteClick} />
           </div>
           <div className={styles.formContent}>
+            {jobStatusDetails && (
+              <div style={{ color: jobStatusDetails.color }} className={styles.jobStatus}>
+                {renderIcon(jobStatusDetails.icon)}
+                <span>{jobStatusDetails.name}</span>
+              </div>
+            )}
             <div className={styles.formInput}>
               <span>Company</span>
               <Autocomplete
@@ -133,7 +156,7 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
               <input
                 type="text"
                 value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                onChange={(e) => handleInputChange("location", e.target.value)}
                 className={styles.input}
                 placeholder="Enter the job location"
               />
@@ -143,7 +166,7 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
               <input
                 type="text"
                 value={salary}
-                onChange={(e) => setSalary(e.target.value)}
+                onChange={(e) => handleInputChange("salary", e.target.value)}
                 className={styles.input}
                 placeholder="Enter the job salary"
               />
@@ -153,7 +176,7 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
               <input
                 type="text"
                 value={postUrl}
-                onChange={(e) => setPostUrl(e.target.value)}
+                onChange={(e) => handleInputChange("postUrl", e.target.value)}
                 className={styles.input}
                 placeholder="Enter the job post URL"
               />

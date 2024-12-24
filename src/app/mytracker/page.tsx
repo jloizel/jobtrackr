@@ -4,23 +4,16 @@ import { useEffect, useState, FormEvent, useRef } from 'react';
 import styles from "./mytracker.module.css"
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { createJob, getAllJobs, updateJob } from '../API';
+import { createJob, deleteJob, getAllJobs, updateJob } from '../API';
 import { ClipLoader } from 'react-spinners';
 import { PiBriefcaseBold } from "react-icons/pi";
-import { IoIosStats } from "react-icons/io";
-import { FaPaperPlane, FaSyncAlt } from "react-icons/fa";
+import { IoIosStats, IoIosSearch, IoMdClose } from "react-icons/io";
+import { FaPaperPlane, FaHandshake, FaTimes, FaPlus } from "react-icons/fa";
 import { MdEvent } from "react-icons/md";
-import { FaHandshake } from "react-icons/fa";
-import { FaTimes } from "react-icons/fa";
-import { FaPlus } from "react-icons/fa";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { RxUpdate } from "react-icons/rx";
-import { IoIosSearch } from "react-icons/io";
-import { Modal } from '@mui/material';
-import { Autocomplete } from '@/components/mytrackerComponents/autocomplete/autocomplete';
 import { GoQuestion } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
-import { IoMdClose } from "react-icons/io";
 import { JobModal } from '@/components/mytrackerComponents/jobModal/jobModal';
 import { UpdateModal } from '@/components/mytrackerComponents/updateModal/updateModal';
 import RelativeTime from '@/components/mytrackerComponents/relativeTime/relativeTime';
@@ -29,6 +22,7 @@ import { BiSolidShow } from "react-icons/bi";
 import { BiSolidHide } from "react-icons/bi";
 import { SlOptions } from "react-icons/sl";
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
+import { RiDragMove2Fill } from "react-icons/ri";
 
 
 type Job = {
@@ -52,7 +46,7 @@ interface JobStatus {
   color: string;
 }
 
-const jobStatuses: JobStatus[] = [
+export const jobStatuses: JobStatus[] = [
   {
     id: 1,
     name: "Applied",
@@ -69,7 +63,7 @@ const jobStatuses: JobStatus[] = [
     id: 3,
     name: "Offered",
     icon: "FaHandshake",
-    color: "#34eb67"
+    color: "#6eea8e"
   },
   {
     id: 4,
@@ -133,7 +127,7 @@ const MyTrackerPage: React.FC = () => {
   }
   
   const handleCreateJob = async (e: FormEvent) => {
-    e.preventDefault();
+    // e.preventDefault();
     setLoading(true);
   
     try {  
@@ -169,6 +163,26 @@ const MyTrackerPage: React.FC = () => {
       setLoading(false);
     }
   };
+
+  const handleDeleteJob = async (jobId: string) => {
+    setLoading(true);
+    try {
+      await deleteJob(jobId); 
+  
+      const updatedJobs = await getAllJobs();
+      setJobs(updatedJobs);
+  
+      setMessage('Job deleted successfully.');
+    } catch (error) {
+      setError('Failed to delete job.');
+      console.error(error);
+    } finally {
+      setLoading(false);
+      setUpdateModalOpen(false);
+      setSelectedJob(null);
+    }
+  };
+  
 
   const toggleRejectedVisibility = () => {
     setRejectedVisible((prev) => !prev);
@@ -318,11 +332,7 @@ const MyTrackerPage: React.FC = () => {
             onSubmit={handleCreateJob}
             title={title}
             setTitle={setTitle}
-            company={company}
             setCompany={setCompany}
-            domain={domain}
-            setDomain={setDomain}
-            logoUrl={logoUrl}
             setLogoUrl={setLogoUrl}
             salary={salary}
             setSalary={setSalary}
@@ -330,6 +340,7 @@ const MyTrackerPage: React.FC = () => {
             setLocation={setLocation}
             postUrl={postUrl}
             setPostUrl={setPostUrl}
+            jobStatus={jobStatus}
           />
 
           <UpdateModal
@@ -339,21 +350,15 @@ const MyTrackerPage: React.FC = () => {
               setSelectedJob(null);
             }}
             onSubmit={handleUpdateJob}
-            title={title}
-            setTitle={setTitle}
-            company={company}
-            setCompany={setCompany}
-            domain={domain}
-            setDomain={setDomain}
-            logoUrl={logoUrl}
-            setLogoUrl={setLogoUrl}
-            salary={salary}
-            setSalary={setSalary}
-            location={location}
-            setLocation={setLocation}
-            postUrl={postUrl}
-            setPostUrl={setPostUrl}
             job={selectedJob}
+            title={title}
+            company={company}
+            domain={domain}
+            logoUrl={logoUrl}
+            salary={salary}
+            location={location}
+            postUrl={postUrl}
+            handleDeleteJob={handleDeleteJob}
           />
 
           <DetailsModal
@@ -362,15 +367,12 @@ const MyTrackerPage: React.FC = () => {
               setDetailsModalOpen(false);
               setSelectedJob(null);
             }}
-            onSubmit={handleUpdateJob}
             createdAt={selectedJob?.createdAt}
             updatedAt={selectedJob?.updatedAt}
             title={title}
             setTitle={setTitle}
             company={company}
             setCompany={setCompany}
-            domain={domain}
-            setDomain={setDomain}
             logoUrl={logoUrl}
             setLogoUrl={setLogoUrl}
             salary={salary}
@@ -380,6 +382,7 @@ const MyTrackerPage: React.FC = () => {
             postUrl={postUrl}
             setPostUrl={setPostUrl}
             job={selectedJob}
+            handleDeleteJob={handleDeleteJob}
           />
 
           {/* {message && <p>{message}</p>} */}
@@ -410,8 +413,9 @@ const MyTrackerPage: React.FC = () => {
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                         className={`${styles.jobColumn} ${
-                          status.name === "Rejected" && !rejectedVisible ? styles.hidden : ""
-                        }`}
+                          status.name === "Rejected" && !rejectedVisible ? styles.hidden : ""} 
+                          ${status.name === "Rejected" ? "" : (rejectedVisible ? "" : styles.rejectedHidden)}`
+                        }
                       >
                         <div className={styles.jobColumnHeader}>
                           <span style={{color: status.color}}>{renderIcon(status.icon)}</span>
@@ -450,14 +454,17 @@ const MyTrackerPage: React.FC = () => {
                                         <span className={styles.jobCompany}>{job.company}</span>
                                       </div>
                                       <div className={styles.jobCardInfo}>
-                                        <div className={styles.date}>
-                                          <RelativeTime date={job.updatedAt}/>
+                                        <RiDragMove2Fill className={styles.grabber}/>
+                                        <div className={styles.dateInfo}>
+                                          <div className={styles.date}>
+                                            <RelativeTime date={job.updatedAt}/>
+                                          </div>
+                                          {isRecentlyUpdated(job.createdAt, job.updatedAt) ? (
+                                            <RxUpdate className={styles.icon} />
+                                          ) : (
+                                            <IoIosAddCircleOutline className={styles.icon} />
+                                          )}
                                         </div>
-                                        {isRecentlyUpdated(job.createdAt, job.updatedAt) ? (
-                                          <RxUpdate className={styles.icon} />
-                                        ) : (
-                                          <IoIosAddCircleOutline className={styles.icon} />
-                                        )}
                                       </div>
                                       <div className={styles.buttonsContainer}>
                                         <MdEdit 

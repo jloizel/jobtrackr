@@ -28,6 +28,20 @@
   position: relative;
 }
 
+.jobStatus {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.jobStatus span {
+  font-weight: 500;
+}
+
+.statusIcon {
+  display: flex;
+}
+
 .closeIcon {
   position: absolute;
   top: 10px;

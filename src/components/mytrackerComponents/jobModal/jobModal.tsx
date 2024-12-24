@@ -3,6 +3,10 @@ import { Modal } from "@mui/material";
 import { IoMdClose } from "react-icons/io";
 import { Autocomplete } from "@/components/mytrackerComponents/autocomplete/autocomplete";
 import styles from "./jobModal.module.css";
+import { jobStatuses } from "@/app/mytracker/page";
+import { MdEvent } from "react-icons/md";
+import { FaPaperPlane, FaHandshake, FaTimes } from "react-icons/fa";
+
 
 type JobModalProps = {
   open: boolean;
@@ -10,11 +14,7 @@ type JobModalProps = {
   onSubmit: (e: FormEvent) => void;
   title: string;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
-  company: string;
   setCompany: React.Dispatch<React.SetStateAction<string>>;
-  domain: string;
-  setDomain: React.Dispatch<React.SetStateAction<string>>;
-  logoUrl: string;
   setLogoUrl: React.Dispatch<React.SetStateAction<string>>;
   salary: string;
   setSalary: React.Dispatch<React.SetStateAction<string>>;
@@ -22,6 +22,7 @@ type JobModalProps = {
   setLocation: React.Dispatch<React.SetStateAction<string>>;
   postUrl: string;
   setPostUrl: React.Dispatch<React.SetStateAction<string>>;
+  jobStatus: string;
 };
 
 export const JobModal: React.FC<JobModalProps> = ({
@@ -30,11 +31,7 @@ export const JobModal: React.FC<JobModalProps> = ({
   onSubmit,
   title,
   setTitle,
-  company,
   setCompany,
-  domain,
-  setDomain,
-  logoUrl,
   setLogoUrl,
   salary,
   setSalary,
@@ -42,14 +39,36 @@ export const JobModal: React.FC<JobModalProps> = ({
   setLocation,
   postUrl,
   setPostUrl,
+  jobStatus
 }) => {
+  
   const handleCompanySelect = (data: { value: string; query?: { name: string; domain: string; icon: string } }) => {
     if (data.query) {
       setCompany(data.query.name);
-      setDomain(data.query.domain);
       setLogoUrl(data.query.icon);
     }
   };
+
+  const renderIcon = (icon: string) => {
+    switch (icon) {
+      case "FaPaperPlane":
+        return <FaPaperPlane className={styles.statusIcon}/>;
+      case "MdEvent":
+        return <MdEvent className={styles.statusIcon}/>;
+      case "FaHandshake":
+        return <FaHandshake className={styles.statusIcon}/>;
+      case "FaTimes":
+        return <FaTimes className={styles.statusIcon}/>;
+      default:
+        return null;
+    }
+  };
+  
+  const getJobStatusDetails = (statusName: string | undefined) => {
+    return jobStatuses.find((status) => status.name === statusName);
+  };
+
+  const jobStatusDetails = getJobStatusDetails(jobStatus);
 
   return (
     <Modal open={open} className={styles.modalWrapper} onClose={onClose} disableScrollLock>
@@ -60,6 +79,12 @@ export const JobModal: React.FC<JobModalProps> = ({
             <IoMdClose className={styles.closeIcon} onClick={onClose} />
           </div>
           <div className={styles.formContent}>
+            {jobStatusDetails && (
+              <div style={{ color: jobStatusDetails.color }} className={styles.jobStatus}>
+                {renderIcon(jobStatusDetails.icon)}
+                <span>{jobStatusDetails.name}</span>
+              </div>
+            )}
             <div className={styles.formInput}>
               <span>Company</span>
               <Autocomplete onSubmit={handleCompanySelect} placeholder="Search for a company" />

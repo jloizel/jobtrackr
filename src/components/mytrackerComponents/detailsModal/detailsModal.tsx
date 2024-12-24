@@ -15,7 +15,6 @@ import { RxUpdate } from "react-icons/rx";
 type DetailsModalProps = {
   open: boolean;
   onClose: () => void;
-  onSubmit: (updatedJob: Job) => Promise<void>;
   job: Job | null;
   createdAt?: string;
   updatedAt?: string;
@@ -23,8 +22,6 @@ type DetailsModalProps = {
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   company: string;
   setCompany: React.Dispatch<React.SetStateAction<string>>;
-  domain: string;
-  setDomain: React.Dispatch<React.SetStateAction<string>>;
   logoUrl: string;
   setLogoUrl: React.Dispatch<React.SetStateAction<string>>;
   salary: string;
@@ -33,12 +30,12 @@ type DetailsModalProps = {
   setLocation: React.Dispatch<React.SetStateAction<string>>;
   postUrl: string;
   setPostUrl: React.Dispatch<React.SetStateAction<string>>;
+  handleDeleteJob: (jobId: string) => void
 };
 
 export const DetailsModal: React.FC<DetailsModalProps> = ({
   open,
   onClose,
-  onSubmit,
   job,
   createdAt,
   updatedAt,
@@ -46,8 +43,6 @@ export const DetailsModal: React.FC<DetailsModalProps> = ({
   setTitle,
   company,
   setCompany,
-  domain,
-  setDomain,
   logoUrl,
   setLogoUrl,
   salary,
@@ -62,7 +57,6 @@ export const DetailsModal: React.FC<DetailsModalProps> = ({
     if (job && open) {
       setTitle(job.title);
       setCompany(job.company);
-      setDomain(job.domain);
       setLogoUrl(job.logoUrl);
       setSalary(job.salary);
       setLocation(job.location);
@@ -70,13 +64,12 @@ export const DetailsModal: React.FC<DetailsModalProps> = ({
     } else if (!open) {
       setTitle("");
       setCompany("");
-      setDomain("");
       setLogoUrl("");
       setSalary("");
       setLocation("");
       setPostUrl("");
     }
-  }, [job, open, setTitle, setCompany, setDomain, setLogoUrl, setSalary, setLocation, setPostUrl]);
+  }, [job, open]);
 
   function isRecentlyUpdated(createdAt: string | number | Date | undefined, updatedAt: string | number | Date | undefined): boolean {
     if (!createdAt || !updatedAt) return false; 

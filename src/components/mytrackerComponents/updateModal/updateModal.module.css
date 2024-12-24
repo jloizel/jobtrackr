@@ -27,19 +27,40 @@
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   position: relative;
+  justify-content: space-between;
+  flex-direction: row;
 }
 
-.closeIcon {
-  position: absolute;
-  top: 10px;
-  left: 10px;
+.jobStatus {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.jobStatus span {
+  font-weight: 500;
+}
+
+.statusIcon {
+  display: flex;
+}
+
+.closeIcon, .binIcon {
+  /* position: absolute; */
   cursor: pointer;
-  font-size: 20px;
   color: #7e8aad;
   transition: all 0.2s ease-in-out;
 }
 
-.closeIcon:hover {
+.closeIcon {
+  font-size: 20px;
+}
+
+.binIcon {
+  font-size: 18px;
+}
+
+.closeIcon:hover, .binIcon:hover {
   color: #283452;
 }
 
