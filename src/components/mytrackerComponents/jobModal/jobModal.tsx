@@ -3,9 +3,9 @@ import { Modal } from "@mui/material";
 import { IoMdClose } from "react-icons/io";
 import { Autocomplete } from "@/components/mytrackerComponents/autocomplete/autocomplete";
 import styles from "./jobModal.module.css";
-import { jobStatuses } from "@/app/mytracker/page";
 import { MdEvent } from "react-icons/md";
 import { FaPaperPlane, FaHandshake, FaTimes } from "react-icons/fa";
+import { jobStatuses } from "@/constants/jobStatuses";
 
 
 type JobModalProps = {

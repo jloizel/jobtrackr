@@ -23,6 +23,7 @@ import { BiSolidHide } from "react-icons/bi";
 import { SlOptions } from "react-icons/sl";
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
 import { RiDragMove2Fill } from "react-icons/ri";
+import { jobStatuses } from '@/constants/jobStatuses';
 
 
 type Job = {
@@ -39,39 +40,6 @@ type Job = {
   updatedAt: string;
 };
 
-interface JobStatus {
-  id: number;
-  name: string;
-  icon: string;
-  color: string;
-}
-
-export const jobStatuses: JobStatus[] = [
-  {
-    id: 1,
-    name: "Applied",
-    icon: "FaPaperPlane",
-    color: "#a963ff"
-  },
-  {
-    id: 2,
-    name: "Interviewed",
-    icon: "MdEvent",
-    color: "#FFC107"
-  },
-  {
-    id: 3,
-    name: "Offered",
-    icon: "FaHandshake",
-    color: "#6eea8e"
-  },
-  {
-    id: 4,
-    name: "Rejected",
-    icon: "FaTimes",
-    color: "#fa5252"
-  },
-]
 
 const MyTrackerPage: React.FC = () => {
   const { data: session, status } = useSession();

@@ -5,9 +5,9 @@ import { Autocomplete } from "@/components/mytrackerComponents/autocomplete/auto
 import styles from "./updateModal.module.css";
 import { Job } from "@/app/API";
 import { ImBin } from "react-icons/im";
-import { jobStatuses } from "@/app/mytracker/page";
 import { MdEvent } from "react-icons/md";
 import { FaPaperPlane, FaHandshake, FaTimes } from "react-icons/fa";
+import { jobStatuses } from "@/constants/jobStatuses";
 
 type UpdateModalProps = {
   open: boolean;
