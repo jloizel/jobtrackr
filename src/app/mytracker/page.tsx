@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, FormEvent } from 'react';
+import { useEffect, useState, FormEvent, useRef } from 'react';
 import styles from "./mytracker.module.css"
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -25,6 +25,10 @@ import { JobModal } from '@/components/mytrackerComponents/jobModal/jobModal';
 import { UpdateModal } from '@/components/mytrackerComponents/updateModal/updateModal';
 import RelativeTime from '@/components/mytrackerComponents/relativeTime/relativeTime';
 import { DetailsModal } from '@/components/mytrackerComponents/detailsModal/detailsModal';
+import { BiSolidShow } from "react-icons/bi";
+import { BiSolidHide } from "react-icons/bi";
+import { SlOptions } from "react-icons/sl";
+import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
 
 
 type Job = {
@@ -80,22 +84,25 @@ const MyTrackerPage: React.FC = () => {
   const router = useRouter();
 
   const [jobs, setJobs] = useState<Job[]>([]);
-  const [title, setTitle] = useState<string>('');
-  const [company, setCompany] = useState<string>('');
-  const [domain, setDomain] = useState<string>('');
-  const [logoUrl, setLogoUrl] = useState<string>('');
-  const [salary, setSalary] = useState<string>('');
-  const [location, setLocation] = useState<string>('');
-  const [postUrl, setPostUrl] = useState<string>('');
-  const [jobStatus, setJobStatus] = useState<string>('Applied');
-  const [loading, setLoading] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>('');
-  const [error, setError] = useState<string>('');
-  const [jobModalOpen, setJobModalOpen] = useState(false)
-  const [updateModalOpen, setUpdateModalOpen] = useState(false)
-  const [selectedJob, setSelectedJob] = useState<Job | null>(null)
-  const [detailsModalOpen, setDetailsModalOpen] = useState(false)
-  const [recentlyUpdated, setRecentlyUpdated] = useState(false)
+  const [title, setTitle] = useState('');
+  const [company, setCompany] = useState('');
+  const [domain, setDomain] = useState('');
+  const [logoUrl, setLogoUrl] = useState('');
+  const [salary, setSalary] = useState('');
+  const [location, setLocation] = useState('');
+  const [postUrl, setPostUrl] = useState('');
+  const [jobStatus, setJobStatus] = useState('Applied');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const [jobModalOpen, setJobModalOpen] = useState(false);
+  const [updateModalOpen, setUpdateModalOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+  const [detailsModalOpen, setDetailsModalOpen] = useState(false);
+  const [recentlyUpdated, setRecentlyUpdated] = useState(false);
+  const [rejectedVisible, setRejectedVisible] = useState(false);
+  const [showOptions, setShowOptions] = useState<string | null>(null);
+  const optionsRef = useRef<HTMLDivElement | null>(null);
 
   const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
@@ -124,15 +131,6 @@ const MyTrackerPage: React.FC = () => {
     setJobModalOpen(true)
     setJobStatus(statusName)
   }
-
-  const handleCompanySelect = (data: { value: string; query?: { name: string; domain: string; icon:string } }) => {
-    if (data.query) {
-      setCompany(data.query.name);
-      setDomain(data.query.domain);
-      setLogoUrl(data.query.icon)
-      console.log(logoUrl)
-    }
-  };
   
   const handleCreateJob = async (e: FormEvent) => {
     e.preventDefault();
@@ -172,10 +170,15 @@ const MyTrackerPage: React.FC = () => {
     }
   };
 
+  const toggleRejectedVisibility = () => {
+    setRejectedVisible((prev) => !prev);
+  };
+
   const handleEditClick = (job: Job) => {
     setSelectedJob(job);
     setUpdateModalOpen(true);
   };
+
 
   const handleUpdateJob = async (updatedJob: Job) => {
     setLoading(true);
@@ -197,6 +200,67 @@ const MyTrackerPage: React.FC = () => {
   const handleCardClick = (job: Job) => {
     setSelectedJob(job);
     setDetailsModalOpen(true)
+  };
+
+  const handleOptionsClick = (jobId: string) => {
+    setShowOptions((prev) => (prev === jobId ? null : jobId));
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (optionsRef.current && !optionsRef.current.contains(event.target as Node)) {
+        setShowOptions(null); // close optionsContainer if clicked outside
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleUpdateJobStatus = async (jobId: string, newStatus: string) => {
+    setLoading(true);
+  
+    const updatedJobs = jobs.map((job) =>
+      job._id === jobId ? { ...job, status: newStatus } : job
+    );
+    setJobs(updatedJobs);
+  
+    try {
+      const jobToUpdate = jobs.find((job) => job._id === jobId);
+      if (!jobToUpdate) throw new Error("Job not found");
+      await updateJob(jobId, { ...jobToUpdate, status: newStatus });
+  
+      setMessage(`Job status updated to ${newStatus}.`);
+    } catch (error) {
+      setError("Failed to update job status.");
+  
+      // revert the UI change if API call fails
+      const originalJobs = await getAllJobs();
+      setJobs(originalJobs);
+    } finally {
+      setLoading(false);
+      setShowOptions(null);
+    }
+  };
+  
+  const onDragEnd = async (result: any) => {
+    const { source, destination, draggableId } = result;
+  
+    // if dropped outside a droppable zone, do nothing
+    if (!destination) return;
+  
+    // if dropped in the same column, do nothing
+    if (source.droppableId === destination.droppableId) return;
+  
+    // get the job being dragged
+    const jobId = draggableId;
+    const newStatus = destination.droppableId;
+  
+    // update the job status
+    await handleUpdateJobStatus(jobId, newStatus);
   };
   
   
@@ -229,6 +293,8 @@ const MyTrackerPage: React.FC = () => {
   if (status === 'authenticated') {
     return (
       <div className={styles.tracker}>
+        <DragDropContext onDragEnd={onDragEnd}>
+
         <div className={styles.headerContainer}>
           <div className={styles.header}>My Job Tracker</div>
           <div className={styles.filter}>
@@ -319,7 +385,17 @@ const MyTrackerPage: React.FC = () => {
 
         {/* {message && <p>{message}</p>} */}
 
-        <div className={styles.jobsContainer}>
+        <div 
+          className={`${styles.jobsContainer} ${
+            !rejectedVisible ? styles.rejectedHidden : ""
+          }`}
+        >
+          <button
+            onClick={toggleRejectedVisibility}
+            className={styles.toggleRejectedButton}
+          >
+          {rejectedVisible ? <BiSolidHide/> : <BiSolidShow/>}
+        </button>
           {loading ? (
             <div className={styles.loading}>
               <ClipLoader color={"#00a6ff"} />
@@ -327,10 +403,23 @@ const MyTrackerPage: React.FC = () => {
           ) : (
             jobStatuses.map((status) => {
               const jobStatusNumber = jobs.filter((job) => job.status === status.name).length;
+
+              if (status.name === "Rejected" && !rejectedVisible) {
+                return null; 
+              }
+
               return (
-                <div key={status.id} className={styles.jobColumn}>
+                <Droppable droppableId={status.name} key={status.id}>
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                      className={`${styles.jobColumn} ${
+                        status.name === "Rejected" && !rejectedVisible ? styles.hidden : ""
+                      }`}
+                    >
                   <div className={styles.jobColumnHeader}>
-                    <span style={{color: status.color}}>{renderIcon(status.icon)} </span>
+                    <span style={{color: status.color}}>{renderIcon(status.icon)}</span>
                     <span>{status.name}</span>
                     <span>{jobStatusNumber} JOBS</span>
                   </div>
@@ -340,9 +429,17 @@ const MyTrackerPage: React.FC = () => {
                   <div className={styles.jobs}>
                     {jobs
                       .filter((job) => job.status === status.name)
-                      .map((job) => {
+                      .map((job, index) => {
                         return (
-                          <div key={job._id} className={styles.jobCard} onClick={() => handleCardClick(job)}>
+                          <Draggable key={job._id} draggableId={job._id} index={index}>
+                            {(provided) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                className={styles.jobCard}
+                                onClick={() => handleCardClick(job)}
+                              >
                             <div className={styles.line} style={{ border: `solid 1px ${status.color}` }}></div>
                             <div className={styles.jobCardContent}>
                               <span className={styles.jobTitle}>{job.title}</span>
@@ -368,23 +465,61 @@ const MyTrackerPage: React.FC = () => {
                                   <IoIosAddCircleOutline className={styles.icon} />
                                 )}
                               </div>
-                              <MdEdit 
-                                className={styles.editButton} 
-                                onClick={(event) => {
-                                  event.stopPropagation(); // prevent triggering parent click
-                                  handleEditClick(job);
-                                }}
-                              />
+                              <div className={styles.buttonsContainer}>
+                                <MdEdit 
+                                  className={styles.editButton} 
+                                  onClick={(event) => {
+                                    event.stopPropagation(); // prevent triggering parent click
+                                    handleEditClick(job);
+                                  }}
+                                />
+                                <SlOptions
+                                  className={styles.optionsButton} 
+                                  onClick={(event) => {
+                                    event.stopPropagation();
+                                    handleOptionsClick(job._id);
+                                  }}
+                                />
+                                {showOptions === job._id && (
+                                  <div className={styles.optionsContainer} ref={optionsRef}>
+                                    {jobStatuses
+                                    .filter((status) => status.name !== job.status)
+                                    .map((status) => (
+                                      <button 
+                                        key={status.id} 
+                                        onClick={(event) => {
+                                          event.stopPropagation();
+                                          handleUpdateJobStatus(job._id, status.name);
+                                        }}
+                                        className={styles.optionButton}
+                                      >
+                                        <div className={styles.optionButtonContent}>
+                                          <span style={{color: status.color}}>{renderIcon(status.icon)}</span>
+                                          <span>{status.name}</span>
+                                        </div>
+                                        
+
+                                      </button>
+                                    ))}
+
+                                  </div>
+                                )}
+                              </div>
                             </div>
                           </div>
+                            )}
+                          </Draggable>
                         );
                       })}
                   </div>
                 </div>
+                  )}
+                </Droppable>
               );
             })
           )}
         </div>
+        </DragDropContext>
       </div>
     );
   }
