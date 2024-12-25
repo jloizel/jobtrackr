@@ -26,6 +26,8 @@ const Statistics: React.FC<StatisticsProps> = ({ jobs }) => {
   const offeredJobs = (jobs.filter((job) => job.status === 'Offered')).length;
   const rejectedJobs = (jobs.filter((job) => job.status === 'Rejected')).length;
 
+  const labels = ['Applied', 'Interviewed', 'Offered'];
+  const values = [appliedJobs, interviewedJobs, offeredJobs];
 
 
   return (
@@ -33,12 +35,21 @@ const Statistics: React.FC<StatisticsProps> = ({ jobs }) => {
       <div className={styles.header}>Job Statistics</div>
       <div>
         <BarChart
-          xAxis={[{ scaleType: 'band', data: ['group A', 'group B', 'group C'], disableLine: true, disableTicks: true }]}
+          xAxis={[
+            { scaleType: 'band', 
+              data: ['group A', 'group B', 'group C'], 
+              disableLine: true, 
+              disableTicks: true,
+              label: "test",
+            }
+          ]}
           yAxis={[{ disableLine: true, disableTicks: true, }]}
-          series={[{ data: [appliedJobs, interviewedJobs, offeredJobs] }]}
+          series={[{ data: values }]}
           width={250}
           height={300}
           borderRadius={4}
+          leftAxis={null}
+          bottomAxis={null}
         />
       </div>
     </div>
