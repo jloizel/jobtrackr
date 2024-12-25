@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./search.module.css";
-import { IoIosSearch } from "react-icons/io";
+import { IoIosSearch, IoMdClose } from "react-icons/io";
+
 
 interface SearchProps {
   onSearch: (query: string) => void;
@@ -51,6 +52,9 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
         onChange={handleSearch}
         className={`${styles.searchInput} ${isExpanded ? styles.expanded : ""}`}
       />
+      {isExpanded && (
+        <IoMdClose className={styles.closeIcon} onClick={handleClearInput}/>
+      )}
     </div>
   );
 };

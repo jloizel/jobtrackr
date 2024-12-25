@@ -9,6 +9,7 @@
   padding: 6px 12px;
   color: #7e8aad;
   gap: 5px;
+  position: relative;
 }
 
 .searchIcon {
@@ -32,4 +33,10 @@
 
 .searchInput:not(.expanded) {
   width: calc(7ch);
+}
+
+.closeIcon {
+  position: absolute;
+  right: 5px;
+  z-index: 1000;
 }
