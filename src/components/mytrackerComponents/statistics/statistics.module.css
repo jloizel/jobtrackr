@@ -1,0 +1,9 @@
+.statisticsWrapper {
+  display: flex;
+  padding: 60px 40px;
+}
+
+.header {
+  font-weight: 500;
+  font-size: 22px;
+}

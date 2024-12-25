@@ -18,13 +18,13 @@ import { JobModal } from '@/components/mytrackerComponents/jobModal/jobModal';
 import { UpdateModal } from '@/components/mytrackerComponents/updateModal/updateModal';
 import RelativeTime from '@/components/mytrackerComponents/relativeTime/relativeTime';
 import { DetailsModal } from '@/components/mytrackerComponents/detailsModal/detailsModal';
-import { BiSolidShow } from "react-icons/bi";
-import { BiSolidHide } from "react-icons/bi";
+import { BiSolidShow, BiSolidHide } from "react-icons/bi";
 import { SlOptions } from "react-icons/sl";
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
 import { RiDragMove2Fill } from "react-icons/ri";
 import { jobStatuses } from '@/constants/jobStatuses';
 import Search from '@/components/mytrackerComponents/search/search';
+import Statistics from '@/components/mytrackerComponents/statistics/statistics';
 
 
 type Job = {
@@ -67,6 +67,8 @@ const MyTrackerPage: React.FC = () => {
   const [showOptions, setShowOptions] = useState<string | null>(null);
   const optionsRef = useRef<HTMLDivElement | null>(null);
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
+  const [showStats, setShowStats] = useState(false);
+  const [showTracker, setShowTracker] = useState(true);
 
 
   useEffect(() => {
@@ -261,7 +263,6 @@ const MyTrackerPage: React.FC = () => {
   };
   
   
-  
   if (status === 'loading') {
     return <div className={styles.loading}><ClipLoader color={"#00a6ff"}/></div>;
   }
@@ -288,19 +289,37 @@ const MyTrackerPage: React.FC = () => {
     return updatedTime > createdTime; // if `updatedAt` is more recent than `createdAt`, it has been updated
   }
 
+  const handleTrackerClick = () => {
+    setShowTracker(true)
+    setShowStats(false)
+  }
+
+  const handleStatsClick = () => {
+    setShowStats(true)
+    setShowTracker(false)
+  }
+
   if (status === 'authenticated') {
     return (
       <div className={styles.tracker}>
         <DragDropContext onDragEnd={onDragEnd}>
           <div className={styles.headerContainer}>
-            <div className={styles.header}>My Job Tracker</div>
+            <div 
+              className={`${styles.header} ${showTracker ? styles.selected : ""}`}
+              onClick={handleTrackerClick}
+            >
+              My Job Tracker
+            </div>
             <Search onSearch={handleSearch}/>
             <div className={styles.submenuContainer}>
               {/* <div className={styles.submenu}>
                 <PiBriefcaseBold/>
                 Tracker
               </div> */}
-              <div className={styles.submenu}>
+              <div
+                className={`${styles.submenu} ${showStats ? styles.selected : ""}`}
+                onClick={handleStatsClick}
+              >
                 <IoIosStats/>
                 Statistics
               </div>
@@ -367,137 +386,142 @@ const MyTrackerPage: React.FC = () => {
           />
 
           {/* {message && <p>{message}</p>} */}
+          
+          { showTracker && (
+            <div className={`${styles.jobsContainer} ${rejectedVisible ? styles.rejectedHidden : ""}`}>
+              <button
+                onClick={toggleRejectedVisibility}
+                className={styles.toggleRejectedButton}
+              >
+                {rejectedVisible ? <BiSolidHide/> : <BiSolidShow/>}
+              </button>
+              {loading ? (
+                <div className={styles.loading}>
+                  <ClipLoader color={"#00a6ff"} />
+                </div>
+              ) : (
+                jobStatuses.map((status) => {
+                  const jobStatusNumber = jobs.filter((job) => job.status === status.name).length;
 
-          <div className={`${styles.jobsContainer} ${rejectedVisible ? styles.rejectedHidden : ""}`}>
-            <button
-              onClick={toggleRejectedVisibility}
-              className={styles.toggleRejectedButton}
-            >
-              {rejectedVisible ? <BiSolidHide/> : <BiSolidShow/>}
-            </button>
-            {loading ? (
-              <div className={styles.loading}>
-                <ClipLoader color={"#00a6ff"} />
-              </div>
-            ) : (
-              jobStatuses.map((status) => {
-                const jobStatusNumber = jobs.filter((job) => job.status === status.name).length;
+                  if (status.name === "Rejected" && !rejectedVisible) {
+                    return null; 
+                  }
 
-                if (status.name === "Rejected" && !rejectedVisible) {
-                  return null; 
-                }
-
-                return (
-                  <Droppable droppableId={status.name} key={status.id}>
-                    {(provided) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.droppableProps}
-                        className={`${styles.jobColumn} ${
-                          status.name === "Rejected" && !rejectedVisible ? styles.hidden : ""} 
-                          ${status.name === "Rejected" ? "" : (rejectedVisible ? "" : styles.rejectedHidden)}`
-                        }
-                      >
-                        <div className={styles.jobColumnHeader}>
-                          <span style={{color: status.color}}>{renderIcon(status.icon)}</span>
-                          <span>{status.name}</span>
-                          <span>{jobStatusNumber} JOBS</span>
-                        </div>
-                        <div className={styles.button} onClick={() => handlePlusButtonClick(status.name)}>
-                          <FaPlus/>
-                        </div>
-                        <div className={styles.jobs}>
-                          {filteredJobs
-                            .filter((job) => job.status === status.name)
-                            .map((job, index) => (
-                              <Draggable key={job._id} draggableId={job._id} index={index}>
-                                {(provided) => (
-                                  <div
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    className={styles.jobCard}
-                                    onClick={() => handleCardClick(job)}
-                                  >
-                                    <div className={styles.line} style={{ border: `solid 1px ${status.color}` }}/>
-                                    <div className={styles.jobCardContent}>
-                                      <span className={styles.jobTitle}>{job.title}</span>
-                                      <div className={styles.companyContainer}>
-                                        {job.logoUrl ? (
-                                          <img
-                                            src={job.logoUrl}
-                                            alt={`${job.company} logo`}
-                                            className={styles.companyLogo}
-                                          />
-                                        ) : (
-                                          <GoQuestion />
-                                        )}
-                                        <span className={styles.jobCompany}>{job.company}</span>
-                                      </div>
-                                      <div className={styles.jobCardInfo}>
-                                        <RiDragMove2Fill className={styles.grabber}/>
-                                        <div className={styles.dateInfo}>
-                                          <div className={styles.date}>
-                                            <RelativeTime date={job.updatedAt}/>
-                                          </div>
-                                          {isRecentlyUpdated(job.createdAt, job.updatedAt) ? (
-                                            <RxUpdate className={styles.icon} />
+                  return (
+                    <Droppable droppableId={status.name} key={status.id}>
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.droppableProps}
+                          className={`${styles.jobColumn} ${
+                            status.name === "Rejected" && !rejectedVisible ? styles.hidden : ""} 
+                            ${status.name === "Rejected" ? "" : (rejectedVisible ? "" : styles.rejectedHidden)}`
+                          }
+                        >
+                          <div className={styles.jobColumnHeader}>
+                            <span style={{color: status.color}}>{renderIcon(status.icon)}</span>
+                            <span>{status.name}</span>
+                            <span>{jobStatusNumber} JOBS</span>
+                          </div>
+                          <div className={styles.button} onClick={() => handlePlusButtonClick(status.name)}>
+                            <FaPlus/>
+                          </div>
+                          <div className={styles.jobs}>
+                            {filteredJobs
+                              .filter((job) => job.status === status.name)
+                              .map((job, index) => (
+                                <Draggable key={job._id} draggableId={job._id} index={index}>
+                                  {(provided) => (
+                                    <div
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                      className={styles.jobCard}
+                                      onClick={() => handleCardClick(job)}
+                                    >
+                                      <div className={styles.line} style={{ border: `solid 1px ${status.color}` }}/>
+                                      <div className={styles.jobCardContent}>
+                                        <span className={styles.jobTitle}>{job.title}</span>
+                                        <div className={styles.companyContainer}>
+                                          {job.logoUrl ? (
+                                            <img
+                                              src={job.logoUrl}
+                                              alt={`${job.company} logo`}
+                                              className={styles.companyLogo}
+                                            />
                                           ) : (
-                                            <IoIosAddCircleOutline className={styles.icon} />
+                                            <GoQuestion />
+                                          )}
+                                          <span className={styles.jobCompany}>{job.company}</span>
+                                        </div>
+                                        <div className={styles.jobCardInfo}>
+                                          <RiDragMove2Fill className={styles.grabber}/>
+                                          <div className={styles.dateInfo}>
+                                            <div className={styles.date}>
+                                              <RelativeTime date={job.updatedAt}/>
+                                            </div>
+                                            {isRecentlyUpdated(job.createdAt, job.updatedAt) ? (
+                                              <RxUpdate className={styles.icon} />
+                                            ) : (
+                                              <IoIosAddCircleOutline className={styles.icon} />
+                                            )}
+                                          </div>
+                                        </div>
+                                        <div className={styles.buttonsContainer}>
+                                          <MdEdit 
+                                            className={styles.editButton} 
+                                            onClick={(event) => {
+                                              event.stopPropagation(); // prevent triggering parent click
+                                              handleEditClick(job);
+                                            }}
+                                          />
+                                          <SlOptions
+                                            className={styles.optionsButton} 
+                                            onClick={(event) => {
+                                              event.stopPropagation();
+                                              handleOptionsClick(job._id);
+                                            }}
+                                          />
+                                          {showOptions === job._id && (
+                                            <div className={styles.optionsContainer} ref={optionsRef}>
+                                              {jobStatuses
+                                              .filter((status) => status.name !== job.status)
+                                              .map((status) => (
+                                                <button 
+                                                  key={status.id} 
+                                                  onClick={(event) => {
+                                                    event.stopPropagation();
+                                                    handleUpdateJobStatus(job._id, status.name);
+                                                  }}
+                                                  className={styles.optionButton}
+                                                >
+                                                  <div className={styles.optionButtonContent}>
+                                                    <span style={{color: status.color}}>{renderIcon(status.icon)}</span>
+                                                    <span>{status.name}</span>
+                                                  </div>
+                                                </button>
+                                              ))}
+                                            </div>
                                           )}
                                         </div>
                                       </div>
-                                      <div className={styles.buttonsContainer}>
-                                        <MdEdit 
-                                          className={styles.editButton} 
-                                          onClick={(event) => {
-                                            event.stopPropagation(); // prevent triggering parent click
-                                            handleEditClick(job);
-                                          }}
-                                        />
-                                        <SlOptions
-                                          className={styles.optionsButton} 
-                                          onClick={(event) => {
-                                            event.stopPropagation();
-                                            handleOptionsClick(job._id);
-                                          }}
-                                        />
-                                        {showOptions === job._id && (
-                                          <div className={styles.optionsContainer} ref={optionsRef}>
-                                            {jobStatuses
-                                            .filter((status) => status.name !== job.status)
-                                            .map((status) => (
-                                              <button 
-                                                key={status.id} 
-                                                onClick={(event) => {
-                                                  event.stopPropagation();
-                                                  handleUpdateJobStatus(job._id, status.name);
-                                                }}
-                                                className={styles.optionButton}
-                                              >
-                                                <div className={styles.optionButtonContent}>
-                                                  <span style={{color: status.color}}>{renderIcon(status.icon)}</span>
-                                                  <span>{status.name}</span>
-                                                </div>
-                                              </button>
-                                            ))}
-                                          </div>
-                                        )}
-                                      </div>
                                     </div>
-                                  </div>
-                                )}
-                              </Draggable>
-                            ))}
-                          {provided.placeholder}
+                                  )}
+                                </Draggable>
+                              ))}
+                            {provided.placeholder}
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </Droppable>
-                );
-              })
-            )}
-          </div>
+                      )}
+                    </Droppable>
+                  );
+                })
+              )}
+            </div>
+          )}
+          { showStats && (
+            <Statistics jobs={jobs}/>
+          )}
         </DragDropContext>
       </div>
     );
