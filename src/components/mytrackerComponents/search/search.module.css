@@ -1,0 +1,35 @@
+.searchContainer {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+  border: solid 1px #7e8aadb2;
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: #7e8aad;
+  gap: 5px;
+}
+
+.searchIcon {
+  font-size: 17px;
+  display: flex;
+}
+
+.searchInput {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  transition: width 0.3s ease-in-out;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+}
+
+.searchInput::placeholder {
+  color: #7e8aad;
+  font-size: 16px;
+}
+
+.searchInput:not(.expanded) {
+  width: calc(7ch);
+}

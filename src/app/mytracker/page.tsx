@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { createJob, deleteJob, getAllJobs, updateJob } from '../API';
 import { ClipLoader } from 'react-spinners';
 import { PiBriefcaseBold } from "react-icons/pi";
-import { IoIosStats, IoIosSearch, IoMdClose } from "react-icons/io";
+import { IoIosStats, IoMdClose } from "react-icons/io";
 import { FaPaperPlane, FaHandshake, FaTimes, FaPlus } from "react-icons/fa";
 import { MdEvent } from "react-icons/md";
 import { IoIosAddCircleOutline } from "react-icons/io";
@@ -24,6 +24,7 @@ import { SlOptions } from "react-icons/sl";
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
 import { RiDragMove2Fill } from "react-icons/ri";
 import { jobStatuses } from '@/constants/jobStatuses';
+import Search from '@/components/mytrackerComponents/search/search';
 
 
 type Job = {
@@ -65,8 +66,8 @@ const MyTrackerPage: React.FC = () => {
   const [rejectedVisible, setRejectedVisible] = useState(false);
   const [showOptions, setShowOptions] = useState<string | null>(null);
   const optionsRef = useRef<HTMLDivElement | null>(null);
+  const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
 
-  const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -77,9 +78,9 @@ const MyTrackerPage: React.FC = () => {
         try {
           const userJobs = await getAllJobs();
           setJobs(userJobs);
+          setFilteredJobs(userJobs)
         } catch (err) {
           setError('Failed to fetch jobs.');
-          console.error('Error fetching jobs:', err);
         } finally {
           setLoading(false);
         }
@@ -87,7 +88,17 @@ const MyTrackerPage: React.FC = () => {
 
       fetchJobs();
     }
-  }, [status, router]);
+  }, [status]);
+
+  const handleSearch = (query: string) => {
+    const filtered = jobs.filter(
+      (job) =>
+        job.title.toLowerCase().includes(query.toLowerCase()) ||
+        job.company.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredJobs(filtered);
+  };
+  
 
   const handlePlusButtonClick = (statusName: string) => {
     setJobModalOpen(true)
@@ -237,13 +248,18 @@ const MyTrackerPage: React.FC = () => {
     // if dropped in the same column, do nothing
     if (source.droppableId === destination.droppableId) return;
   
-    // get the job being dragged
     const jobId = draggableId;
     const newStatus = destination.droppableId;
   
-    // update the job status
+    // update the job status in the filtered jobs array
+    const updatedFilteredJobs = filteredJobs.map((job) =>
+      job._id === jobId ? { ...job, status: newStatus } : job
+    );
+    setFilteredJobs(updatedFilteredJobs);
+  
     await handleUpdateJobStatus(jobId, newStatus);
   };
+  
   
   
   if (status === 'loading') {
@@ -278,10 +294,7 @@ const MyTrackerPage: React.FC = () => {
         <DragDropContext onDragEnd={onDragEnd}>
           <div className={styles.headerContainer}>
             <div className={styles.header}>My Job Tracker</div>
-            <div className={styles.filter}>
-              <IoIosSearch/>
-              Filter
-            </div>
+            <Search onSearch={handleSearch}/>
             <div className={styles.submenuContainer}>
               {/* <div className={styles.submenu}>
                 <PiBriefcaseBold/>
@@ -394,7 +407,7 @@ const MyTrackerPage: React.FC = () => {
                           <FaPlus/>
                         </div>
                         <div className={styles.jobs}>
-                          {jobs
+                          {filteredJobs
                             .filter((job) => job.status === status.name)
                             .map((job, index) => (
                               <Draggable key={job._id} draggableId={job._id} index={index}>
