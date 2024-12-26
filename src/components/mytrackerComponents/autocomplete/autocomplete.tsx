@@ -27,6 +27,8 @@ interface IAutocomplete {
   initialValue?: TQuery;
 }
 
+const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
+
 export const Autocomplete = ({ onSubmit, placeholder, initialValue }: IAutocomplete) => {
   const [value, setValue] = useState({ text: initialValue?.name || "", active: false });
   const [queries, setQueries] = useState<TQuery[]>([]);
@@ -55,7 +57,7 @@ export const Autocomplete = ({ onSubmit, placeholder, initialValue }: IAutocompl
   const getQueries = useCallback(async (searchValue: string) => {
     if (searchValue !== "") {
       try {
-        const url = `https://api.brandfetch.io/v2/search/${searchValue}`;
+        const url = `https://api.brandfetch.io/v2/search/${searchValue}?c=${apiKey}`;
 
         const res = await fetch(url);
         if (res.ok) {

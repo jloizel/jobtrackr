@@ -71,6 +71,7 @@ const MyTrackerPage: React.FC = () => {
   const [showStats, setShowStats] = useState(false);
   const [showTracker, setShowTracker] = useState(true);
 
+  const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -109,10 +110,8 @@ const MyTrackerPage: React.FC = () => {
   }
   
   const handleCreateJob = async (e: FormEvent) => {
-    // e.preventDefault();
     setLoading(true);
-  
-    try {  
+    try {
       const jobData = {
         title,
         company,
@@ -125,9 +124,9 @@ const MyTrackerPage: React.FC = () => {
       };
   
       const job = await createJob(jobData);
-      const updatedJobs = await getAllJobs();
-      setJobs(updatedJobs);
-
+      setJobs((prevJobs) => [...prevJobs, job]); 
+      setFilteredJobs((prevJobs) => [...prevJobs, job]); 
+  
       setTitle('');
       setCompany('');
       setSalary('');
@@ -136,7 +135,7 @@ const MyTrackerPage: React.FC = () => {
       setDomain('');
       setLogoUrl('');
       setPostUrl('');
-
+  
       setJobModalOpen(false);
     } catch (error) {
       setMessage('Error creating job.');
@@ -145,6 +144,11 @@ const MyTrackerPage: React.FC = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    setFilteredJobs(jobs);
+  }, [jobs]);
+  
 
   const handleDeleteJob = async (jobId: string) => {
     setLoading(true);

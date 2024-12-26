@@ -1,0 +1,17 @@
+.calendarContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.detailsContainer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.jobAppliedDate {
+  background-color: blue !important;
+  color: white !important;
+  border-radius: 50%;
+}
