@@ -13,6 +13,7 @@
   display: flex;
   flex-direction: row;
   margin-top: 25px;
+  gap: 20px;
 }
 
 .chartWrapper {
@@ -26,12 +27,18 @@
   box-shadow: 0 0px 2px rgba(0, 0, 0, 0.1);
 }
 
-.chartHeader {
+.chartHeader, .calendarHeader {
   border-bottom: 1px solid #ddd;
   width: 100%;
   padding: 10px;
   font-weight: 600;
   font-size: 15px;
+}
+
+.chartContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .chartLabels {
@@ -40,15 +47,43 @@
   /* align-items: center; */
   justify-self: flex-start;
   align-self: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  height: 15%;
+  padding: 20px 0;
 }
 
-.chartContainer {
+.labelItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+  gap: 10px;
+}
+
+.labelText {
+  color: #7e8aad;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.labelValue {
+  color: #283452;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.chart {
   width: 100%;
-  height: 100%;
+  height: 85%;
+  max-height: 250px;
 }
 
 .calendarWrapper {
   width: 35%;
   display: flex;
   flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 0px 2px rgba(0, 0, 0, 0.1);
 }

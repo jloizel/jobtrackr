@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./calendar.css"
 import { ThemeProvider } from '../utils/theme'
 import AuthProvider from "@/providers/AuthProvider";
 import Navbar from "@/components/navbar/navbar";

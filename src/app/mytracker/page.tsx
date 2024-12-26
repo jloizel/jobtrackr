@@ -25,6 +25,7 @@ import { RiDragMove2Fill } from "react-icons/ri";
 import { jobStatuses } from '@/constants/jobStatuses';
 import Search from '@/components/mytrackerComponents/search/search';
 import Statistics from '@/components/mytrackerComponents/statistics/statistics';
+// import 'react-calendar/dist/Calendar.css';
 
 
 type Job = {

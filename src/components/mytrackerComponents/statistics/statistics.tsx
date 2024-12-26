@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './statistics.module.css';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { AxisConfig, ChartsXAxisProps } from '@mui/x-charts';
+import Calendar from 'react-calendar';
 
 type Job = {
   _id: string;
@@ -40,54 +41,59 @@ const Statistics: React.FC<StatisticsProps> = ({ jobs }) => {
           <div className={styles.chartHeader}>
             Job Search Chart
           </div>
-          <div className={styles.chartLabels}>
-            {labels.map((label, index) => (
-              <div key={index} className={styles.labelItem}>
-                <div className={styles.labelText}>{label}</div>
-                <div className={styles.labelValue}>{values[index]}</div>
-              </div>
-            ))}
-          </div>
           <div className={styles.chartContainer}>
-            <BarChart
-              xAxis={[
-                { 
-                  scaleType: 'band', 
-                  data: values, 
-                  categoryGapRatio: 0.5,
-                  disableLine: true, 
-                  disableTicks: true,
-                  position: "top",
-                  id: "xAxis",
-                  colorMap: {
-                    type: "ordinal",
-                    colors: ["#00a6ff", "#a963ff", "#FFC107", "#6eea8e"]
-                  } 
-                } as AxisConfig<'band', number, ChartsXAxisProps>,
-              ]}
-              yAxis={[
-                { 
-                  disableLine: true, 
-                  disableTicks: true, 
-                  data: labels,
-                }
-              ]}
-              series={[{ data: values }]}
-              // width={250}
-              // height={300}
-              borderRadius={4}
-              tooltip={{trigger: "none"}}
-              leftAxis={null}
-              // topAxis={"xAxis"}
-              topAxis={null}
-              bottomAxis={null}
-              axisHighlight={{x: "none"}}
-              margin={{bottom: 0, left: 0, right: 0, top: 0}}
-            />
+            <div className={styles.chartLabels}>
+              {labels.map((label, index) => (
+                <div key={index} className={styles.labelItem}>
+                  <div className={styles.labelText}>{label}</div>
+                  <div className={styles.labelValue}>{values[index]}</div>
+                </div>
+              ))}
+            </div>
+            <div className={styles.chart}>
+              <BarChart
+                xAxis={[
+                  { 
+                    scaleType: 'band', 
+                    data: values, 
+                    categoryGapRatio: 0.5,
+                    disableLine: true, 
+                    disableTicks: true,
+                    position: "top",
+                    id: "xAxis",
+                    colorMap: {
+                      type: "ordinal",
+                      colors: ["#00a6ff", "#a963ff", "#FFC107", "#6eea8e"]
+                    } 
+                  } as AxisConfig<'band', number, ChartsXAxisProps>,
+                ]}
+                yAxis={[
+                  { 
+                    disableLine: true, 
+                    disableTicks: true, 
+                    data: labels,
+                  }
+                ]}
+                series={[{ data: values }]}
+                // width={250}
+                // height={300}
+                borderRadius={4}
+                tooltip={{trigger: "none"}}
+                leftAxis={null}
+                // topAxis={"xAxis"}
+                topAxis={null}
+                bottomAxis={null}
+                axisHighlight={{x: "none"}}
+                margin={{bottom: 0, left: 0, right: 0, top: 0}}
+              />
+            </div>
           </div>
         </div>
         <div className={styles.calendarWrapper}>
-           Calendar
+          <div className={styles.calendarHeader}>
+            Job Search Calendar
+          </div>
+           <Calendar/>
         </div>
       </div>
     </div>
