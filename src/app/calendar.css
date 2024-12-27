@@ -69,14 +69,14 @@ abbr[title] {
  
 
 .react-calendar__tile:enabled:hover, .react-calendar__tile:enabled:focus {
-  background: #f8f8fa;
+  background: #00a6ff;
   /* color: #00a6ff; */
   border-radius: 6px;
   font-weight: 600;
 }
 
 .react-calendar__tile--now {
-  background: #00a6ff;
+  /* background: #00a6ff; */
   border-radius: 6px;
   font-weight: 600 !important;
   /* color: #00a6ff !important; */

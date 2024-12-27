@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './statistics.module.css';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { AxisConfig, ChartsXAxisProps } from '@mui/x-charts';
-import Calendar from 'react-calendar';
+import CalendarComponent from '../calendar/calendar';
 
 type Job = {
   _id: string;
@@ -93,7 +93,7 @@ const Statistics: React.FC<StatisticsProps> = ({ jobs }) => {
           <div className={styles.calendarHeader}>
             Job Search Calendar
           </div>
-           <Calendar/>
+           <CalendarComponent/>
         </div>
       </div>
     </div>

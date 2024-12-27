@@ -10,8 +10,12 @@
   text-align: center;
 }
 
-.jobAppliedDate {
-  background-color: blue !important;
-  color: white !important;
-  border-radius: 50%;
+.todayClass {
+  background-color: #00a6ff ;
+  color: white ;
+  border-radius: 6px;
+}
+
+.jobDateClass {
+  color: red;
 }
