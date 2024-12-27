@@ -3,20 +3,8 @@ import styles from './statistics.module.css';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { AxisConfig, ChartsXAxisProps } from '@mui/x-charts';
 import CalendarComponent from '../calendar/calendar';
-
-type Job = {
-  _id: string;
-  title: string;
-  company: string;
-  domain: string;
-  logoUrl: string;
-  salary: string;
-  location: string;
-  postUrl: string;
-  status: string;
-  createdAt: string;
-  updatedAt: string;
-};
+import JobRankings from '../jobRankings.tsx/jobRankings';
+import { Job } from '@/app/mytracker/page';
 
 type StatisticsProps = {
   jobs: Job[];
@@ -27,7 +15,7 @@ const Statistics: React.FC<StatisticsProps> = ({ jobs }) => {
   const interviewedJobs = (jobs.filter((job) => job.status === 'Interviewed')).length;
   const offeredJobs = (jobs.filter((job) => job.status === 'Offered')).length;
   const rejectedJobs = (jobs.filter((job) => job.status === 'Rejected')).length;
-  const totalJobs = jobs.length
+  const totalJobs = appliedJobs + interviewedJobs + offeredJobs + rejectedJobs
 
   const labels = ['Total', 'Applied', 'Interviewed', 'Offered'];
   const values = [totalJobs, appliedJobs, interviewedJobs, offeredJobs];
@@ -39,7 +27,7 @@ const Statistics: React.FC<StatisticsProps> = ({ jobs }) => {
       <div className={styles.topContainer}>
         <div className={styles.chartWrapper}>
           <div className={styles.chartHeader}>
-            Job Search Chart
+            Search Chart
           </div>
           <div className={styles.chartContainer}>
             <div className={styles.chartLabels}>
@@ -91,9 +79,20 @@ const Statistics: React.FC<StatisticsProps> = ({ jobs }) => {
         </div>
         <div className={styles.calendarWrapper}>
           <div className={styles.calendarHeader}>
-            Job Search Calendar
+            Activity Calendar
           </div>
            <CalendarComponent/>
+        </div>
+      </div>
+      <div className={styles.bottomContainer}>
+        <div className={styles.rankingsWrapper}>
+          <div className={styles.rankingsHeader}>
+            Role Metrics
+          </div>
+          <JobRankings jobs={jobs}/>
+        </div>
+        <div className={styles.responsesWrapper}>
+
         </div>
       </div>
     </div>

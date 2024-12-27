@@ -7,24 +7,31 @@ import { isSameDay } from 'date-fns';
 
 const CalendarComponent = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [longestStreak, setLongestStreak] = useState<number>(0);
-  const [currentStreak, setCurrentStreak] = useState<number>(0);
+  const [longestStreak, setLongestStreak] = useState(0);
+  const [currentStreak, setCurrentStreak] = useState(0);
   const [jobDates, setJobDates] = useState<string[]>([]);
+  const [createdJobCount, setCreatedJobCount] = useState(0);
+  const [jobs, setJobs] = useState<Job[]>([]);
+
+  const onClickDay = (value: Date) => {
+    setSelectedDate(value);
+  };
 
   const fetchAndCalculateStreaks = async () => {
     try {
-      const jobs = await getAllJobs();
+      const fetchedJobs = await getAllJobs();
+      setJobs(fetchedJobs);
 
       // parse and normalize dates
-      const dates = jobs.map((job) => new Date(job.createdAt));
+      const dates = fetchedJobs.map((job) => new Date(job.createdAt));
       const uniqueDates = new Set(
         dates.map((date) => date.toISOString().split('T')[0]) // normalize to YYYY-MM-DD
       );
 
       // extract and normalize job-related dates
-      const jobCreatedOrUpdatedDates = jobs.flatMap((job) => [
+      const jobCreatedOrUpdatedDates = fetchedJobs.flatMap((job) => [
         job.createdAt.split('T')[0], // created date in YYYY-MM-DD format
-        job.updatedAt.split('T')[0], // updated date in YYYY-MM-DD format
+        // job.updatedAt.split('T')[0], // updated date in YYYY-MM-DD format
       ]);
       setJobDates(jobCreatedOrUpdatedDates);
 
@@ -72,37 +79,50 @@ const CalendarComponent = () => {
   useEffect(() => {
     fetchAndCalculateStreaks();
 
-    // Automatically select and focus today's date
+    // automatically select and focus today's date
     const today = new Date();
-    setSelectedDate(today); // Update state
+    setSelectedDate(today); 
   }, []);
 
-  const onClickDay = (value: Date) => {
-    setSelectedDate(value);
+  const countJobsForDate = (date: Date) => {
+    const selectedDateString = date.toISOString().split('T')[0]; 
+    const createdCount = jobs.filter(
+      (job) =>
+        job.createdAt.startsWith(selectedDateString)
+    ).length;
+    setCreatedJobCount(createdCount);
   };
+
+  useEffect(() => {
+    countJobsForDate(selectedDate);
+  }, [selectedDate]);
+
 
   const tileClassName = ({ date, view }: { date: Date; view: string }) => {
     const today = new Date();
-
-    // Classes array to store multiple classes
     const classes = [];
 
     if (view === 'month') {
-      // Add a class for today's date
       if (isSameDay(today, date) && (!selectedDate || isSameDay(selectedDate, today))) {
         classes.push(`${styles.todayClass}`);
       }
 
-      // Add a class for job-related dates
-      const dateString = date.toISOString().split('T')[0]; // Convert tile date to YYYY-MM-DD
+      const dateString = date.toISOString().split('T')[0]; // convert tile date to YYYY-MM-DD
       if (jobDates.includes(dateString)) {
         classes.push(`${styles.jobDateClass}`);
+  
+        // Add active class if this date is the selectedDate
+        if (isSameDay(date, selectedDate)) {
+          classes.push(`${styles.activeJobDateClass}`);
+        }
       }
     }
 
-    // Return the combined class names as a single string
     return classes.length > 0 ? classes.join(' ') : null;
   };
+
+  const formattedDate = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric' }).format(selectedDate);
+
 
   return (
     <div>
@@ -115,17 +135,21 @@ const CalendarComponent = () => {
           tileClassName={tileClassName}
         />
       </div>
+      <div className={styles.date}>{selectedDate.toDateString()}</div>
       <div className={styles.detailsContainer}>
-        {selectedDate ? (
-          <div>
-            <h3>Selected Date: {selectedDate.toDateString()}</h3>
+        <div className={styles.detail}>
+          <span>{createdJobCount}</span>
+          <span className={styles.text}>Job(s) applied to</span>
+        </div>
+        <div className={styles.streakDetails}>
+          <div className={styles.detail}>
+            <span>{currentStreak}</span>
+            <span className={styles.text}>Current streak</span>
           </div>
-        ) : (
-          <p>Please select a date to see details.</p>
-        )}
-        <div>
-          <h3>Longest Application Streak: {longestStreak} days</h3>
-          <h3>Current Application Streak: {currentStreak} days</h3>
+          <div className={styles.detail}>
+            <span>{longestStreak}</span>
+            <span className={styles.text}>Longest streak</span>
+          </div>
         </div>
       </div>
     </div>

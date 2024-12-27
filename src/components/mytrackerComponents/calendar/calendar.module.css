@@ -2,20 +2,75 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 0 20px;
+  padding-top: 10px;
 }
 
 .detailsContainer {
-  margin-top: 20px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .todayClass {
-  background-color: #00a6ff ;
-  color: white ;
+  background-color: #EFEEF6 ;
+  color: #283452 ;
   border-radius: 6px;
 }
 
 .jobDateClass {
-  color: red;
+  color: #00a6ff;
 }
+
+.jobDateClass:hover, .activeJobDateClass  {
+  color: white !important;
+  background-color: #00a6ff !important;
+}
+
+.date {
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 5px;
+  color: #00a6ff;
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* margin-top: 10px; */
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  /* gap: 10px; */
+  align-items: center;
+}
+
+.detail span:first-child {
+  color: #283452;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.text {
+  color: #7e8aad;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.streakDetails {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+  gap: 20px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 6px;
+}
+

@@ -27,7 +27,7 @@
   box-shadow: 0 0px 2px rgba(0, 0, 0, 0.1);
 }
 
-.chartHeader, .calendarHeader {
+.chartHeader, .calendarHeader, .rankingsHeader {
   border-bottom: 1px solid #ddd;
   width: 100%;
   padding: 10px;
@@ -87,3 +87,20 @@
   border-radius: 6px;
   box-shadow: 0 0px 2px rgba(0, 0, 0, 0.1);
 }
+
+.bottomContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.rankingsWrapper {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 0px 2px rgba(0, 0, 0, 0.1);
+} 

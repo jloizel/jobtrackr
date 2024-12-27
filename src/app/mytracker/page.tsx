@@ -28,7 +28,7 @@ import Statistics from '@/components/mytrackerComponents/statistics/statistics';
 // import 'react-calendar/dist/Calendar.css';
 
 
-type Job = {
+export type Job = {
   _id: string;
   title: string;
   company: string;
