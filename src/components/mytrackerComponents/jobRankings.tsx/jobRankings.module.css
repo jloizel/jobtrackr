@@ -9,7 +9,7 @@
 .ranking {
   display: flex;
   flex-direction: column;
-  border: 1px solid #ddd;
+  border: 1px solid var(--mytracker-card-border-color);
   margin: 10px 0;
   align-items: center;
   padding: 10px;
@@ -41,7 +41,7 @@
 }
 
 .title {
-  color: #283452;
+  color: var(--primary-text-color);
   font-size: 16px;
   font-weight: 400;
 }

@@ -14,9 +14,13 @@
 }
 
 .todayClass {
-  background-color: #EFEEF6 ;
-  color: #283452 ;
+  /* background-color: #EFEEF6 ; */
+  color: var(--primary-text-color) ;
   border-radius: 6px;
+}
+
+.todayClass:hover {
+  color: #283452 !important;
 }
 
 .jobDateClass {
@@ -52,7 +56,7 @@
 }
 
 .detail span:first-child {
-  color: #283452;
+  color: var(--primary-text-color);
   font-weight: 600;
   font-size: 22px;
 }
@@ -66,7 +70,7 @@
 .streakDetails {
   display: flex;
   flex-direction: row;
-  border: 1px solid #ddd;
+  border: 1px solid var(--mytracker-card-border-color);
   margin-top: 10px;
   gap: 20px;
   align-items: center;

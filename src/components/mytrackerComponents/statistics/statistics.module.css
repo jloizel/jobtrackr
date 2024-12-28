@@ -68,7 +68,7 @@
 }
 
 .labelValue {
-  color: #283452;
+  color: var(--primary-text-color);
   font-weight: 600;
   font-size: 22px;
 }
@@ -83,7 +83,7 @@
   width: 35%;
   display: flex;
   flex-direction: column;
-  border: 1px solid #ddd;
+  border: 1px solid var(--mytracker-card-border-color);
   border-radius: 6px;
   box-shadow: 0 0px 2px rgba(0, 0, 0, 0.1);
 }
@@ -111,7 +111,7 @@
 }
 
 .rate span:first-child {
-  color: #283452;
+  color: var(--primary-text-color);
   font-weight: 600;
   font-size: 22px;
 }
