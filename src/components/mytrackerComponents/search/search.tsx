@@ -5,9 +5,10 @@ import { IoIosSearch, IoMdClose } from "react-icons/io";
 
 interface SearchProps {
   onSearch: (query: string) => void;
+  onClick: () => void
 }
 
-const Search: React.FC<SearchProps> = ({ onSearch }) => {
+const Search: React.FC<SearchProps> = ({ onSearch, onClick }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
   const searchRef = useRef<HTMLDivElement | null>(null);
@@ -20,6 +21,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
 
   const handleInputClick = () => {
     setIsExpanded(true); 
+    onClick()
   };
 
   const handleClearInput = () => {

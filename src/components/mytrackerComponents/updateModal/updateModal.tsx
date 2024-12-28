@@ -155,7 +155,7 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
               <span>Location</span>
               <input
                 type="text"
-                value={location}
+                value={formData.location}
                 onChange={(e) => handleInputChange("location", e.target.value)}
                 className={styles.input}
                 placeholder="Enter the job location"
@@ -165,7 +165,7 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
               <span>Salary</span>
               <input
                 type="text"
-                value={salary}
+                value={formData.salary}
                 onChange={(e) => handleInputChange("salary", e.target.value)}
                 className={styles.input}
                 placeholder="Enter the job salary"
@@ -175,7 +175,7 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
               <span>Post URL</span>
               <input
                 type="text"
-                value={postUrl}
+                value={formData.postUrl}
                 onChange={(e) => handleInputChange("postUrl", e.target.value)}
                 className={styles.input}
                 placeholder="Enter the job post URL"

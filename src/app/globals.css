@@ -10,7 +10,12 @@
   --foreground-color: #06283D;
   --primary-text-color: #283452;
   --secondary-text-color: #fbfbff;
-  --button-bg-color: #EFEEF6
+  --button-bg-color: #EFEEF6;
+  --mytracker-bg-color: #FDFDFF;
+  --mytracker-border-color: #DFDFE2;
+  --mytracker-bs-color: rgba(25, 4, 69, 0.1);
+  --mytracker-search-color: #7e8aad;
+  --mytracker-card-border-color: #ddd
 }
 
 [data-theme="dark"] {
@@ -18,7 +23,12 @@
   --foreground-color: #fbfbff;
   --primary-text-color: #fbfbff;
   --secondary-text-color: #0a0a0a;
-  --button-bg-color: #283452
+  --button-bg-color: #283452;
+  --mytracker-bg-color: #283452;
+  --mytracker-border-color: #06283D;
+  --mytracker-bs-color: rgba(255, 255, 255, 0.1);
+  --mytracker-search-color: #fbfbff;
+  --mytracker-card-border-color: #7e8aadc1
 }
 
 html,

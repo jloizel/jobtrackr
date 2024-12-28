@@ -24,6 +24,8 @@
   transition: width 0.3s ease-in-out;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
+  background: none;
+  color: var(--mytracker-search-color);
 }
 
 .searchInput::placeholder {
@@ -43,5 +45,5 @@
 }
 
 .closeIcon:hover {
-  color: #283452;
+  color: var(--primary-text-color);
 }

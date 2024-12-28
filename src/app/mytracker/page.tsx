@@ -315,7 +315,7 @@ const MyTrackerPage: React.FC = () => {
             >
               My Job Tracker
             </div>
-            <Search onSearch={handleSearch}/>
+            <Search onSearch={handleSearch} onClick={handleTrackerClick}/>
             <div className={styles.submenuContainer}>
               {/* <div className={styles.submenu}>
                 <PiBriefcaseBold/>

@@ -8,7 +8,8 @@ type RankingsProps = {
 };
 
 const JobRankings: React.FC<RankingsProps> = ({ jobs }) => {
-  // Count occurrences of each job title
+
+  // get count of each job title
   const titleCounts = jobs.reduce((acc: Record<string, number>, job) => {
     if (job.title) {
       acc[job.title] = (acc[job.title] || 0) + 1;
@@ -16,18 +17,16 @@ const JobRankings: React.FC<RankingsProps> = ({ jobs }) => {
     return acc;
   }, {});
 
-  // Convert the title counts object into an array of [title, count] pairs
+  // convert title counts object into an array of [title, count] pairs
   const sortedTitles = Object.entries(titleCounts).sort((a, b) => b[1] - a[1]);
-
-  // Get the top 5 job titles
   const top5Titles = sortedTitles.slice(0, 5);
 
-  // Filter for successful jobs
+  // filter for successful jobs
   const successfulJobs = jobs.filter(
     (job) => job.status === 'Interviewed' || job.status === 'Offered'
   );
 
-  // Count occurrences of each successful job title
+  // count occurrences of each successful job title
   const successfulTitleCounts = successfulJobs.reduce(
     (acc: Record<string, number>, job) => {
       if (job.title) {
@@ -38,31 +37,40 @@ const JobRankings: React.FC<RankingsProps> = ({ jobs }) => {
     {}
   );
 
-  // Convert to array, sort, and get top 5
+  // convert to array, sort, and get top 5
   const sortedSuccessfulTitles = Object.entries(successfulTitleCounts).sort(
     (a, b) => b[1] - a[1]
   );
   const top5SuccessfulTitles = sortedSuccessfulTitles.slice(0, 5);
 
   return (
-    <div>
-      <h3>Top 5 Most Popular Job Titles</h3>
-      <ul>
-        {top5Titles.map(([title, count]) => (
-          <li key={title}>
-            {title}: {count} application(s)
-          </li>
+    <div className={styles.rankingsContainer}>
+      <div className={styles.ranking}>
+        <div className={styles.header}>Your most popular jobs</div>
+        {top5Titles.map(([title, count], index) => (
+          <div className={styles.result} key={`popular-${title}-${index}`}>
+            <span className={styles.title}>{index + 1}. {title} - </span>
+            <div className={styles.countInfo}>
+              <span>{count}</span>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
 
-      <h3>Top 5 Most Successful Job Titles</h3>
-      <ul>
-        {top5SuccessfulTitles.map(([title, count]) => (
-          <li key={title}>
-            {title}: {count} successful application(s)
-          </li>
+      <div className={styles.ranking}>
+        <div className={styles.header}>
+          Your most successful jobs
+          <span>&#40;interviewed or offered&#41;</span>
+        </div>
+        {top5SuccessfulTitles.map(([title, count], index) => (
+          <div className={styles.result} key={`successful-${title}-${index}`}>
+            <span className={styles.title}>{index + 1}. {title} - </span>
+            <div className={styles.countInfo}>
+              <span>{count}</span>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

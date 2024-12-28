@@ -20,6 +20,9 @@ const Statistics: React.FC<StatisticsProps> = ({ jobs }) => {
   const labels = ['Total', 'Applied', 'Interviewed', 'Offered'];
   const values = [totalJobs, appliedJobs, interviewedJobs, offeredJobs];
 
+  const responsiveness = ((interviewedJobs + offeredJobs + rejectedJobs) / totalJobs) * 100;
+  const positiveResponses = ((interviewedJobs + offeredJobs) / totalJobs) * 100;
+  const negativeResponses = (rejectedJobs / totalJobs) * 100;
 
   return (
     <div className={styles.statisticsWrapper}>
@@ -92,7 +95,23 @@ const Statistics: React.FC<StatisticsProps> = ({ jobs }) => {
           <JobRankings jobs={jobs}/>
         </div>
         <div className={styles.responsesWrapper}>
-
+          <div className={styles.responsivenessHeader}>
+            Response Rate
+          </div>
+          <div className={styles.rateContainer}>
+            <div className={styles.rate}>
+              <span>{responsiveness}%</span>
+              <span>of companies have got back to you</span>
+            </div>
+            <div className={styles.rate}>
+              <span>{positiveResponses}%</span>
+              <span>were a positive response</span>
+            </div>
+            <div className={styles.rate}>
+              <span>{negativeResponses}%</span>
+              <span>were a negative response</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

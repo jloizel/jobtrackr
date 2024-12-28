@@ -9,7 +9,7 @@
 .modalContent {
   width: 60%;
   max-width: 500px;
-  background-color: #FDFDFF;
+  background-color: var(--mytracker-bg-color);
   display: flex;
   flex-direction: column;
   outline: none;
@@ -17,7 +17,7 @@
 }
 
 .modalHeader {
-  background-color: #FFFFFF;
+  background-color: var(--mytracker-bg-color);
   font-weight: 500;
   display: flex;
   justify-content: center;
@@ -26,6 +26,7 @@
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   position: relative;
+  color: var(--primary-text-color);
 }
 
 .jobStatus {
@@ -53,7 +54,7 @@
 }
 
 .closeIcon:hover {
-  color: #283452;
+  color: var(--primary-text-color);
 }
 
 .formContent {
@@ -76,6 +77,7 @@
 .formInput span {
   font-weight: 500;
   font-size: 15px;
+  color: var(--primary-text-color);
 }
 
 .input {
@@ -90,7 +92,8 @@
   width: 100%;
   outline: none;
   font-family: "Roboto", sans-serif;
-  color: #283452;
+  color: var(--primary-text-color);
+  background: none;
 }
 
 .input:focus {
@@ -124,7 +127,7 @@
 }
 
 .submitButtonContainer button:hover {
-  background-color: #FFFFFF;
+  background-color: transparent;
   color: #00a6ff;
   border: solid 1px #00a6ff;
 }
