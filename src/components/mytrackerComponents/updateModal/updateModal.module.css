@@ -135,7 +135,7 @@
 }
 
 .submitButtonContainer button:hover {
-  background-color: #FFFFFF;
+  background-color: transparent;
   color: #00a6ff;
   border: solid 1px #00a6ff;
 }

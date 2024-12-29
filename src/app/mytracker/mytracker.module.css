@@ -150,7 +150,7 @@
   background-color: var(--mytracker-bg-color);
   justify-content: center;
   border: solid 2px #dfdfe252;
-  box-shadow: rgba(25, 4, 69, 0.05) 0px 3px 6px;
+  box-shadow: var(--mytracker-bs-color) 0px 3px 6px;
   border-radius: 6px;
   padding: 10px;
   cursor: pointer;
