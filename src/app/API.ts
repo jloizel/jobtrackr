@@ -61,6 +61,7 @@ export const createJob = async (jobData: {
   }
 };
 
+
 // Get a job by ID
 export const getJobById = async (jobId: string): Promise<Job | null> => {
   try {
@@ -117,3 +118,50 @@ export const deleteJob = async (jobId: string): Promise<{ message: string }> => 
     throw error;
   }
 };
+
+export interface FileData {
+  fileName: string;
+  fileData: string; // Base64 encoded file data
+  uploadDate: string;
+}
+
+// Upload a file (PDF)
+export const uploadFile = async (file: File): Promise<{ message: string }> => {
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const email = getUserEmail();
+    if (email) {
+      formData.append('email', email);
+    } else {
+      throw new Error('User email is not available');
+    }
+
+    const response: AxiosResponse<{ message: string }> = await api.post('/cv/upload', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Get files for the logged-in user
+export const getFiles = async (): Promise<FileData[]> => {
+  try {
+    const email = getUserEmail();
+    if (!email) {
+      throw new Error('User email is not available');
+    }
+
+    const response: AxiosResponse<FileData[]> = await api.get('/cv/get', {
+      params: { email },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+

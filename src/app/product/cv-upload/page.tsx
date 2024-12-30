@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CvUploadPage = () => {
+const CVUploadPage = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const CvUploadPage = () => {
   )
 }
 
-export default CvUploadPage
+export default CVUploadPage
