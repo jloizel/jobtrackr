@@ -10,6 +10,11 @@ import { Page, Document } from "react-pdf";
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 import ClipLoader from "react-spinners/ClipLoader";
+import { ImBin } from "react-icons/im";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
+import { format } from "date-fns";
+
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
@@ -86,7 +91,7 @@ const MyCVPage = () => {
       ) : (
         <div className={styles.filesContainer}>
           <div className={styles.files}>
-            {files.map((file) => (
+            {files.map((file, index) => (
               <div key={file.fileName} className={styles.file}>
                 <a
                   href={`data:application/pdf;base64,${file.fileData}`}
@@ -101,37 +106,42 @@ const MyCVPage = () => {
                     file={`data:application/pdf;base64,${file.fileData}`}
                     onLoadSuccess={(pdf) => onDocumentSuccess(pdf, file.fileName)}
                   >
-                    <Page pageNumber={pageNumber} />
+                    <Page pageNumber={pageNumber}/>
                   </Document>
                 </div>
 
-                {pdfPageCounts[file.fileName] > 1 && (
-                  <div>
-                    <button onClick={prevPage} disabled={pageNumber <= 1}>
-                      Previous
-                    </button>
-                    <button
-                      onClick={nextPage}
-                      disabled={pageNumber >= (pdfPageCounts[file.fileName] || 1)}
-                    >
-                      Next
-                    </button>
-                  </div>
-                )}
+                <div className={styles.pdfButton}>
+                  PDF
+                </div>
 
-                <button
-                  onClick={() => handleDelete(file.fileName)}
-                  disabled={isLoading}
-                >
-                  Delete
-                </button>
+                {/* {pdfPageCounts[file.fileName] > 1 && (
+                  <div className={styles.navigationButtons}>
+                    <IoIosArrowBack
+                      onClick={pageNumber > 1 ? prevPage : undefined}
+                      className={`${styles.icon} ${pageNumber <= 1 ? styles.disabled : ""}`}
+                    />
+
+                    <IoIosArrowForward
+                      onClick={pageNumber < (pdfPageCounts[file.fileName] || 1) ? nextPage : undefined}
+                      className={`${styles.icon} ${pageNumber >= (pdfPageCounts[file.fileName] || 1) ? styles.disabled : ""}`}
+                    />
+                  </div>
+                )} */}
+
+                <span className={styles.timestamp}>
+                  Added on: {format(new Date(file.uploadDate), "yyyy-MM-dd HH:mm")}
+                </span>
+                <div className={styles.fileBottom}>
+                  <span>CV {index + 1}</span>
+                  <ImBin onClick={() => handleDelete(file.fileName)} className={styles.binIcon}/>
+                </div>
               </div>
             ))}
           </div>
 
-          {!canUpload && (
+          {/* {!canUpload && (
             <p>You can only upload up to {maxFiles} files.</p>
-          )}
+          )} */}
         </div>
       )}
 
