@@ -101,7 +101,7 @@ const MyCVPage = () => {
                     file={`data:application/pdf;base64,${file.fileData}`}
                     onLoadSuccess={(pdf) => onDocumentSuccess(pdf, file.fileName)}
                   >
-                    <Page pageNumber={pageNumber} width={200}/>
+                    <Page pageNumber={pageNumber} />
                   </Document>
                 </div>
 
