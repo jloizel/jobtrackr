@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react'; // Import useSession from NextAuth
-import { uploadFile } from '../../app/API'; // Your API function
+import { uploadCV } from '../../app/API'; // Your API function
 
 const CVUploadForm: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -20,7 +20,7 @@ const CVUploadForm: React.FC = () => {
     }
 
     try {
-      const response = await uploadFile(selectedFile);
+      const response = await uploadCV(selectedFile);
       alert(response.message);
     } catch (error) {
       console.error('Error uploading file:', error);

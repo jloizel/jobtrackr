@@ -126,7 +126,7 @@ export interface FileData {
 }
 
 // Upload a file (PDF)
-export const uploadFile = async (file: File): Promise<{ message: string }> => {
+export const uploadCV = async (file: File): Promise<{ message: string }> => {
   try {
     const formData = new FormData();
     formData.append('file', file);
@@ -148,7 +148,7 @@ export const uploadFile = async (file: File): Promise<{ message: string }> => {
 };
 
 // Get files for the logged-in user
-export const getFiles = async (): Promise<FileData[]> => {
+export const getCVs = async (): Promise<FileData[]> => {
   try {
     const email = getUserEmail();
     if (!email) {
@@ -163,5 +163,66 @@ export const getFiles = async (): Promise<FileData[]> => {
     throw error;
   }
 };
+
+export const deleteCV = async (email: string, fileName?: string): Promise<{ message: string }> => {
+  try {
+    const response = await api.delete('/cv/delete', {
+      data: { email, fileName }, 
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const uploadCL = async (file: File): Promise<{ message: string }> => {
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const email = getUserEmail();
+    if (email) {
+      formData.append('email', email);
+    } else {
+      throw new Error('User email is not available');
+    }
+
+    const response: AxiosResponse<{ message: string }> = await api.post('/cl/upload', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Get files for the logged-in user
+export const getCLs = async (): Promise<FileData[]> => {
+  try {
+    const email = getUserEmail();
+    if (!email) {
+      throw new Error('User email is not available');
+    }
+
+    const response: AxiosResponse<FileData[]> = await api.get('/cl/get', {
+      params: { email },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteCL = async (email: string, fileName?: string): Promise<{ message: string }> => {
+  try {
+    const response = await api.delete('/cl/delete', {
+      data: { email, fileName }, 
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 
 
