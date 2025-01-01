@@ -1,0 +1,59 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  border: 1px dashed #00a6ff;
+  box-shadow: 0 4px 10px var(--mytracker-bs-color); 
+  border-radius: 8px;
+  height: 80%;
+  width: 80%;
+}
+
+.fileinputButton {
+  display: none; 
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  transition: all 0.2s ease-in-out;
+  justify-content: center;
+}
+
+.input:hover {
+  background-color: #f5f5f5a8;
+}
+
+.header {
+  font-size: 14px;
+
+  @media (min-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+.subHeader {
+  font-style: italic;
+  color: #00a6ff;
+  font-size: 14px;
+}
+
+.fileName {
+  font-weight: 600;
+  color: #00a6ff;
+  font-size: 14px;
+  margin-top: 10px;
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    font-size: 24px;
+    margin-top: 20px;   
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 20px;
+    margin-top: 20px;   
+  }
+}

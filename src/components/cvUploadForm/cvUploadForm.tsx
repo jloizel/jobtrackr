@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from 'react';
-import { useSession } from 'next-auth/react'; // Import useSession from NextAuth
-import { uploadCV } from '../../app/API'; // Your API function
+import styles from "./cvUploadForm.module.css";
+import { uploadCV } from '../../app/API'; 
 
 const CVUploadForm: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -28,9 +28,24 @@ const CVUploadForm: React.FC = () => {
   };
 
   return (
-    <div>
-      <input type="file" accept="application/pdf" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Upload</button>
+    <div className={styles.form}>
+        <label htmlFor="fileInput" className={styles.input}>
+          <span className={styles.header}>Allowed file type:</span>
+          <span className={styles.subHeader}>pdf (max file size: 16 mb)</span>
+          {selectedFile && (
+            <span className={styles.fileName}>{selectedFile.name}</span>
+          )}
+        </label>
+        <input
+          id="fileInput"
+          className={styles.fileinputButton}
+          type="file"
+          onChange={handleFileChange}
+          accept="application/pdf"
+        />
+      {/* <button onClick={handleUpload} disabled={!selectedFile}>
+        Upload
+      </button> */}
     </div>
   );
 };

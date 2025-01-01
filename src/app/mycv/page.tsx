@@ -13,7 +13,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { ImBin } from "react-icons/im";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
-import { format } from "date-fns";
+import { format, formatDistanceToNow } from "date-fns";
+import { IoMdDownload } from "react-icons/io";
 
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
@@ -24,7 +25,7 @@ const MyCVPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [pdfPageCounts, setPdfPageCounts] = useState<Record<string, number>>({});
   const [pageNumber, setPageNumber] = useState(1);
-  const maxFiles = 2;
+  const [hoveredFile, setHoveredFile] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchFiles = async () => {
@@ -42,6 +43,17 @@ const MyCVPage = () => {
 
     fetchFiles();
   }, [session?.user?.email]);
+
+  const calculateFileSize = (base64: string) => {
+    const stringLength = base64.length - 'data:application/pdf;base64,'.length;
+    const sizeInBytes = (stringLength * 3) / 4; 
+    const sizeInKB = sizeInBytes / 1024;
+    const sizeInMB = sizeInKB / 1024;
+  
+    return sizeInMB >= 1
+      ? `${sizeInMB.toFixed(2)} MB`
+      : `${sizeInKB.toFixed(2)} KB`;
+  };
 
   const handleDelete = async (fileName: string) => {
     if (!session?.user?.email) {
@@ -65,6 +77,7 @@ const MyCVPage = () => {
     }
   };
 
+  const maxFiles = 2;
   const canUpload = files.length < maxFiles;
 
   // update the page count for each file when the document is loaded
@@ -87,32 +100,44 @@ const MyCVPage = () => {
     <div className={styles.pageContainer}>
       <div className={styles.pageHeader}>My CV Files</div>
       {isLoading ? (
-        <ClipLoader color={"#00a6ff"}/>
+        <div className={styles.loaderContainer}>
+          <ClipLoader color={"#00a6ff"}/>
+        </div>
       ) : (
-        <div className={styles.filesContainer}>
+        <div className={`${styles.filesContainer} ${files.length === 1 ? styles.singleFile : ""}`}>
           <div className={styles.files}>
             {files.map((file, index) => (
               <div key={file.fileName} className={styles.file}>
-                <a
-                  href={`data:application/pdf;base64,${file.fileData}`}
-                  download={file.fileName}
-                >
-                  Download {file.fileName}
-                </a>
+                <div className={styles.fileDetails}>
+                  <span>{file.fileName.endsWith(".pdf") ? file.fileName.slice(0, -4) : file.fileName}</span>
+                  <span>PDF - {calculateFileSize(file.fileData)}</span>
+                </div>
 
                 {/* <p>Number of Pages: {pdfPageCounts[file.fileName] || "Loading..."}</p> */}
-                <div className={styles.thumbnail}>
-                  <Document
-                    file={`data:application/pdf;base64,${file.fileData}`}
-                    onLoadSuccess={(pdf) => onDocumentSuccess(pdf, file.fileName)}
+                <div
+                  className={styles.thumbnail}
+                  onMouseEnter={() => setHoveredFile(file.fileName)}
+                  onMouseLeave={() => setHoveredFile(null)}
+                >
+                  <a 
+                    href={`data:application/pdf;base64,${file.fileData}`}
+                    download={file.fileName}
                   >
-                    <Page pageNumber={pageNumber}/>
-                  </Document>
+                    <Document
+                      file={`data:application/pdf;base64,${file.fileData}`}
+                      onLoadSuccess={(pdf) => onDocumentSuccess(pdf, file.fileName)}
+                    >
+                      <Page pageNumber={pageNumber} />
+                    </Document>
+                  </a>
+
+                  <div className={`${styles.pdfButton} ${hoveredFile === file.fileName ? styles.hidden : ""}`}>
+                    PDF
+                  </div>
+
+                  <IoMdDownload className={`${styles.downloadButton} ${hoveredFile === file.fileName ? styles.visible : ""}`}/> 
                 </div>
 
-                <div className={styles.pdfButton}>
-                  PDF
-                </div>
 
                 {/* {pdfPageCounts[file.fileName] > 1 && (
                   <div className={styles.navigationButtons}>
@@ -129,7 +154,7 @@ const MyCVPage = () => {
                 )} */}
 
                 <span className={styles.timestamp}>
-                  Added on: {format(new Date(file.uploadDate), "yyyy-MM-dd HH:mm")}
+                  uploaded {formatDistanceToNow(new Date(file.uploadDate), { addSuffix: true })}
                 </span>
                 <div className={styles.fileBottom}>
                   <span>CV {index + 1}</span>
@@ -138,14 +163,13 @@ const MyCVPage = () => {
               </div>
             ))}
           </div>
-
-          {/* {!canUpload && (
-            <p>You can only upload up to {maxFiles} files.</p>
-          )} */}
+          
+          <div className={styles.formContainer}>
+            {canUpload && <CVUploadForm />}
+          </div>
         </div>
       )}
 
-      {canUpload && <CVUploadForm />}
     </div>
   );
 };

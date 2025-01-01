@@ -4,7 +4,8 @@
   align-items: center;
   /* justify-content: center; */
   gap: 40px;
-  min-height: 90vh;
+  /* min-height: 90vh; */
+  width: 100%;
 }
 
 .pageHeader {
@@ -12,11 +13,22 @@
   font-weight: 600;
 }
 
+.loaderContainer {
+  display: flex;
+  min-height: 60vh;
+  align-items: center;
+  justify-content: center
+}
+
 .filesContainer {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.singleFile {
+  width: 100%;
 }
 
 .files {
@@ -27,16 +39,38 @@
 }
 
 .file {
-  border: 1px solid var(--mytracker-border-color);
-  box-shadow: 0 4px 6px var(--mytracker-bs-color); 
+  border: 1px solid var(--mytracker-card-border-color);
+  box-shadow: 0 4px 10px var(--mytracker-bs-color); 
   border-radius: 8px;
-  width: 40%;
-  max-width: 800px;
-  position: relative;
+  /* width: 40%; */
+  max-width: 400px;
+}
+
+.fileDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 5px;
+}
+
+.fileDetails span:first-child {
+  text-overflow: ellipsis;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.fileDetails span:last-child {
+  color: #7e8aad;
+  font-weight: 500;
+  font-size: 16px;
 }
 
 .thumbnail {
-  padding-top: 50px;
+  /* padding-top: 50px; */
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .pdfButton {
@@ -49,7 +83,35 @@
   border: 1px solid var(--mytracker-border-color);
   padding: 4px 10px;
   border-radius: 10px;
-  background-color: #f0a6bc;
+  background-color: #f9cad8;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+}
+
+.thumbnail:hover .pdfButton {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.downloadButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f9cad8;
+  color: #D70040;
+  padding: 10px;
+  border-radius: 50%;
+  opacity: 0;
+  visibility: hidden;
+  font-size: 40px;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.thumbnail:hover .downloadButton {
+  opacity: 1;
+  visibility: visible;
 }
 
 .navigationButtons {
@@ -79,12 +141,22 @@
   opacity: 0.5;
 }
 
+.timestamp {
+  color: #7e8aad;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
 .fileBottom {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
   padding: 10px;
+  border-top: 1px solid var(--mytracker-card-border-color);
+  align-items: center;
 }
 
 .fileBottom span {
@@ -107,4 +179,13 @@
 .binIcon:hover {
   /* color: var(--primary-text-color); */
   color: #D70040;
+}
+
+.formContainer {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center; 
+  width: 50%;
+  max-width: 400px;
 }
