@@ -109,6 +109,7 @@
 }
 
 .downloadButton {
+  display: flex;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -120,6 +121,10 @@
   font-size: 45px;
   transition: opacity 0.3s ease, visibility 0.3s ease;
   cursor: pointer !important;
+}
+
+.visible {
+  opacity: 1;
 }
 
 .navigationButtons {
@@ -192,6 +197,7 @@
 .formContainer {
   flex: 1;
   display: flex;
+  justify-content: flex-end; 
   align-items: center; 
   width: 50%;
 }
@@ -201,6 +207,5 @@
 }
 
 .emptyFormContainer {
-  justify-content: center !important;
+  justify-content: center;
 }
-

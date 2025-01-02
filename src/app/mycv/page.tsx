@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./mycv.module.css";
 import { useSession } from "next-auth/react";
-import { FileData, getCVs, deleteCV } from "../API";
-import CVUploadForm from "@/components/cvUploadForm/cvUploadForm";
+import { FileData, getCVs, deleteCV, uploadCV } from "../API";
 import { pdfjs } from "react-pdf";
 import { Page, Document } from "react-pdf";
 import 'react-pdf/dist/Page/AnnotationLayer.css';
@@ -15,6 +14,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { format, formatDistanceToNow } from "date-fns";
 import { IoMdDownload } from "react-icons/io";
+import UploadForm from "@/components/fileUploadForm/fileUploadForm";
 
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
@@ -26,7 +26,10 @@ const MyCVPage = () => {
   const [pdfPageCounts, setPdfPageCounts] = useState<Record<string, number>>({});
   const [pageNumber, setPageNumber] = useState(1);
   const [hoveredFile, setHoveredFile] = useState<string | null>(null);
-  const [canUpload, setCanUpload] = useState(false)
+  const [canUpload, setCanUpload] = useState(false);
+  const [numFiles, setNumFiles] = useState(0);
+  const [hoveredDownloadButton, setHoveredDownloadButton] = useState<string | null>(null);
+  
 
   const maxFiles = 2;
 
@@ -36,6 +39,7 @@ const MyCVPage = () => {
     try {
       const fileData = await getCVs();
       setFiles(fileData);
+      setNumFiles(files.length)
       setCanUpload(fileData.length < maxFiles); 
     } catch (error) {
       console.error("Error fetching files:", error);
@@ -71,6 +75,7 @@ const MyCVPage = () => {
   
       setFiles((prevFiles) => {
         const updatedFiles = prevFiles.filter((file) => file.fileName !== fileName);
+        setNumFiles(updatedFiles.length);
         setCanUpload(updatedFiles.length < maxFiles);
         return updatedFiles;
       });
@@ -115,10 +120,8 @@ const MyCVPage = () => {
                 </div>
 
                 {/* <p>Number of Pages: {pdfPageCounts[file.fileName] || "Loading..."}</p> */}
-                <div
-                  className={styles.thumbnail}
-                >
-                  <a 
+                <div className={styles.thumbnail}>
+                  <a
                     href={`data:application/pdf;base64,${file.fileData}`}
                     download={file.fileName}
                   >
@@ -128,21 +131,29 @@ const MyCVPage = () => {
                     >
                       <Page
                         pageNumber={pageNumber}
-                        className={`${styles.pdfPage} ${hoveredFile === file.fileName ? styles.hovered : ""}`}
+                        className={`${styles.pdfPage} ${
+                          hoveredFile === file.fileName ? styles.hovered : ""
+                        }`}
                         onMouseEnter={() => setHoveredFile(file.fileName)}
-                        onMouseLeave={() => setHoveredFile(null)}
+                        onMouseLeave={() => {
+                          if (hoveredDownloadButton !== file.fileName) setHoveredFile(null);
+                        }}
+                        renderTextLayer={false}
                       />
                     </Document>
                   </a>
 
-                  <div className={`${styles.pdfButton} ${hoveredFile === file.fileName ? styles.hidden : ""}`}>
-                    PDF
-                  </div>
-
-                  <IoMdDownload
-                    className={`${styles.downloadButton} ${hoveredFile === file.fileName ? styles.visible : ""}`}
-                  />
+                  {hoveredFile === file.fileName || hoveredDownloadButton === file.fileName ? (
+                    <IoMdDownload
+                      className={styles.downloadButton}
+                      onMouseEnter={() => setHoveredDownloadButton(file.fileName)}
+                      onMouseLeave={() => setHoveredDownloadButton(null)}
+                    />
+                  ) : (
+                    <div className={styles.pdfButton}>PDF</div>
+                  )}
                 </div>
+
 
 
 
@@ -171,8 +182,8 @@ const MyCVPage = () => {
             ))}
           </div>
           
-          <div className={styles.formContainer}>
-            {canUpload && <CVUploadForm onFileUpload={fetchFiles}/>}
+          <div className={`${styles.formContainer} ${numFiles === 0 ? styles.emptyFormContainer : styles.notEmptyFormContainer}`}>
+            {canUpload && <UploadForm onFileUpload={fetchFiles} uploadHandler={uploadCV} numFiles={numFiles}/>}
           </div>
         </div>
       )}
