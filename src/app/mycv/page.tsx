@@ -26,21 +26,25 @@ const MyCVPage = () => {
   const [pdfPageCounts, setPdfPageCounts] = useState<Record<string, number>>({});
   const [pageNumber, setPageNumber] = useState(1);
   const [hoveredFile, setHoveredFile] = useState<string | null>(null);
+  const [canUpload, setCanUpload] = useState(false)
 
+  const maxFiles = 2;
+
+  const fetchFiles = async () => {
+    if (!session?.user?.email) return;
+    setIsLoading(true);
+    try {
+      const fileData = await getCVs();
+      setFiles(fileData);
+      setCanUpload(fileData.length < maxFiles); 
+    } catch (error) {
+      console.error("Error fetching files:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
   useEffect(() => {
-    const fetchFiles = async () => {
-      if (!session?.user?.email) return;
-      setIsLoading(true);
-      try {
-        const fileData = await getCVs();
-        setFiles(fileData);
-      } catch (error) {
-        console.error("Error fetching files:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchFiles();
   }, [session?.user?.email]);
 
@@ -60,26 +64,23 @@ const MyCVPage = () => {
       alert("User email is not available!");
       return;
     }
-
+  
     setIsLoading(true);
     try {
       const response = await deleteCV(session.user.email, fileName);
-      alert(response.message);
-
-      setFiles((prevFiles) =>
-        prevFiles.filter((file) => file.fileName !== fileName)
-      );
+  
+      setFiles((prevFiles) => {
+        const updatedFiles = prevFiles.filter((file) => file.fileName !== fileName);
+        setCanUpload(updatedFiles.length < maxFiles);
+        return updatedFiles;
+      });
     } catch (error) {
       console.error("Error deleting file:", error);
-      alert("Failed to delete file.");
     } finally {
       setIsLoading(false);
     }
   };
-
-  const maxFiles = 2;
-  const canUpload = files.length < maxFiles;
-
+  
   // update the page count for each file when the document is loaded
   const onDocumentSuccess = (pdf: any, fileName: string) => {
     setPdfPageCounts((prev) => ({
@@ -116,8 +117,6 @@ const MyCVPage = () => {
                 {/* <p>Number of Pages: {pdfPageCounts[file.fileName] || "Loading..."}</p> */}
                 <div
                   className={styles.thumbnail}
-                  onMouseEnter={() => setHoveredFile(file.fileName)}
-                  onMouseLeave={() => setHoveredFile(null)}
                 >
                   <a 
                     href={`data:application/pdf;base64,${file.fileData}`}
@@ -127,7 +126,12 @@ const MyCVPage = () => {
                       file={`data:application/pdf;base64,${file.fileData}`}
                       onLoadSuccess={(pdf) => onDocumentSuccess(pdf, file.fileName)}
                     >
-                      <Page pageNumber={pageNumber} />
+                      <Page
+                        pageNumber={pageNumber}
+                        className={`${styles.pdfPage} ${hoveredFile === file.fileName ? styles.hovered : ""}`}
+                        onMouseEnter={() => setHoveredFile(file.fileName)}
+                        onMouseLeave={() => setHoveredFile(null)}
+                      />
                     </Document>
                   </a>
 
@@ -135,8 +139,11 @@ const MyCVPage = () => {
                     PDF
                   </div>
 
-                  <IoMdDownload className={`${styles.downloadButton} ${hoveredFile === file.fileName ? styles.visible : ""}`}/> 
+                  <IoMdDownload
+                    className={`${styles.downloadButton} ${hoveredFile === file.fileName ? styles.visible : ""}`}
+                  />
                 </div>
+
 
 
                 {/* {pdfPageCounts[file.fileName] > 1 && (
@@ -165,11 +172,10 @@ const MyCVPage = () => {
           </div>
           
           <div className={styles.formContainer}>
-            {canUpload && <CVUploadForm />}
+            {canUpload && <CVUploadForm onFileUpload={fetchFiles}/>}
           </div>
         </div>
       )}
-
     </div>
   );
 };

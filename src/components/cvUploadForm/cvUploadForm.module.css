@@ -1,34 +1,47 @@
 .form {
   display: flex;
   flex-direction: column;
-  border: 1px dashed #00a6ff;
   box-shadow: 0 4px 10px var(--mytracker-bs-color); 
   border-radius: 8px;
   height: 80%;
   width: 80%;
 }
 
-.fileinputButton {
-  display: none; 
-}
-
-.input {
+.dragDropContainer {
+  border: 1px dashed #00a6ff;
+  border-radius: 8px;
+  text-align: center;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  border-radius: 8px;
-  cursor: pointer;
-  text-align: center;
   font-family: "Poppins", sans-serif;
   transition: all 0.2s ease-in-out;
+  align-items: center;
   justify-content: center;
+  position: relative;
 }
 
-.input:hover {
+.dragDropContainer:hover {
+  border: 2px dashed #00a6ff;
   background-color: #f5f5f5a8;
 }
 
+.dropArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100% !important;
+  height: 100% !important;
+  justify-self: center;
+  cursor: pointer;
+  justify-content: center;
+}
+
 .header {
+  /* margin-top: 100px; */
   font-size: 14px;
+  width: 80%;
 
   @media (min-width: 1024px) {
     font-size: 16px;
@@ -39,21 +52,59 @@
   font-style: italic;
   color: #00a6ff;
   font-size: 14px;
+  width: 80%;
+}
+
+.icon {
+  color: #00a6ff;
+  font-size: 28px;
+  transition: all 0.2s ease-in-out;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.scale {
+  scale: 1.5;
+}
+
+.selectedFile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .fileName {
   font-weight: 600;
   color: #00a6ff;
   font-size: 14px;
-  margin-top: 10px;
+  text-overflow: ellipsis;
 
   @media (min-width: 768px) and (max-width: 1023px) {
     font-size: 24px;
-    margin-top: 20px;   
   }
 
   @media (min-width: 1024px) {
     font-size: 20px;
-    margin-top: 20px;   
   }
+}
+
+.button {
+  box-shadow: 0px 4px 10px rgba(25,4,69,0.2);
+  background-color: #00a6ff;
+  border: solid 2px #00a6ff;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 18px;
+  transition: all 0.3s ease-in-out;
+  width: max-content;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+}
+
+.button:hover {
+  border: solid 2px #00a6ff;
+  color: #00a6ff;
+  background-color: transparent;
 }
