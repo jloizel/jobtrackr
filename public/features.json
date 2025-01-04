@@ -5,19 +5,31 @@
     "color": "#EFF9FF",
     "border": "#18A8FF",
     "icon": "PiBriefcaseBold",
-    "image": "",
+    "backgroundColor": "#b7e4ff",
     "description": [
       {
-        "title": "",
-        "content": ""
+        "title": "Organised columns",
+        "content": "Track your jobs with columns like Applied, Interviewed, and Offered (Rejected hidden by default).",
+        "imageDarkMode": "/images (dark mode)/Job Tracker/1.png",
+        "imageLightMode": "/images (light mode)/Job Tracker/1.png"
       },
       {
-        "title": "",
-        "content": ""
+        "title": "Drag-and-Drop",
+        "content": "Easily update job statuses by dragging and dropping job cards.",
+        "imageDarkMode": "/images (dark mode)/JobTracker.png",
+        "imageLightMode": "/images (light mode)/JobTracker.png"
       },
       {
-        "title": "",
-        "content": ""
+        "title": "Interactive Modals",
+        "content": "Click on a job to view detailed information or the edit button to edit the job information.",
+        "imageDarkMode": "/images (dark mode)/JobTracker.png",
+        "imageLightMode": "/images (light mode)/JobTracker.png"
+      },
+      {
+        "title": "Statistics Page",
+        "content": "Track metrics like your response rate and application activity.",
+        "imageDarkMode": "/images (dark mode)/JobTracker.png",
+        "imageLightMode": "/images (light mode)/JobTracker.png"
       }
     ]
   },
@@ -26,13 +38,55 @@
     "name": "CV Upload",
     "color": "#FFF6DF",
     "border": "#F8B407",
-    "icon": "CgFileDocument"
+    "icon": "CgFileDocument",
+    "backgroundColor": "",
+    "description": [
+      {
+        "title": "",
+        "content": "",
+        "imageDarkMode": "",
+        "imageLightMode": ""
+      },
+      {
+        "title": "",
+        "content": "",
+        "imageDarkMode": "",
+        "imageLightMode": ""
+      },
+      {
+        "title": "",
+        "content": "",
+        "imageDarkMode": "",
+        "imageLightMode": ""
+      }
+    ]
   },
   {
     "id": 3,
     "name": "Cover Letter Upload",
     "color": "#EDFFFB",
     "border": "#13B793",
-    "icon": "FaRegEnvelope"
+    "icon": "FaRegEnvelope",
+    "backgroundColor": "",
+    "description": [
+      {
+        "title": "",
+        "content": "",
+        "imageDarkMode": "",
+        "imageLightMode": ""
+      },
+      {
+        "title": "",
+        "content": "",
+        "imageDarkMode": "",
+        "imageLightMode": ""
+      },
+      {
+        "title": "",
+        "content": "",
+        "imageDarkMode": "",
+        "imageLightMode": ""
+      }
+    ]
   }
 ]

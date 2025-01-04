@@ -171,9 +171,9 @@
   color: #00a6ff;
   font-weight: 600;
   border: 1px solid var(--mytracker-border-color);
-  padding: 4px;
+  padding: 4px 8px;
   border-radius: 4px;
-  background-color: #00a6ff17;
+  background-color: var(--button-bg-color);
 }
 
 .binIcon {
@@ -201,6 +201,6 @@
 }
 
 .emptyFormContainer {
-  justify-content: center !important;
+  justify-content: center;
 }
 

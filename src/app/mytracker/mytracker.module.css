@@ -185,6 +185,12 @@
   scale: 1.01;
 }
 
+.jobCard.dragging {
+  border: 2px solid #00a6ff;
+  transition: border 0.2s ease;
+}
+
+
 .jobCardContent {
   display: flex;
   flex-direction: column;

@@ -37,7 +37,6 @@ const MyCoverLetterPage = () => {
     try {
       const fileData = await getCLs();
       setFiles(fileData);
-      setNumFiles(files.length)
       setCanUpload(fileData.length < maxFiles); 
     } catch (error) {
       console.error("Error fetching files:", error);
@@ -45,12 +44,14 @@ const MyCoverLetterPage = () => {
       setIsLoading(false);
     }
   };
-
-  console.log(numFiles)
   
   useEffect(() => {
     fetchFiles();
   }, [session?.user?.email]);
+
+  useEffect(() => {
+    setNumFiles(files.length)
+  }, [files])
 
   const calculateFileSize = (base64: string) => {
     const stringLength = base64.length - 'data:application/pdf;base64,'.length;
@@ -73,12 +74,9 @@ const MyCoverLetterPage = () => {
     try {
       const response = await deleteCL(session.user.email, fileName);
   
-      setFiles((prevFiles) => {
-        const updatedFiles = prevFiles.filter((file) => file.fileName !== fileName);
-        setNumFiles(updatedFiles.length);
-        setCanUpload(updatedFiles.length < maxFiles);
-        return updatedFiles;
-      });
+      const updatedFiles = files.filter((file) => file.fileName !== fileName);
+      setFiles(updatedFiles);
+      setCanUpload(updatedFiles.length < maxFiles);
     } catch (error) {
       console.error("Error deleting file:", error);
     } finally {

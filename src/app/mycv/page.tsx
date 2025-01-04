@@ -39,7 +39,6 @@ const MyCVPage = () => {
     try {
       const fileData = await getCVs();
       setFiles(fileData);
-      setNumFiles(files.length)
       setCanUpload(fileData.length < maxFiles); 
     } catch (error) {
       console.error("Error fetching files:", error);
@@ -51,6 +50,10 @@ const MyCVPage = () => {
   useEffect(() => {
     fetchFiles();
   }, [session?.user?.email]);
+
+  useEffect(() => {
+      setNumFiles(files.length)
+    }, [files])
 
   const calculateFileSize = (base64: string) => {
     const stringLength = base64.length - 'data:application/pdf;base64,'.length;
@@ -73,12 +76,9 @@ const MyCVPage = () => {
     try {
       const response = await deleteCV(session.user.email, fileName);
   
-      setFiles((prevFiles) => {
-        const updatedFiles = prevFiles.filter((file) => file.fileName !== fileName);
-        setNumFiles(updatedFiles.length);
-        setCanUpload(updatedFiles.length < maxFiles);
-        return updatedFiles;
-      });
+      const updatedFiles = files.filter((file) => file.fileName !== fileName);
+      setFiles(updatedFiles);
+      setCanUpload(updatedFiles.length < maxFiles);
     } catch (error) {
       console.error("Error deleting file:", error);
     } finally {

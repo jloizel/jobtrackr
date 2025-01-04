@@ -70,6 +70,7 @@ const MyTrackerPage: React.FC = () => {
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
   const [showStats, setShowStats] = useState(false);
   const [showTracker, setShowTracker] = useState(true);
+  const [draggedJobId, setDraggedJobId] = useState<string | null>(null);
 
   const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
@@ -245,8 +246,15 @@ const MyTrackerPage: React.FC = () => {
       setShowOptions(null);
     }
   };
+
+  const onDragStart = (start: any) => {
+    const { draggableId } = start;
+    setDraggedJobId(draggableId);
+  };
   
   const onDragEnd = async (result: any) => {
+    setDraggedJobId(null);
+
     const { source, destination, draggableId } = result;
   
     // if dropped outside a droppable zone, do nothing
@@ -307,7 +315,7 @@ const MyTrackerPage: React.FC = () => {
   if (status === 'authenticated') {
     return (
       <div className={styles.tracker}>
-        <DragDropContext onDragEnd={onDragEnd}>
+        <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
           <div className={styles.headerContainer}>
             <div 
               className={`${styles.header} ${showTracker ? styles.selected : ""}`}
@@ -441,7 +449,7 @@ const MyTrackerPage: React.FC = () => {
                                       ref={provided.innerRef}
                                       {...provided.draggableProps}
                                       {...provided.dragHandleProps}
-                                      className={styles.jobCard}
+                                      className={`${styles.jobCard} ${draggedJobId === job._id ? styles.dragging : ''}`}
                                       onClick={() => handleCardClick(job)}
                                     >
                                       <div className={styles.line} style={{ border: `solid 1px ${status.color}` }}/>
@@ -451,7 +459,7 @@ const MyTrackerPage: React.FC = () => {
                                           {job.logoUrl ? (
                                             <img
                                               src={job.logoUrl}
-                                              alt={`${job.company} logo`}
+                                              alt={"Logos by Brandfetch"}
                                               className={styles.companyLogo}
                                             />
                                           ) : (

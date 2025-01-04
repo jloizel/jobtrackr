@@ -5,6 +5,7 @@ import { ThemeProvider } from '../utils/theme'
 import AuthProvider from "@/providers/AuthProvider";
 import Navbar from "@/components/navbar/navbar";
 import ConditionalNavbar from "./conditionalRender";
+import Footer from "@/components/footer/footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,6 +28,7 @@ export default function RootLayout({
                 <div className="wrapper">
                   {children}
                 </div>
+                <Footer/>
             </div>
           </ThemeProvider>
         </AuthProvider>
