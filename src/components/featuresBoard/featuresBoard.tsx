@@ -150,7 +150,7 @@ const FeaturesBoard = () => {
           <PrevArrow swiper={swiperInstance} className={styles.customPrevArrow}/>
           <NextArrow swiper={swiperInstance} className={styles.customNextArrow}/>
           <Swiper
-            spaceBetween={70}
+            spaceBetween={50}
             slidesPerView={1.5} 
             modules={[ Navigation]}
             // pagination={{ clickable: true }}

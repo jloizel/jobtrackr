@@ -19,6 +19,7 @@
   --upload-hover-bg-color: #f5f5f59a;
   --footer-border-color: #DFDFE2;
   --footer-color: #7e8aad;
+  --credit-bar-bg: #06283D;
 }
 
 [data-theme="dark"] {
@@ -35,6 +36,7 @@
   --upload-hover-bg-color: #283452;
   --footer-border-color: #7e8aad9c;
   --footer-color: #7e8aad;
+  --credit-bar-bg: #fbfbff;
 }
 
 html,

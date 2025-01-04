@@ -1,5 +1,5 @@
 .wrapper {
-  background-color: var(--foreground-color);
+  background-color: var(--credit-bar-bg);
   width: 100%;
   display: flex;
   justify-content: center;
