@@ -1,5 +1,5 @@
 import React from 'react';
-import { Job } from '@/app/mytracker/page';
+import { Job } from '@/app/my-tracker/page';
 import { MdLeaderboard } from "react-icons/md";
 import styles from "./jobRankings.module.css"
 

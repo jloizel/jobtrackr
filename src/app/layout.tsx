@@ -26,9 +26,9 @@ export default function RootLayout({
             <div className="container">
                 <ConditionalNavbar />
                 <div className="wrapper">
-                  {children}
+                  {children}   
+                   <Footer/>
                 </div>
-                <Footer/>
             </div>
           </ThemeProvider>
         </AuthProvider>

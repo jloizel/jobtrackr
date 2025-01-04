@@ -12,9 +12,9 @@ const Navbar = () => {
   const { data: session } = useSession();
 
   const links = [
-    { name: session ? 'My Tracker' : 'Tracker', path: session ? '/mytracker' : '/product/tracker' },
-    { name: session ? 'My CV' : 'CV Upload', path: session ? '/mycv' : '/product/cv-upload' },
-    { name: session ? 'My Cover Letter' : 'Cover Letter Upload', path: session ? '/mycoverletter' : '/product/cover-letter-upload' },
+    { name: session ? 'My Tracker' : 'Tracker', path: session ? '/my-tracker' : '/tools/job-tracker' },
+    { name: session ? 'My CV' : 'CV Upload', path: session ? '/my-cv' : '/tools/cv-upload' },
+    { name: session ? 'My Cover Letter' : 'Cover Letter Upload', path: session ? '/my-cover-letter' : '/tools/cover-letter-upload' },
   ];
 
   return (

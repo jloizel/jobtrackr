@@ -4,7 +4,7 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import { AxisConfig, ChartsXAxisProps } from '@mui/x-charts';
 import CalendarComponent from '../calendar/calendar';
 import JobRankings from '../jobRankings.tsx/jobRankings';
-import { Job } from '@/app/mytracker/page';
+import { Job } from '@/app/my-tracker/page';
 
 type StatisticsProps = {
   jobs: Job[];

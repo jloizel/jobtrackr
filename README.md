@@ -22,7 +22,7 @@
 <!-- ABOUT THE PROJECT -->
 ## 📝 About The Project
 
-Jobtrackr is a mobile application built to empower job seekers in organizing their job search effectively. With features for tracking applications, statuses, and deadlines, users can stay on top of their job hunt and maintain a structured approach.
+Jobtrackr is a mobile application built to empower job seekers in organizing their job search effectively. With tools for tracking applications, statuses, and deadlines, users can stay on top of their job hunt and maintain a structured approach.
 
 This app allows users to log into their personal account, add details about job applications, and track their progress, from submission to offer. The platform offers a clean and intuitive interface, ensuring that users can focus on finding the right opportunity without getting lost in administrative tasks.
 
