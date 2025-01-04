@@ -42,7 +42,7 @@ const Footer = () => {
       <div className={styles.linksWrapper}>
         {links.map((section) => (
           <div key={section.id} className={styles.linksContainer}>
-            <h3 className={styles.sectionTitle}>{section.title}</h3>
+            <div className={styles.sectionTitle}>{section.title}</div>
             <div className={styles.links}>
               {section.links.map((item, index) => (
                 <a key={index} href={item.href} className={styles.link}>

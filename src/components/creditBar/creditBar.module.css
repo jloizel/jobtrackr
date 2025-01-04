@@ -1,0 +1,40 @@
+.wrapper {
+  background-color: var(--foreground-color);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  color: var(--secondary-text-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  max-width: 1200px;
+  padding: 15px 0;
+  width: 100%;
+  gap: 30px;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.iconContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+}
+
+.iconContainer a {
+  transition: all 0.2s ease-in-out;
+}
+
+.iconContainer a:hover {
+  color: #00a6ff;
+}
+

@@ -30,7 +30,7 @@ export default function Home() {
               <span>Tracking</span>
             </div>
             <span className={styles.headerText3}>
-              jobTrackr takes the stress out of job applications with a seamless organisation of your job search, so you never miss an opportunity.
+              JobTrackr takes the stress out of job applications with a seamless organisation of your job search, so you never miss an opportunity.
             </span>
           </div>
           {status === "unauthenticated" && (

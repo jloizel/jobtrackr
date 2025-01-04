@@ -6,3 +6,39 @@
   width: 100%;
   border-top: solid 1px var(--footer-border-color);
 }
+
+.linksWrapper {
+  display: flex;
+  flex-direction: row;
+  padding: 30px;
+  justify-content: center;
+  width: 100%;
+  gap: 100px;
+}
+
+.linksContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.sectionTitle {
+  font-weight: 600;
+  /* color: #283452; */
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.link {
+  color: var(--footer-color);
+  transition: all 0.2s ease-in-out;
+}
+
+.link:hover {
+  color: #00a6ff;
+}

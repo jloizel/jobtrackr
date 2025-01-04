@@ -35,6 +35,7 @@
     "react-spinners": "^0.15.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.13",
+    "swipe": "^1.7.7",
     "swiper": "^11.2.0"
   },
   "devDependencies": {
