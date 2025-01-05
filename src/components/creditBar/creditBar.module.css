@@ -8,13 +8,18 @@
 .container {
   color: var(--secondary-text-color);
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   max-width: 1200px;
   padding: 15px 0;
   width: 90%;
-  gap: 30px;
+  gap: 10px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    gap: 30px;
+  }
 }
 
 .name {

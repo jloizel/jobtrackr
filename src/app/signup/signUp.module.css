@@ -65,7 +65,11 @@
   margin-bottom: 40px;
   text-align: center;
   font-weight: 400;
-  width: max-content !important;
+  width: 80%;
+
+  @media (min-width: 768px) {
+    width: max-content;
+  }
 }
 
 .buttonsContainer {
@@ -73,6 +77,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  align-items: center;
 }
 
 .socialButton {
@@ -87,6 +92,11 @@
   justify-content: center;
   gap: 10px;
   cursor: pointer;
+  width: 80%;
+
+  @media (min-width: 768px) {
+    width: 100%;
+  }
 }
 
 .socialButton:hover {
@@ -95,8 +105,12 @@
 
 .socialButton span {
   color: #06283D;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
 }
 
 .socialIcon {
@@ -116,8 +130,12 @@
 }
 
 .textContainer span {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
 }
 
 .textContainer span:last-child {

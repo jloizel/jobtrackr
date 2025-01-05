@@ -37,6 +37,9 @@ const FeaturesBoard = () => {
   const { theme } = useContext(ThemeContext);
   const [selectedDescriptionIndex, setSelectedDescriptionIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState<any>(null);
+  const [isAtStart, setIsAtStart] = useState<boolean>(true);
+  const [isAtEnd, setIsAtEnd] = useState<boolean>(false);
+
 
   const getData = () => {
     fetch('/features.json', {
@@ -93,6 +96,12 @@ const FeaturesBoard = () => {
     swiperInstance?.slideTo(index);
   };
 
+  const handleSlideChange = () => {
+    if (!swiperInstance) return;
+    setIsAtStart(swiperInstance.isBeginning);
+    setIsAtEnd(swiperInstance.isEnd);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.buttonContainer}>
@@ -147,20 +156,26 @@ const FeaturesBoard = () => {
         </div>
 
         <div className={styles.swiperContainer}>
-          <PrevArrow swiper={swiperInstance} className={styles.customPrevArrow}/>
-          <NextArrow swiper={swiperInstance} className={styles.customNextArrow}/>
+          <PrevArrow swiper={swiperInstance} className={`${styles.customPrevArrow} ${isAtStart ? styles.disabledArrow : ""}`}
+          />
+          <NextArrow swiper={swiperInstance} className={`${styles.customNextArrow} ${isAtEnd ? styles.disabledArrow : ""}`}
+          />
           <Swiper
-            spaceBetween={50}
+            spaceBetween={120}
             slidesPerView={1.5} 
             modules={[ Navigation]}
             // pagination={{ clickable: true }}
+            slidesOffsetAfter={120}
+            onSlideChange={handleSlideChange}
             onSwiper={setSwiperInstance}
             breakpoints={{
               600: {
-                slidesPerView: 2.5, 
+                slidesPerView: 2.5,
+                spaceBetween: 80 
               },
               900: {
                 slidesPerView: 3.5, 
+                spaceBetween: 50
               }
             }}
             className={styles.descriptionContainer}

@@ -22,14 +22,14 @@ const MobileNavbar = () => {
 
   useEffect(() => {
     if (menuOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.classList.add("noScroll");
     } else {
-      document.body.style.overflow = "";
+      document.body.classList.remove("noScroll");
     }
     return () => {
-      document.body.style.overflow = "";
+      document.body.classList.remove("noScroll");
     };
-  }, [menuOpen]);
+  }, [menuOpen]);  
 
   const handleMenuClick = () => {
     setMenuOpen((prev) => !prev);
@@ -58,6 +58,8 @@ const MobileNavbar = () => {
         open={menuOpen}
         anchor="right"
         onClose={closeMenu}
+        disableScrollLock={true}
+        hideBackdrop={true}
         sx={{
           "& .MuiDrawer-paper": {
             height: "90vh", 

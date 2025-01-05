@@ -9,7 +9,6 @@
   /* position: fixed; */
 
   @media (min-width: 768px) {
-    padding: 80px;
     width: 90%;
   }
 }

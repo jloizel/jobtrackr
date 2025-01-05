@@ -1,42 +1,45 @@
 import React from "react";
 import styles from "./footer.module.css";
-
-const links = [
-  {
-    id: 1,
-    title: "Tools",
-    links: [
-      {
-        link: "Job Tracker",
-        href: "/tool/job-tracker",
-      },
-      {
-        link: "CV Upload",
-        href: "/tool/cv-upload",
-      },
-      {
-        link: "Cover Letter Upload",
-        href: "/tool/cover-letter-upload",
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "Links",
-    links: [
-      {
-        link: "Sign Up",
-        href: "/signup",
-      },
-      {
-        link: "Log In",
-        href: "/login",
-      },
-    ],
-  },
-];
+import { useSession } from "next-auth/react";
 
 const Footer = () => {
+  const { data: session } = useSession();
+
+  const links = [
+    {
+      id: 1,
+      title: "Tools",
+      links: [
+        {
+          link: session ? "My Tracker" : "Job Tracker",
+          href: session ? "/my-tracker" : "/tools/job-tracker",
+        },
+        {
+          link: session ? "My CV" : "CV Upload",
+          href: session ? "/my-cv" : "/tools/cv-upload",
+        },
+        {
+          link: session ? "My Cover Letter" : "Cover Letter Upload",
+          href: session ? "/my-cover-letter" : "/tools/cover-letter-upload",
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: "Links",
+      links: [
+        {
+          link: "Sign Up",
+          href: "/signup",
+        },
+        {
+          link: "Log In",
+          href: "/login",
+        },
+      ],
+    },
+  ];
+  
   return (
     <div className={styles.container}>
       <div className={styles.linksWrapper}>
