@@ -4,7 +4,7 @@ import "./calendar.css"
 import { ThemeProvider } from '../utils/theme'
 import AuthProvider from "@/providers/AuthProvider";
 import Navbar from "@/components/navbar/navbar";
-import ConditionalNavbar from "./conditionalRender";
+import { ConditionalNavbar, ConditionalFooter } from "./conditionalRender";
 import Footer from "@/components/footer/footer";
 import CreditBar from "@/components/creditBar/creditBar";
 
@@ -28,7 +28,7 @@ export default function RootLayout({
                 <ConditionalNavbar />
                 <div className="wrapper">
                   {children}   
-                   <Footer/>
+                   <ConditionalFooter/>
                 </div>
             </div>
             <CreditBar/>
