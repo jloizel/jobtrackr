@@ -325,10 +325,6 @@ const MyTrackerPage: React.FC = () => {
             </div>
             <Search onSearch={handleSearch} onClick={handleTrackerClick}/>
             <div className={styles.submenuContainer}>
-              {/* <div className={styles.submenu}>
-                <PiBriefcaseBold/>
-                Tracker
-              </div> */}
               <div
                 className={`${styles.submenu} ${showStats ? styles.selected : ""}`}
                 onClick={handleStatsClick}

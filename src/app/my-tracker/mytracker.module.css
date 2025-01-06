@@ -32,10 +32,14 @@
 
 .header {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
   color: #7e8aad;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
 }
 
 .header:hover {
@@ -60,11 +64,16 @@
   color: #7e8aad;
   font-weight: 500;
   cursor: pointer;
-  padding: 6px 12px;
   border-radius: 8px;
   width: max-content;
   text-wrap: nowrap;
   transition: all 0.2s ease-in;
+  font-size: 14px;
+
+  @media (min-width: 768px) {
+    padding: 6px 12px;
+    font-size: 16px;
+  }
 }
 
 .submenu:hover {
@@ -135,13 +144,23 @@
 .jobColumnHeader span:nth-child(2) {
   text-transform: uppercase;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
 }
 
 .jobColumnHeader span:last-child {
   color: #7e8aad;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 500;
+  display: flex;
+  width: max-content;
+
+  @media (min-width: 768px) {
+    font-size: 15px;
+  }
 }
 
 .button {
@@ -152,9 +171,13 @@
   border: solid 2px #dfdfe252;
   box-shadow: var(--mytracker-bs-color) 0px 3px 6px;
   border-radius: 6px;
-  padding: 10px;
+  padding: 6px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+
+  @media (min-width: 768px) {
+    padding: 10px;
+  }
 }
 
 .button:hover {
@@ -199,6 +222,7 @@
   flex: 1;
   gap: 5px;
   position: relative;
+  width: 100%;
 }
 
 .jobTitle {
@@ -207,6 +231,10 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
+  @media (max-width: 767px) {
+    padding-top: 15px;
+  }
 }
 
 .companyContainer {
@@ -219,12 +247,18 @@
 .companyLogo {
   border-radius: 50%;
   width: 15px;
+  height: 15px;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
 }
 
 .jobCompany  {
   color: #7e8aad;
   font-size: 16px;
+  display: none;
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
 }
 
 .jobCardInfo {
@@ -239,8 +273,12 @@
   color: #7e8aad;
   cursor: grab;
   display: flex;
-  font-size: 18px;
+  font-size: 16px;
   transition: all 0.2s ease-in-out;
+
+  @media (min-width: 768px) {
+    font-size: 18px;
+  }
 }
 
 .grabber:hover {
@@ -251,7 +289,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 5px;
+  gap: 3px;
+
+  @media (min-width: 768px) {
+    gap: 5px;
+  }
 }
 
 .date {
@@ -261,8 +303,12 @@
 }
 
 .icon {
-  font-size: 16px;
+  font-size: 14px;
   color: #7e8aad;
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
 }
 
 .buttonsContainer {
@@ -292,13 +338,17 @@
   background-color: var(--mytracker-bg-color);
   border: 1px solid var(--mytracker-border-color);
   border-radius: 5px; 
-  padding: 10px;
+  padding: 6px;
   z-index: 100; 
   box-shadow: 0 4px 6px var(--mytracker-bs-color); 
   width: max-content;
   display: flex;
   flex-direction: column;
   gap: 5px;
+
+  @media (min-width: 768px) {
+    padding: 10px;
+  }
 }
 
 .optionButton {

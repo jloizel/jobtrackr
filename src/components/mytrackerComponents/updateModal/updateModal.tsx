@@ -99,6 +99,17 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
         return null;
     }
   };
+
+  useEffect(() => {
+    if (open) {
+      document.body.classList.add("noScroll");
+    } else {
+      document.body.classList.remove("noScroll");
+    }
+    return () => {
+      document.body.classList.remove("noScroll");
+    };
+  }, [open]); 
   
   const getJobStatusDetails = (statusName: string | undefined) => {
     return jobStatuses.find((status) => status.name === statusName);

@@ -7,14 +7,18 @@
 }
 
 .modalContent {
-  width: 60%;
-  max-width: 500px;
+  width: 80%;
   background-color: var(--mytracker-bg-color);
   display: flex;
   flex-direction: column;
   outline: none;
   border-radius: 8px;
   z-index: 1000;
+
+  @media (min-width: 768px) {
+    width: 60%;
+    max-width: 500px;
+  }
 }
 
 .modalHeader {
@@ -79,7 +83,11 @@
   flex-direction: column;
   /* justify-content: flex-start; */
   gap: 5px;
-  width: 60%;
+  width: 80%;
+  
+  @media (min-width: 768px) {
+    width: 60%;
+  }
 }
 
 .formInput span {

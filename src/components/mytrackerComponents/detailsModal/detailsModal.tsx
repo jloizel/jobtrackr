@@ -71,6 +71,17 @@ export const DetailsModal: React.FC<DetailsModalProps> = ({
     }
   }, [job, open]);
 
+  useEffect(() => {
+    if (open) {
+      document.body.classList.add("noScroll");
+    } else {
+      document.body.classList.remove("noScroll");
+    }
+    return () => {
+      document.body.classList.remove("noScroll");
+    };
+  }, [open]); 
+
   function isRecentlyUpdated(createdAt: string | number | Date | undefined, updatedAt: string | number | Date | undefined): boolean {
     if (!createdAt || !updatedAt) return false; 
 
@@ -97,31 +108,33 @@ export const DetailsModal: React.FC<DetailsModalProps> = ({
       <div className={styles.modalContent}>
           <div className={styles.modalHeader}>
             <span className={styles.title}>{title}</span>
-            <div className={styles.company}>
-              <img src={logoUrl} alt={company} className={styles.companyLogo}/>
-              <span>{company}</span>
+            <div className={styles.bottomContainer}>
+              <div className={styles.company}>
+                <img src={logoUrl} alt={company} className={styles.companyLogo}/>
+                <span>{company}</span>
+              </div>
+              {updatedAt && createdAt ? (
+                <div className={styles.dateContainer}>
+                  {isRecentlyUpdated(createdAt, updatedAt) ? (
+                    <div>
+                      <RxUpdate className={styles.dateIcon} />
+                      Updated
+                    </div>
+                  ) : (
+                    <div>
+                      <IoIosAddCircleOutline className={styles.dateIcon} />
+                      Added
+                    </div>
+                  )}
+                  <div className={styles.date}>
+                    {daysAgo} days ago
+                  </div>
+                </div>
+              ):(
+                ""
+              )}
             </div>
             <IoMdClose className={styles.closeIcon} onClick={onClose} />
-            {updatedAt && createdAt ? (
-              <div className={styles.dateContainer}>
-                {isRecentlyUpdated(createdAt, updatedAt) ? (
-                  <div>
-                    <RxUpdate className={styles.dateIcon} />
-                    Updated
-                  </div>
-                ) : (
-                  <div>
-                    <IoIosAddCircleOutline className={styles.dateIcon} />
-                    Added
-                  </div>
-                )}
-                <div className={styles.date}>
-                  {daysAgo} days ago
-                </div>
-              </div>
-            ):(
-              ""
-            )}
           </div>
           <div className={styles.detailsWrapper}>
             {salary && (

@@ -6,10 +6,15 @@
   overflow: hidden;
   border: solid 1px #7e8aadb2;
   border-radius: 8px;
-  padding: 6px 12px;
+  padding: 4px 8px;
   color: #7e8aad;
   gap: 5px;
   position: relative;
+  min-width: 100px;
+
+  @media (min-width: 768px) {
+    padding: 6px 12px;
+  }
 }
 
 .searchIcon {
@@ -30,7 +35,12 @@
 
 .searchInput::placeholder {
   color: #7e8aad;
-  font-size: 16px;
+  font-size: 14px;
+  display: flex;
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
 }
 
 .searchInput:not(.expanded) {

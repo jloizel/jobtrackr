@@ -127,7 +127,6 @@ export const Autocomplete = ({ onSubmit, placeholder, initialValue }: IAutocompl
             <div className={styles.notFound}>
               <IoIosSearch className={styles.notFoundIcon} />
               <span className={styles.bold}>Nothing found...</span>
-              {/* <p>Search by entering its website URL for better results.</p> */}
             </div>
           )}
         </div>
