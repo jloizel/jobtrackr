@@ -16,20 +16,20 @@
       {
         "title": "Drag-and-Drop",
         "content": "Easily update job statuses by dragging and dropping job cards.",
-        "imageDarkMode": "/images (dark mode)/JobTracker.png",
-        "imageLightMode": "/images (light mode)/JobTracker.png"
+        "imageDarkMode": "/images (dark mode)/Job Tracker/2.png",
+        "imageLightMode": "/images (light mode)/Job Tracker/2.png"
       },
       {
         "title": "Interactive Modals",
         "content": "Click on a job to view detailed information or the edit button to edit the job information.",
-        "imageDarkMode": "/images (dark mode)/JobTracker.png",
-        "imageLightMode": "/images (light mode)/JobTracker.png"
+        "imageDarkMode": "/images (dark mode)/Job Tracker/3.png",
+        "imageLightMode": "/images (light mode)/Job Tracker/3.png"
       },
       {
         "title": "Statistics Page",
         "content": "Track metrics like your response rate and application activity.",
-        "imageDarkMode": "/images (dark mode)/JobTracker.png",
-        "imageLightMode": "/images (light mode)/JobTracker.png"
+        "imageDarkMode": "/images (dark mode)/Job Tracker/4.png",
+        "imageLightMode": "/images (light mode)/Job Tracker/4.png"
       }
     ]
   },

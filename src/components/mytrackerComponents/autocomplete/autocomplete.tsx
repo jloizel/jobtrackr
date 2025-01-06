@@ -45,7 +45,7 @@ export const Autocomplete = ({ onSubmit, placeholder, initialValue }: IAutocompl
   const handleClick = (query: TQuery) => {
     onSubmit({ value: value.text, query, queries });
     setValue({ text: query.name, active: false });
-    setIcon({ text: query.icon, active: true });
+    setIcon({ text: `https://cdn.brandfetch.io/${query.domain}c=${apiKey}`, active: true });
   };
 
   const reset = () => {
@@ -76,6 +76,7 @@ export const Autocomplete = ({ onSubmit, placeholder, initialValue }: IAutocompl
   useEffect(() => {
     getQueries(value.text);
   }, [getQueries, value.text]);
+
 
   return (
     <div className={styles.container} style={{ position: "relative" }}>
