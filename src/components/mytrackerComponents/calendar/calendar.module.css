@@ -65,6 +65,7 @@
   color: #7e8aad;
   font-weight: 500;
   font-size: 14px;
+  text-align: center;
 }
 
 .streakDetails {
@@ -72,9 +73,16 @@
   flex-direction: row;
   border: 1px solid var(--mytracker-card-border-color);
   margin-top: 10px;
-  gap: 20px;
+  gap: 10px;
   align-items: center;
-  padding: 10px;
+  padding: 4px;
   border-radius: 6px;
+  margin-bottom: 20px;
+
+  @media (min-width: 768px) {
+    gap: 20px;
+    padding: 10px;
+    margin-bottom: 0;
+  }
 }
 

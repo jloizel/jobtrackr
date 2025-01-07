@@ -20,9 +20,9 @@ const Statistics: React.FC<StatisticsProps> = ({ jobs }) => {
   const labels = ['Total', 'Applied', 'Interviewed', 'Offered'];
   const values = [totalJobs, appliedJobs, interviewedJobs, offeredJobs];
 
-  const responsiveness = ((interviewedJobs + offeredJobs + rejectedJobs) / totalJobs) * 100;
-  const positiveResponses = ((interviewedJobs + offeredJobs) / totalJobs) * 100;
-  const negativeResponses = (rejectedJobs / totalJobs) * 100;
+  const responsiveness = Math.round(((interviewedJobs + offeredJobs + rejectedJobs) / totalJobs) * 100);
+  const positiveResponses = Math.round(((interviewedJobs + offeredJobs) / totalJobs) * 100);
+  const negativeResponses = Math.round((rejectedJobs / totalJobs) * 100);
 
   return (
     <div className={styles.statisticsWrapper}>

@@ -148,6 +148,10 @@ a {
   width: 100% !important;
   display: flex;
   justify-content: center;
+  
+  @media (max-width: 767px) {
+    min-height: 300px;
+  }
 }
 
 .swiper-pagination-bullet {

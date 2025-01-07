@@ -10,20 +10,20 @@
       {
         "title": "Organised columns",
         "content": "Track your jobs with columns like Applied, Interviewed, and Offered (Rejected hidden by default).",
-        "imageDarkMode": "/images (dark mode)/Job Tracker/1.png",
-        "imageLightMode": "/images (light mode)/Job Tracker/1.png"
+        "imageDarkMode": "/darkModeImages/JobTracker/1.png",
+        "imageLightMode": "/lightModeImages/JobTracker/1.png"
       },
       {
         "title": "Drag-and-Drop",
         "content": "Easily update job statuses by dragging and dropping job cards.",
-        "imageDarkMode": "/images (dark mode)/Job Tracker/2.png",
-        "imageLightMode": "/images (light mode)/Job Tracker/2.png"
+        "imageDarkMode": "/darkModeImages/JobTracker/2.png",
+        "imageLightMode": "/lightModeImages/JobTracker/2.png"
       },
       {
         "title": "Interactive Modals",
         "content": "Click on a job to view detailed information or the edit button to edit the job information.",
-        "imageDarkMode": "/images (dark mode)/Job Tracker/3.png",
-        "imageLightMode": "/images (light mode)/Job Tracker/3.png"
+        "imageDarkMode": "/darkModeImages/JobTracker/3.png",
+        "imageLightMode": "/lightModeImages/JobTracker/3.png"
       },
       {
         "title": "Statistics Page",

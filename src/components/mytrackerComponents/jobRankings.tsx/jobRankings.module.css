@@ -1,9 +1,13 @@
 .rankingsContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 20px;
   justify-content: center;
   align-items: center;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 }
 
 .ranking {
