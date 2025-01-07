@@ -41,24 +41,15 @@ const FeaturesBoard = () => {
   const [isAtEnd, setIsAtEnd] = useState<boolean>(false);
 
 
-  const getData = () => {
-    fetch('/features.json', {
-      headers: { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      }
-    })
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(myJson) {
-      setData(myJson);
-    });
-  };
-
   useEffect(() => {
-    getData();
-  }, []);
+      const fetchData = async () => {
+        const response = await fetch('/data/features.json');
+        const data = await response.json();
+        setData(data);
+      };
+  
+      fetchData();
+    }, []);
 
   const handleFeatureClick = (feature: string) => {
     setActiveItem(feature === activeItem ? null : feature);
@@ -109,8 +100,8 @@ const FeaturesBoard = () => {
           const isHovered = hoveredItem === feature.name;
           const isActive = activeItem === feature.name;
           const buttonStyles = {
-            backgroundColor: isHovered || isActive ? feature.color : "",
-            border: 
+            // backgroundColor: isHovered || isActive ? feature.color : "",
+            borderBottom: 
               `2px solid ${
                 isHovered || isActive ? feature.border : "transparent"
               }`,

@@ -5,22 +5,22 @@ import { useSession } from "next-auth/react";
 const Footer = () => {
   const { data: session } = useSession();
 
-  const links = [
+  const links1 = [
     {
       id: 1,
       title: "Tools",
       links: [
         {
-          link: session ? "My Tracker" : "Job Tracker",
-          href: session ? "/my-tracker" : "/tools/job-tracker",
+          link: "My Tracker",
+          href: "/my-tracker",
         },
         {
-          link: session ? "My CV" : "CV Upload",
-          href: session ? "/my-cv" : "/tools/cv-upload",
+          link: "My CV",
+          href: "/my-cv",
         },
         {
-          link: session ? "My Cover Letter" : "Cover Letter Upload",
-          href: session ? "/my-cover-letter" : "/tools/cover-letter-upload",
+          link: "My Cover Letter",
+          href: "/my-cover-letter",
         },
       ],
     },
@@ -39,11 +39,30 @@ const Footer = () => {
       ],
     },
   ];
+
+  const links2 = [
+    {
+      id: 1,
+      title: "Links",
+      links: [
+        {
+          link: "Sign Up",
+          href: "/signup",
+        },
+        {
+          link: "Log In",
+          href: "/login",
+        },
+      ],
+    },
+  ];
+
+  const renderedLinks = session ? links1 : links2;
   
   return (
     <div className={styles.container}>
       <div className={styles.linksWrapper}>
-        {links.map((section) => (
+        {renderedLinks.map((section) => (
           <div key={section.id} className={styles.linksContainer}>
             <div className={styles.sectionTitle}>{section.title}</div>
             <div className={styles.links}>

@@ -14,10 +14,16 @@ const MobileNavbar = () => {
   const { data: session } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // const links = [
+  //   { name: session ? "My Tracker" : "Tracker", path: session ? "/my-tracker" : "/tools/job-tracker" },
+  //   { name: session ? "My CV" : "CV Upload", path: session ? "/my-cv" : "/tools/cv-upload" },
+  //   { name: session ? "My Cover Letter" : "Cover Letter Upload", path: session ? "/my-cover-letter" : "/tools/cover-letter-upload" },
+  // ];
+
   const links = [
-    { name: session ? "My Tracker" : "Tracker", path: session ? "/my-tracker" : "/tools/job-tracker" },
-    { name: session ? "My CV" : "CV Upload", path: session ? "/my-cv" : "/tools/cv-upload" },
-    { name: session ? "My Cover Letter" : "Cover Letter Upload", path: session ? "/my-cover-letter" : "/tools/cover-letter-upload" },
+    { name: "My Tracker", path: "/my-tracker" },
+    { name: "My CV", path: "/my-cv" },
+    { name: "My Cover Letter", path: "/my-cover-letter" },
   ];
 
   useEffect(() => {
@@ -80,13 +86,13 @@ const MobileNavbar = () => {
       >
         <div className={styles.drawerContent}>
           <div className={styles.linkContainer}>
-            {links.map((link) => (
+            {session && links.map((link) => (
               <div key={link.name} onClick={closeMenu}>
                 <Link href={link.path} className={styles.link}>
                   {link.name}
                 </Link>
               </div>
-            ))}
+            ))} 
           </div>
           <div className={styles.rightContainer}>
             <Authentication />

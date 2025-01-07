@@ -1,0 +1,136 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "job": "Software Engineer",
+    "company": "TechCorp",
+    "review": "JobTrackr has completely transformed how I manage my job applications. The drag-and-drop feature for updating job statuses is a huge time-saver. It's easy to track everything, and the CV upload made applying for jobs faster than ever. I landed my role at TechCorp in no time!"
+  },
+  {
+    "id": 2,
+    "name": "Sarah Miller",
+    "job": "Product Manager",
+    "company": "Innovative Solutions",
+    "review": "I used JobTrackr during my job search, and it helped me stay organized and focused. The statistics tab gave me great insights into where I stood, and the CV upload was seamless. I secured my position at Innovative Solutions faster than I thought possible!"
+  },
+  {
+    "id": 3,
+    "name": "Michael Johnson",
+    "job": "Marketing Specialist",
+    "company": "Creative Agency",
+    "review": "The job tracker kept me on top of everything. I could easily see which jobs needed follow-up and which ones I had interviews for. The CV tool saved me hours of work, and I got hired by Creative Agency thanks to this site's efficiency."
+  },
+  {
+    "id": 4,
+    "name": "Emily Clark",
+    "job": "Data Scientist",
+    "company": "Data Labs",
+    "review": "JobTrackr made my job search smooth and straightforward. The tracker helped me keep all my applications organized, while the statistics tab helped me measure my progress. Thanks to this tool, I found my role at Data Labs in just a couple of months!"
+  },
+  {
+    "id": 5,
+    "name": "David Smith",
+    "job": "UX Designer",
+    "company": "DesignHub",
+    "review": "I’ve used many job boards, but JobTrackr is by far the most user-friendly. The drag-and-drop feature for tracking job status is a game-changer, and the ability to upload my CV and cover letters all in one place helped me stay focused. I landed my job at DesignHub in less than 6 weeks!"
+  },
+  {
+    "id": 6,
+    "name": "Sophia Williams",
+    "job": "Business Analyst",
+    "company": "FinanceTech",
+    "review": "Tracking my job applications has never been easier. JobTrackr made it simple to update job statuses with a few clicks, and the statistics page gave me a clear picture of my progress. I’ve already secured an interview, and I’m confident this tool helped me get there!"
+  },
+  {
+    "id": 7,
+    "name": "James Brown",
+    "job": "Web Developer",
+    "company": "WebWorks",
+    "review": "As a developer, I appreciate the clean interface and how intuitive everything is on JobTrackr. The ability to upload my CV and manage applications in one place made a huge difference. I used it every day, and now I’m working at WebWorks!"
+  },
+  {
+    "id": 8,
+    "name": "Olivia Davis",
+    "job": "Account Manager",
+    "company": "Global Enterprises",
+    "review": "JobTrackr helped me manage my job search with ease. I loved how I could see my job application statuses at a glance, and the ability to upload my CV quickly saved me a ton of time. I landed my Account Manager role at Global Enterprises thanks to this tool!"
+  },
+  {
+    "id": 9,
+    "name": "Liam Wilson",
+    "job": "Project Manager",
+    "company": "Innovative Projects",
+    "review": "What I love about JobTrackr is how everything is organized. I could track job applications, update statuses, and even analyze my progress with the stats tab. I’m thrilled to have found my Project Manager position at Innovative Projects using this tool."
+  },
+  {
+    "id": 10,
+    "name": "Isabella Moore",
+    "job": "Content Strategist",
+    "company": "ContentCo",
+    "review": "JobTrackr was a lifesaver during my job search. It kept me organized, and I could easily see where I was in the process with the drag-and-drop tracker. Thanks to JobTrackr, I landed my Content Strategist position at ContentCo with less stress."
+  },
+  {
+    "id": 11,
+    "name": "Ethan Lee",
+    "job": "Financial Analyst",
+    "company": "FinTech Solutions",
+    "review": "The statistics page was so helpful in tracking my applications. I could clearly see which companies were showing interest, which made my job search more strategic. I secured my Financial Analyst position at FinTech Solutions within a few months!"
+  },
+  {
+    "id": 12,
+    "name": "Charlotte Anderson",
+    "job": "Graphic Designer",
+    "company": "Creative Works",
+    "review": "I used to feel overwhelmed by my job applications, but JobTrackr made it easy to stay organized. The tracker is intuitive, and I love the stats feature that showed me where I was in the process. I’m now a Graphic Designer at Creative Works, thanks to this site."
+  },
+  {
+    "id": 13,
+    "name": "Daniel Martinez",
+    "job": "HR Manager",
+    "company": "People Solutions",
+    "review": "I highly recommend JobTrackr for anyone in the job market. The job tracker helped me stay on top of applications, and the CV upload feature saved me time. Thanks to JobTrackr, I landed my HR Manager position at People Solutions!"
+  },
+  {
+    "id": 14,
+    "name": "Mia Gonzalez",
+    "job": "Legal Assistant",
+    "company": "LawCorp",
+    "review": "JobTrackr made my job search incredibly efficient. I loved how I could track the progress of all my applications in one place, and the CV upload tool saved me a lot of time. I landed my Legal Assistant position at LawCorp within weeks!"
+  },
+  {
+    "id": 15,
+    "name": "Lucas Taylor",
+    "job": "Software Developer",
+    "company": "DevWorks",
+    "review": "JobTrackr helped me stay on track during my job search. I loved the ease of the drag-and-drop feature for updating job statuses, and the CV upload was seamless. Thanks to this tool, I was able to land a Software Developer role at DevWorks."
+  },
+  {
+    "id": 16,
+    "name": "Amelia Robinson",
+    "job": "Sales Representative",
+    "company": "SalesPro",
+    "review": "Managing my job search was so much easier with JobTrackr. The tracker helped me keep everything organized, and the statistics tab helped me stay motivated. I got my Sales Rep position at SalesPro faster than I thought possible!"
+  },
+  {
+    "id": 17,
+    "name": "Jack Harris",
+    "job": "Systems Administrator",
+    "company": "TechSolutions",
+    "review": "I couldn’t have stayed on top of my job search without JobTrackr. It kept my applications organized, and I could easily track my progress. The CV upload feature made applying to jobs a breeze. Now I’m working as a Systems Admin at TechSolutions!"
+  },
+  {
+    "id": 18,
+    "name": "Ava King",
+    "job": "Business Consultant",
+    "company": "BizConsult",
+    "review": "JobTrackr was essential for managing my job search. The tracker kept all my applications in one place, and I loved the insights I got from the statistics page. Thanks to this site, I was able to land my Business Consultant role at BizConsult!"
+  },
+  {
+    "id": 19,
+    "name": "Benjamin Wright",
+    "job": "Data Analyst",
+    "company": "DataCo",
+    "review": "I can’t recommend JobTrackr enough. It helped me track my applications in an organized way, and the drag-and-drop feature made it easy to update statuses. The CV upload tool was quick, and I secured my Data Analyst position at DataCo through this site."
+  }
+]
+

@@ -8,6 +8,7 @@ import { ThemeContext } from "../utils/theme";
 import { useSession } from "next-auth/react";
 import FeaturesBoard from "@/components/featuresBoard/featuresBoard";
 import Link from "next/link";
+import Testimonials from "@/components/testimonials/testimonials";
 
 export default function Home() {
   const { theme } = useContext(ThemeContext);
@@ -39,11 +40,12 @@ export default function Home() {
             </Link>
           )}
         </div>
-        <div className={styles.rightContainer}>
+        {/* <div className={styles.rightContainer}>
 
-        </div>
+        </div> */}
       </div>
       <FeaturesBoard/>
+      <Testimonials/>
     </div>
   );
 }

@@ -66,7 +66,7 @@ const MyCVPage = () => {
       : `${sizeInKB.toFixed(2)} KB`;
   };
 
-  const handleDelete = async (fileName: string) => {
+  const handleDelete = async (fileId: string) => {
     if (!session?.user?.email) {
       alert("User email is not available!");
       return;
@@ -74,9 +74,9 @@ const MyCVPage = () => {
   
     setIsLoading(true);
     try {
-      const response = await deleteCV(session.user.email, fileName);
+      const response = await deleteCV(session.user.email, fileId);
   
-      const updatedFiles = files.filter((file) => file.fileName !== fileName);
+      const updatedFiles = files.filter((file) => file._id !== fileId);
       setFiles(updatedFiles);
       setCanUpload(updatedFiles.length < maxFiles);
     } catch (error) {
@@ -113,7 +113,7 @@ const MyCVPage = () => {
         <div className={`${styles.filesContainer} ${files.length === 1 ? styles.singleFile : ""}`}>
           <div className={styles.files}>
             {files.map((file, index) => (
-              <div key={file.fileName} className={styles.file}>
+              <div key={file._id} className={styles.file}>
                 <div className={styles.fileDetails}>
                   <span>{file.fileName.endsWith(".pdf") ? file.fileName.slice(0, -4) : file.fileName}</span>
                   <span>PDF - {calculateFileSize(file.fileData)}</span>
@@ -132,21 +132,21 @@ const MyCVPage = () => {
                       <Page
                         pageNumber={pageNumber}
                         className={`${styles.pdfPage} ${
-                          hoveredFile === file.fileName ? styles.hovered : ""
+                          hoveredFile === file._id ? styles.hovered : ""
                         }`}
-                        onMouseEnter={() => setHoveredFile(file.fileName)}
+                        onMouseEnter={() => setHoveredFile(file._id)}
                         onMouseLeave={() => {
-                          if (hoveredDownloadButton !== file.fileName) setHoveredFile(null);
+                          if (hoveredDownloadButton !== file._id) setHoveredFile(null);
                         }}
                         renderTextLayer={false}
                       />
                     </Document>
                   </a>
 
-                  {hoveredFile === file.fileName || hoveredDownloadButton === file.fileName ? (
+                  {hoveredFile === file._id || hoveredDownloadButton === file._id ? (
                     <IoMdDownload
                       className={styles.downloadButton}
-                      onMouseEnter={() => setHoveredDownloadButton(file.fileName)}
+                      onMouseEnter={() => setHoveredDownloadButton(file._id)}
                       onMouseLeave={() => setHoveredDownloadButton(null)}
                     />
                   ) : (
@@ -176,7 +176,7 @@ const MyCVPage = () => {
                 </span>
                 <div className={styles.fileBottom}>
                   <span>CV {index + 1}</span>
-                  <ImBin onClick={() => handleDelete(file.fileName)} className={styles.binIcon}/>
+                  <ImBin onClick={() => handleDelete(file._id)} className={styles.binIcon}/>
                 </div>
               </div>
             ))}

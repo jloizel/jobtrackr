@@ -29,43 +29,21 @@
   },
   {
     "id": 2,
-    "name": "CV Upload",
+    "name": "File Upload",
     "color": "#FFF6DF",
     "border": "#F8B407",
     "icon": "CgFileDocument",
     "backgroundColor": "#ffe89c",
     "description": [
       {
-        "title": "Store Your CVs",
-        "content": "Upload multiple CVs and access them quickly when applying for jobs.",
+        "title": "Store Your Documents",
+        "content": "Upload and store multiple CVs and cover letters, all in one place for easy access during your job applications.",
         "imageDarkMode": "/darkModeImages/CV/1.png",
         "imageLightMode": "/lightModeImages/CV/1.png"
       },
       {
-        "title": "Access Anywhere",
-        "content": "Retrieve your stored CVs anytime and from any device.",
-        "imageDarkMode": "/darkModeImages/CV/2.png",
-        "imageLightMode": "/lightModeImages/CV/2.png"
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "name": "Cover Letter Upload",
-    "color": "#EDFFFB",
-    "border": "#13B793",
-    "icon": "FaRegEnvelope",
-    "backgroundColor": "#afff9c",
-    "description": [
-      {
-        "title": "Upload Your Letters",
-        "content": "Save multiple cover letters for different job applications.",
-        "imageDarkMode": "/darkModeImages/CL/1.png",
-        "imageLightMode": "/lightModeImages/CL/1.png"
-      },
-      {
-        "title": "Convenient Access",
-        "content": "Easily retrieve your cover letters for quick submissions.",
+        "title": "Easy Access Anytime",
+        "content": "Retrieve your uploaded files anytime from any device, making it simple to update or submit them with just a few clicks.",
         "imageDarkMode": "/darkModeImages/CL/2.png",
         "imageLightMode": "/lightModeImages/CL/2.png"
       }

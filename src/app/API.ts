@@ -120,6 +120,7 @@ export const deleteJob = async (jobId: string): Promise<{ message: string }> => 
 };
 
 export interface FileData {
+  _id: string;
   fileName: string;
   fileData: string; // Base64 encoded file data
   uploadDate: string;
@@ -164,16 +165,17 @@ export const getCVs = async (): Promise<FileData[]> => {
   }
 };
 
-export const deleteCV = async (email: string, fileName?: string): Promise<{ message: string }> => {
+export const deleteCV = async (email: string, fileId: string): Promise<{ message: string }> => {
   try {
     const response = await api.delete('/cv/delete', {
-      data: { email, fileName }, 
+      data: { email, id: fileId },
     });
     return response.data;
   } catch (error) {
     throw error;
   }
 };
+
 
 export const uploadCL = async (file: File): Promise<{ message: string }> => {
   try {
@@ -213,16 +215,18 @@ export const getCLs = async (): Promise<FileData[]> => {
   }
 };
 
-export const deleteCL = async (email: string, fileName?: string): Promise<{ message: string }> => {
+export const deleteCL = async (email: string, fileId: string): Promise<{ message: string }> => {
   try {
     const response = await api.delete('/cl/delete', {
-      data: { email, fileName }, 
+      data: { email, id: fileId }, 
     });
     return response.data;
   } catch (error) {
     throw error;
   }
 };
+
+
 
 
 
