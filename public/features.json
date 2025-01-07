@@ -8,16 +8,10 @@
     "backgroundColor": "#b7e4ff",
     "description": [
       {
-        "title": "Organised columns",
-        "content": "Track your jobs with columns like Applied, Interviewed, and Offered (Rejected hidden by default).",
+        "title": "Drag-and-Drop Columns",
+        "content": "Easily track your jobs and update job statuses effortlessly with drag-and-drop functionality.",
         "imageDarkMode": "/darkModeImages/JobTracker/1.png",
         "imageLightMode": "/lightModeImages/JobTracker/1.png"
-      },
-      {
-        "title": "Drag-and-Drop",
-        "content": "Easily update job statuses by dragging and dropping job cards.",
-        "imageDarkMode": "/darkModeImages/JobTracker/2.png",
-        "imageLightMode": "/lightModeImages/JobTracker/2.png"
       },
       {
         "title": "Interactive Modals",
@@ -28,8 +22,8 @@
       {
         "title": "Statistics Page",
         "content": "Track metrics like your response rate and application activity.",
-        "imageDarkMode": "/images (dark mode)/Job Tracker/4.png",
-        "imageLightMode": "/images (light mode)/Job Tracker/4.png"
+        "imageDarkMode": "/darkModeImages/JobTracker/4.png",
+        "imageLightMode": "/lightModeImages/JobTracker/4.png"
       }
     ]
   },
@@ -39,25 +33,19 @@
     "color": "#FFF6DF",
     "border": "#F8B407",
     "icon": "CgFileDocument",
-    "backgroundColor": "",
+    "backgroundColor": "#ffe89c",
     "description": [
       {
-        "title": "",
-        "content": "",
-        "imageDarkMode": "",
-        "imageLightMode": ""
+        "title": "Store Your CVs",
+        "content": "Upload multiple CVs and access them quickly when applying for jobs.",
+        "imageDarkMode": "/darkModeImages/CV/1.png",
+        "imageLightMode": "/lightModeImages/CV/1.png"
       },
       {
-        "title": "",
-        "content": "",
-        "imageDarkMode": "",
-        "imageLightMode": ""
-      },
-      {
-        "title": "",
-        "content": "",
-        "imageDarkMode": "",
-        "imageLightMode": ""
+        "title": "Access Anywhere",
+        "content": "Retrieve your stored CVs anytime and from any device.",
+        "imageDarkMode": "/darkModeImages/CV/2.png",
+        "imageLightMode": "/lightModeImages/CV/2.png"
       }
     ]
   },
@@ -67,25 +55,19 @@
     "color": "#EDFFFB",
     "border": "#13B793",
     "icon": "FaRegEnvelope",
-    "backgroundColor": "",
+    "backgroundColor": "#afff9c",
     "description": [
       {
-        "title": "",
-        "content": "",
-        "imageDarkMode": "",
-        "imageLightMode": ""
+        "title": "Upload Your Letters",
+        "content": "Save multiple cover letters for different job applications.",
+        "imageDarkMode": "/darkModeImages/CL/1.png",
+        "imageLightMode": "/lightModeImages/CL/1.png"
       },
       {
-        "title": "",
-        "content": "",
-        "imageDarkMode": "",
-        "imageLightMode": ""
-      },
-      {
-        "title": "",
-        "content": "",
-        "imageDarkMode": "",
-        "imageLightMode": ""
+        "title": "Convenient Access",
+        "content": "Easily retrieve your cover letters for quick submissions.",
+        "imageDarkMode": "/darkModeImages/CL/2.png",
+        "imageLightMode": "/lightModeImages/CL/2.png"
       }
     ]
   }

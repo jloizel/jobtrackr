@@ -38,6 +38,7 @@
 
 .singleFile {
   width: 100%;
+  max-width: 900px;
 }
 
 .files {
@@ -226,3 +227,4 @@
 .emptyFormContainer {
   justify-content: center;
 }
+

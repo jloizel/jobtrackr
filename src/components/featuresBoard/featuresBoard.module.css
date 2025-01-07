@@ -79,9 +79,10 @@
 .descriptionImage {
   width: 100%; 
   height: 100%; 
-  object-fit: contain; 
+  object-fit: cover; 
   border-radius: 8px;
   box-shadow: inset 0 0 0 1px rgba(25,4,69,0.1);
+  max-height: 500px;
 
   @media (min-width: 768px) {
     border-radius: 8px 8px 0px 0px;
@@ -108,7 +109,7 @@
   position: relative;
 
   @media (min-width: 768px) {
-    max-width: 1250px;
+    max-width: 100%;
   }
 }
 
@@ -140,17 +141,17 @@
 .customPrevArrow {
   left: -30px; 
 
-  @media (min-width: 768px) {
+  /* @media (min-width: 768px) {
     left: 0px; 
-  }
+  } */
 }
 
 .customNextArrow {
   right: -30px; 
 
-  @media (min-width: 768px) {
+  /* @media (min-width: 768px) {
     right: 0px; 
-  }
+  } */
 }
 
 .scrollableDescriptionContainer {

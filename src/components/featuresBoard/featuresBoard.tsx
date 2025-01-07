@@ -169,13 +169,18 @@ const FeaturesBoard = () => {
             onSlideChange={handleSlideChange}
             onSwiper={setSwiperInstance}
             breakpoints={{
+              400: {
+                spaceBetween: 100,
+                slidesOffsetAfter: 100
+              },
               600: {
-                slidesPerView: 2.5,
-                spaceBetween: 80 
+                spaceBetween: 80,
+                slidesOffsetAfter: 80
               },
               900: {
-                slidesPerView: 3.5, 
-                spaceBetween: 50
+                slidesPerView: 2.5, 
+                spaceBetween: 50,
+                slidesOffsetAfter: 50
               }
             }}
             className={styles.descriptionContainer}
