@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import FeaturesBoard from "@/components/featuresBoard/featuresBoard";
 import Link from "next/link";
 import Testimonials from "@/components/testimonials/testimonials";
+import Features from "@/components/features/features";
 
 export default function Home() {
   const { theme } = useContext(ThemeContext);
@@ -24,7 +25,7 @@ export default function Home() {
         <div className={styles.leftContainer}>
           <div className={styles.headerText}>
             <span className={styles.headerText1}>
-              Organised, Easy
+              Easy, Organised
             </span>
             <div className={styles.headerText2}>
               <span>Job</span>
@@ -45,6 +46,7 @@ export default function Home() {
         </div> */}
       </div>
       <FeaturesBoard/>
+      <Features/>
       <Testimonials/>
     </div>
   );
