@@ -95,4 +95,17 @@
   background-color: transparent;
 }
 
+.title {
+  font-size: 38px;
+  line-height: 50px;
+  padding: 40px 20px;
+}
+
+.title span {
+  font-weight: 600;
+  background-color: #00a6ff;
+  border-radius: 4px;
+  padding: 2px 8px 0 8px;
+}
+
 
