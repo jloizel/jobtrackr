@@ -1,34 +1,38 @@
 [
   {
     "id": 1,
-    "header": "Easily Organise and Track your Job Search",
-    "subHeader": "Get rid of the messsy spreadsheets for a more organised method, keeping track of all your job applications in one place.",
-    "buttonText": "Organise Your Search",
-    "imageUrl": "",
-    "backgroundColor": ""
+    "header": "Simplify Your Job Application Process",
+    "subHeader": "Ditch the cluttered spreadsheets and embrace a seamless way to manage all your job applications in one intuitive platform.",
+    "buttonText": "Create Your Tracker",
+    "lightImage": "/lightModeImages/JobTracker/6.png",
+    "darkImage": "/darkModeImages/JobTracker/6.png",
+    "backgroundColor": "#b7e4ff"
   },
   {
     "id": 2,
-    "header": "Keep Track of Job Application Statuses",
-    "subHeader": "Easily drag and drop job cards into the corresponding job status column so you don't forget about any opportunity.",
-    "buttonText": "Track Your Job Statuses",
-    "imageUrl": "",
-    "backgroundColor": ""
+    "header": "Visualize and Manage Your Progress",
+    "subHeader": "Stay on top of your applications by effortlessly dragging job cards into the relevant status columns, ensuring no opportunity slips through the cracks.",
+    "buttonText": "Stay Organised Now",
+    "lightImage": "/lightModeImages/JobTracker/5.png",
+    "darkImage": "/darkModeImages/JobTracker/5.png",
+    "backgroundColor": "#f3b1f1"
   },
   {
     "id": 3,
     "header": "Optimise and Improve Your Job Search ",
     "subHeader": "Track your progress with various job metrics to pinpoint roles to focus on and accelerate your path to landing your next role.",
     "buttonText": "Get Job Satistics",
-    "imageUrl": "",
-    "backgroundColor": ""
+    "lightImage": "/lightModeImages/JobTracker/7.png",
+    "darkImage": "/darkModeImages/JobTracker/7.png",
+    "backgroundColor": "#bdf3b1"
   },
   {
     "id": 4,
     "header": "Manage Multiple Files",
     "subHeader": "Effortlessly store multiple CVs and cover letters to easily access the files from anywhere.",
     "buttonText": "Upload Your Files",
-    "imageUrl": "",
-    "backgroundColor": ""
+    "lightImage": "/lightModeImages/CV/2.png",
+    "darkImage": "/darkModeImages/CV/2.png",
+    "backgroundColor": "#ffe89c"
   }
 ]

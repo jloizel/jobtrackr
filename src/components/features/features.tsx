@@ -1,7 +1,8 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from "./features.module.css"
+import { ThemeContext } from '@/utils/theme';
 
 
 const Features = () => {
@@ -11,10 +12,13 @@ const Features = () => {
       header: "",
       subHeader: "",
       buttonText: "",
-      imageUrl: "",
-      backgroundUrl: ""
+      lightImage: "",
+      darkImage: "",
+      backgroundColor: ""
     }
   ]);
+  const { theme } = useContext(ThemeContext);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,20 +33,29 @@ const Features = () => {
 
   return (
     <div className={styles.wrapper}>
-      {data.map((feature) => (
-        <div key={feature.id} className={styles.featureContainer}>
-          <div className={styles.imageContainer}>
-            <img src={feature.imageUrl}/>
+      {data.map((feature) => {
+        const selectedImage = theme === 'dark' ? feature.darkImage : feature.lightImage;
+
+        return (
+          <div
+            key={feature.id}
+            className={styles.featureContainer}
+          >
+            <div className={styles.imageBackground} style={{backgroundColor: feature.backgroundColor}}>
+              <div className={styles.imageContainer}>
+                <img src={selectedImage} alt={feature.header} />
+              </div>
+            </div>
+            <div className={styles.content}>
+              <h2 className={styles.header}>{feature.header}</h2>
+              <p className={styles.subHeader}>{feature.subHeader}</p>
+              <button className={styles.button}>{feature.buttonText}</button>
+            </div>
           </div>
-          <div className={styles.content}>
-            <span>{feature.header}</span>
-            <span>{feature.subHeader}</span>
-            <span>{feature.buttonText}</span>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };
 
-export default Features
+export default Features;
