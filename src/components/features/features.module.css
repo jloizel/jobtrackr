@@ -12,12 +12,16 @@
   width: 100%;
 }
 
+.featureContainer:nth-child(odd) {
+  flex-direction: row-reverse;
+}
+
 .imageContainer {
   width: 55%;
 }
 
-.imageContainer img {
-
+.imageContainer:nth-child(2) {
+  flex: 2;
 }
 
 .content {
