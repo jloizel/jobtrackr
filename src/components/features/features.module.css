@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
+  gap: 80px;
 }
 
 .featureContainer:nth-child(odd) {
@@ -47,4 +48,18 @@
   width: 45%;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  gap: 30px;
+}
+
+.header {
+
+}
+
+.subHeader {
+
+}
+
+.button {
+  
 }
