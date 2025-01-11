@@ -6,7 +6,7 @@
     <img src="" alt="Logo" width="auto" height="300">
   </a>
 
-<h2 align="center">Hackr</h2>
+<h2 align="center">JobTrackr</h2>
 
   <p align="center">
     Hackr is an interactive coding challenge app designed to help you develop your programming skills through engaging daily coding puzzles.
