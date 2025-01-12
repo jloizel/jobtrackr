@@ -3,30 +3,47 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 40px;
+  gap: 60px;
+
+  @media (min-width: 768px) {
+    gap: 100px;
+  }
 }
 
 .featureContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column-reverse;
   width: 100%;
-  gap: 80px;
+  gap: 30px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    gap: 80px;
+  }
 }
 
-.featureContainer:nth-child(odd) {
-  flex-direction: row-reverse;
+@media (min-width: 768px) {
+  .featureContainer:nth-child(odd) {
+    flex-direction: row-reverse;
+  }
 }
 
 .imageBackground {
-  width: 55%;
+  /* width: 65%; */
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  max-height: 450px;
-  min-height: 500px;
-  padding: 15px;
+  /* max-height: 450px; */
+  /* min-height: 500px; */
+  max-height: 100%;
+  aspect-ratio: 3/2;
+  padding: 10px;
   overflow: hidden;
+
+  @media (min-width: 768px) {
+    width: 65%;
+  }
 }
 
 .imageContainer {
@@ -45,21 +62,53 @@
 }
 
 .content {
-  width: 45%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    width: 35%;
+    gap: 20px;
+  }
 }
 
 .header {
+  font-weight: 600;
+  font-size: 26px;
 
+  @media (min-width: 768px) {
+    font-size: 38px;
+  }
 }
 
 .subHeader {
+  font-size: 18px;
 
+  @media (min-width: 768px) {
+    font-size: 20px;
+  }
 }
 
 .button {
-  
+  padding: 6px 12px;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  border-radius: 6px;
+  margin-top: 15px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  font-size: 16px;
+
+  @media (min-width: 768px) {
+    font-size: 20px;
+    margin-top: 20px;
+    padding: 8px 14px;
+  }
+}
+
+.button:hover {
+  opacity: 0.8;
 }

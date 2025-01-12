@@ -14,7 +14,8 @@ const Features = () => {
       buttonText: "",
       lightImage: "",
       darkImage: "",
-      backgroundColor: ""
+      backgroundColor: "",
+      borderColor: ""
     }
   ]);
   const { theme } = useContext(ThemeContext);
@@ -49,7 +50,11 @@ const Features = () => {
             <div className={styles.content}>
               <h2 className={styles.header}>{feature.header}</h2>
               <p className={styles.subHeader}>{feature.subHeader}</p>
-              <button className={styles.button}>{feature.buttonText}</button>
+              <button 
+                className={styles.button}
+                style={{border: `solid 2px ${feature.borderColor}`, backgroundColor: feature.backgroundColor}}
+              >{feature.buttonText}
+              </button>
             </div>
           </div>
         );

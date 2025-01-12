@@ -6,7 +6,8 @@
     "buttonText": "Create Your Tracker",
     "lightImage": "/lightModeImages/JobTracker/6.png",
     "darkImage": "/darkModeImages/JobTracker/6.png",
-    "backgroundColor": "#b7e4ff"
+    "backgroundColor": "#b7e4ff",
+    "borderColor": "#00a6ff"
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "buttonText": "Stay Organised Now",
     "lightImage": "/lightModeImages/JobTracker/5.png",
     "darkImage": "/darkModeImages/JobTracker/5.png",
-    "backgroundColor": "#f3b1f1"
+    "backgroundColor": "#f3b1f1",
+    "borderColor": "#a963ff"
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "buttonText": "Get Job Satistics",
     "lightImage": "/lightModeImages/JobTracker/7.png",
     "darkImage": "/darkModeImages/JobTracker/7.png",
-    "backgroundColor": "#bdf3b1"
+    "backgroundColor": "#bdf3b1",
+    "borderColor": "#6eea8e"
   },
   {
     "id": 4,
@@ -33,6 +36,7 @@
     "buttonText": "Upload Your Files",
     "lightImage": "/lightModeImages/CV/2.png",
     "darkImage": "/darkModeImages/CV/2.png",
-    "backgroundColor": "#ffe89c"
+    "backgroundColor": "#ffe89c",
+    "borderColor": "#FFC107"
   }
 ]

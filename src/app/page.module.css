@@ -96,9 +96,14 @@
 }
 
 .title {
-  font-size: 38px;
-  line-height: 50px;
-  padding: 40px 20px;
+  font-size: 26px;
+  line-height: 36px;
+  
+  @media (min-width: 768px) {
+    font-size: 38px;
+    line-height: 50px;
+    padding: 40px 20px;
+  }
 }
 
 .title span {
