@@ -34,8 +34,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* max-height: 450px; */
-  /* min-height: 500px; */
   max-height: 100%;
   aspect-ratio: 3/2;
   padding: 10px;
@@ -101,6 +99,7 @@
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   font-size: 16px;
+  color: #283452;
 
   @media (min-width: 768px) {
     font-size: 20px;

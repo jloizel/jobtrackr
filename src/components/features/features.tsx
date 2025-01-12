@@ -31,6 +31,9 @@ const Features = () => {
     fetchData();
   }, []);
 
+  const handleOnClick = () => {
+    window.location.href = "/signup";
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -48,11 +51,12 @@ const Features = () => {
               </div>
             </div>
             <div className={styles.content}>
-              <h2 className={styles.header}>{feature.header}</h2>
-              <p className={styles.subHeader}>{feature.subHeader}</p>
+              <div className={styles.header}>{feature.header}</div>
+              <div className={styles.subHeader}>{feature.subHeader}</div>
               <button 
                 className={styles.button}
                 style={{border: `solid 2px ${feature.borderColor}`, backgroundColor: feature.backgroundColor}}
+                onClick={handleOnClick}
               >{feature.buttonText}
               </button>
             </div>
