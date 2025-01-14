@@ -19,7 +19,7 @@ const Features = () => {
     }
   ]);
   const { theme } = useContext(ThemeContext);
-
+  const [hoveredButtonId, setHoveredButtonId] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +45,7 @@ const Features = () => {
             key={feature.id}
             className={styles.featureContainer}
           >
-            <div className={styles.imageBackground} style={{backgroundColor: feature.backgroundColor}}>
+            <div className={styles.imageBackground} style={{border: `solid 2px ${feature.borderColor}`}}>
               <div className={styles.imageContainer}>
                 <img src={selectedImage} alt={feature.header} />
               </div>
@@ -55,8 +55,14 @@ const Features = () => {
               <div className={styles.subHeader}>{feature.subHeader}</div>
               <button 
                 className={styles.button}
-                style={{border: `solid 2px ${feature.borderColor}`, backgroundColor: feature.backgroundColor}}
+                style={{
+                  border: `solid 2px ${feature.borderColor}`,
+                  backgroundColor: hoveredButtonId === feature.id ? feature.backgroundColor : "",
+                  color: hoveredButtonId === feature.id ? "#fff" : feature.borderColor,
+                }}
                 onClick={handleOnClick}
+                onMouseEnter={() => setHoveredButtonId(feature.id)}
+                onMouseLeave={() => setHoveredButtonId(null)}
               >{feature.buttonText}
               </button>
             </div>

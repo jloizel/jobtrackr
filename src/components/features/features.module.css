@@ -39,6 +39,9 @@
   aspect-ratio: 3/2;
   padding: 10px;
   overflow: hidden;
+  background-color: var(--feature-bg-color);
+  box-shadow: 0px 4px 10px var(--mytracker-bs-color);
+  /* background-color: #0f3851a1; */
 
   @media (min-width: 768px) {
     width: 65%;
@@ -101,16 +104,11 @@
   cursor: pointer;
   font-size: 16px;
   color: #283452;
-  box-sizing: content-box;
+  background: none;
 
   @media (min-width: 768px) {
-    font-size: 20px;
+    font-size: 18px;
     margin-top: 20px;
     padding: 8px 14px;
   }
-}
-
-.button:hover {
-  /* opacity: 0.8; */
-  font-weight: 600;
 }
