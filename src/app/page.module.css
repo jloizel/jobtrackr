@@ -113,4 +113,23 @@
   padding: 2px 8px 0 8px;
 }
 
+.testimonials {
+  /* position: absolute; */
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  /* margin: auto; */
+  justify-content: center;
+  left: 0;
+  right: 0;
+  align-content: center;
+  /* height: 100%; */
+  text-align: center;
+  border-top: solid 1px var(--footer-border-color);
+  border-bottom: solid 1px var(--footer-border-color);
+  width: 100vw !important;
+}
 
+.testimonialsContent {
+  width: 100%;
+}

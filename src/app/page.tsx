@@ -10,6 +10,7 @@ import FeaturesBoard from "@/components/featuresBoard/featuresBoard";
 import Link from "next/link";
 import Testimonials from "@/components/testimonials/testimonials";
 import Features from "@/components/features/features";
+import TestimonialsSlider from "@/components/testimonials/testimonialsSlider";
 
 export default function Home() {
   const { theme } = useContext(ThemeContext);
@@ -50,7 +51,17 @@ export default function Home() {
         JobTrackr’s intuitive tools will help you <span>stay on top</span> of your job applications. Easily <span>manage and track</span> every detail of your job search, so you can focus on <span>what matters most</span>.
       </div>
       <Features/>
-      <Testimonials/>
+      {/* <Testimonials/> */}
+      <section className={styles.testimonials}>
+        <div className={styles.testimonialsContent}>
+          <div className={styles.header} >
+            {/* <span style={{color: "#008489"}}>Talented people </span> */}
+            <span>Loved by Our Loyal Users</span>
+          </div>
+        </div>
+        {/* <Testimonials/> */}
+        <TestimonialsSlider/>
+      </section>
     </div>
   );
 }
