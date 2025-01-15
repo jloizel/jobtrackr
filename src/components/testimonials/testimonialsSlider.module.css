@@ -4,7 +4,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 20px;
   
   @media (min-width: 768px) and (max-width: 1023px) {
     width: 60%;
@@ -13,12 +12,15 @@
   @media (min-width: 1024px) {
     /* width: 80%; */
     max-width: 650px;
+    margin: 20px 0;
   }
 }
 
 .swiper {
   width: 100% !important;
   height: 100% !important;
+  box-shadow: 0px 4px 10px var(--mytracker-bs-color);
+  border-radius: 10px;
 }
 
 .swiperSlide {
@@ -29,15 +31,13 @@
 .container {
   /* height: 100%; */
   border-radius: 10px;
-  background: #EFF0F0;
+  background: var(--mytracker-bg-color);
   text-align: center;
-  color: white;
   position: relative;
-  margin-top: 20px;
   align-content: center;
-  background: white;
-  box-shadow: 0px 8px 24px rgba(62, 53, 82, 0.16);
   padding: 30px;
+  height: 100%;
+  
 }
 
 .testimonialContainer {
@@ -108,14 +108,20 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
+  margin-top: 30px;
 }
 
 .customPrevArrow, .customNextArrow {
-  top: 50%;
-  transform: translateY(-20px);
   cursor: pointer;
   font-size: 20px;
   transition: all 0.2s ease-in-out;
-  border-radius: 50%;
-  border: solid 1px red;
+  border-radius: 10px;
+  border: solid 2px var(--mytracker-card-border-color);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.customPrevArrow:hover, .customNextArrow:hover {
+  border: solid 2px var(--disabled-arrow-color);
 }

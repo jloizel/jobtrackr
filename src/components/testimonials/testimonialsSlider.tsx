@@ -20,8 +20,6 @@ const TestimonialsSlider: React.FC = ({}) => {
     }
   ]);
   const [swiperInstance, setSwiperInstance] = useState<any>(null);
-  const [isAtStart, setIsAtStart] = useState<boolean>(true);
-  const [isAtEnd, setIsAtEnd] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,24 +42,7 @@ const TestimonialsSlider: React.FC = ({}) => {
       },
     },
   });
-  
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
-  const isComputer = useMediaQuery(theme.breakpoints.up('md'));
 
-  const customButtonStyles = {
-    color: 'red',
-    background: '#6F6B71',
-    borderRadius: '50%',
-    width: '50px',
-    height: '50px',
-  };
-
-  const handleSlideChange = () => {
-    if (!swiperInstance) return;
-    setIsAtStart(swiperInstance.isBeginning);
-    setIsAtEnd(swiperInstance.isEnd);
-  };
 
   return (
     <div className={styles.swiperContainer}>
@@ -73,7 +54,6 @@ const TestimonialsSlider: React.FC = ({}) => {
         modules={[Navigation]}
         className={styles.swiper}
         speed={800}
-        onSlideChange={handleSlideChange}
         onSwiper={setSwiperInstance}
         loop={true}
       >
@@ -92,8 +72,6 @@ const TestimonialsSlider: React.FC = ({}) => {
             </div>
           </SwiperSlide>
         ))}
-        {/* <div className="swiper-button-prev swiper-button-prev-custom" style={{...customButtonStyles, marginTop: isMobile ? '100px' : '80px'}}></div>
-        <div className="swiper-button-next swiper-button-next-custom" style={{...customButtonStyles, marginTop: isMobile ? '100px' : '80px'}}></div> */}
       </Swiper>
       <div className={styles.arrowsContainer}>
         <PrevArrow swiper={swiperInstance} className={styles.customPrevArrow}/>

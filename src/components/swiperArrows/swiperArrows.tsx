@@ -10,7 +10,7 @@ export const NextArrow: React.FC<ArrowProps> = ({ swiper, style, className }) =>
   return (
     <div
       className={className}
-      style={{ ...style, display: "block" }}
+      style={{ ...style, display: "flex" }}
       onClick={() => swiper?.slideNext()}
     >
       <IoIosArrowForward />
@@ -22,7 +22,7 @@ export const PrevArrow: React.FC<ArrowProps> = ({ swiper, style, className }) =>
   return (
     <div
       className={className}
-      style={{ ...style, display: "block" }}
+      style={{ ...style, display: "flex" }}
       onClick={() => swiper?.slidePrev()}
     >
       <IoIosArrowBack />
