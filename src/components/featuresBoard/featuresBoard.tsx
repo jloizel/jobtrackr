@@ -10,7 +10,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from 'swiper/modules';
-import { NextArrow, PrevArrow } from "./customArrows";
+import { NextArrow, PrevArrow } from "../swiperArrows/swiperArrows";
 
 
 const FeaturesBoard = () => {

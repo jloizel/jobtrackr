@@ -1,6 +1,10 @@
 .swiperContainer {
   align-self: center;
   width: 80%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   
   @media (min-width: 768px) and (max-width: 1023px) {
     width: 60%;
@@ -33,64 +37,57 @@
   align-content: center;
   background: white;
   box-shadow: 0px 8px 24px rgba(62, 53, 82, 0.16);
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 30px;
-  padding-bottom: 20px;
-  margin-bottom: 120px;
-  
-  @media (min-width: 768px) and (max-width: 1023px) {
-    padding-left: 40px;
-    padding-right: 40px;
-    margin-bottom: 140px;
-  }
-  
-  @media (min-width: 1024px) {
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-top: 40px;
-    padding-bottom: 30px;
-    margin-bottom: 140px;
+  padding: 30px;
+}
+
+.testimonialContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.testimonial {
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px 20px;
+  color: var(--primary-text-color);
+
+  @media (min-width: 768px) {
+    font-size: 24px;
   }
 }
 
-.quote {
-  color: #747076;
-  font-weight: 400;
-  font-family: "Poppins", sans-serif;
-  font-style: italic;
-  font-size: 15px;
-  
-  @media (min-width: 768px) and (max-width: 1023px) {
-    font-size: 18px;
-    line-height: 25px;
+.quoteIcon {
+  font-size: 30px;
+  color: var(--primary-text-color);
+
+  @media (min-width: 768px) {
+    font-size: 35px;
   }
-  
-  @media (min-width: 1024px) {
-    font-size: 20px;
-    line-height: 32px;
-  }
+}
+
+.quoteIcon:last-child {
+  align-self: flex-end;
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .quoter {
-  color: #002D49;
+  color: var(--primary-text-color);
   font-weight: 600;
-  font-family: "Poppins", sans-serif;
   font-size: 15px;
-  margin-top: 20px;
   
-  @media (min-width: 768px) and (max-width: 1023px) {
-    font-size: 20px;
-  }
-  
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     font-size: 22px;
-    margin-top: 30px;
   }
 }
 
 .info {
-  color: #002D49;
+  color: var(--primary-text-color);
   font-weight: 400;
   font-family: "Poppins", sans-serif;
   font-size: 12px;
@@ -103,4 +100,22 @@
     font-size: 18px;
     line-height: 30px;
   }
+}
+
+.arrowsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.customPrevArrow, .customNextArrow {
+  top: 50%;
+  transform: translateY(-20px);
+  cursor: pointer;
+  font-size: 20px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 50%;
+  border: solid 1px red;
 }

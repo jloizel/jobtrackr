@@ -1,16 +1,15 @@
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import styles from "./featuresBoard.module.css";
 
 interface ArrowProps {
   className?: string;
   style?: React.CSSProperties;
-  swiper: any; // Pass the swiper instance
+  swiper: any;
 }
 
 export const NextArrow: React.FC<ArrowProps> = ({ swiper, style, className }) => {
   return (
     <div
-      className={`${styles.customNextArrow} ${className}`}
+      className={className}
       style={{ ...style, display: "block" }}
       onClick={() => swiper?.slideNext()}
     >
@@ -22,7 +21,7 @@ export const NextArrow: React.FC<ArrowProps> = ({ swiper, style, className }) =>
 export const PrevArrow: React.FC<ArrowProps> = ({ swiper, style, className }) => {
   return (
     <div
-      className={`${styles.customPrevArrow} ${className}`}
+      className={className}
       style={{ ...style, display: "block" }}
       onClick={() => swiper?.slidePrev()}
     >
