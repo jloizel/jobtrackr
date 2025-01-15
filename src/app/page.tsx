@@ -8,7 +8,6 @@ import { ThemeContext } from "../utils/theme";
 import { useSession } from "next-auth/react";
 import FeaturesBoard from "@/components/featuresBoard/featuresBoard";
 import Link from "next/link";
-import Testimonials from "@/components/testimonials/testimonials";
 import Features from "@/components/features/features";
 import TestimonialsSlider from "@/components/testimonials/testimonialsSlider";
 import Steps from "@/components/steps/steps";
@@ -37,15 +36,12 @@ export default function Home() {
               JobTrackr takes the stress out of job applications with a seamless organisation of your job search, so you never miss an opportunity.
             </span>
           </div>
-          {status === "unauthenticated" && (
+          {/* {status === "unauthenticated" && ( */}
             <Link href="/signup" className={styles.signup}>
               Sign up for free
             </Link>
-          )}
+          {/* )} */}
         </div>
-        {/* <div className={styles.rightContainer}>
-
-        </div> */}
       </div>
       <FeaturesBoard/>
       <div className={styles.title}>
@@ -54,14 +50,19 @@ export default function Home() {
       <Features/>
       {/* <Testimonials/> */}
       <div className={styles.testimonials}>
-        <div className={styles.testimonialsContent}>
-          <div className={styles.header} >
-            {/* <span style={{color: "#008489"}}>Talented people </span> */}
-            <span>Loved by Our Loyal Users</span>
-          </div>
-        </div>
-        {/* <Testimonials/> */}
+        <div className={styles.text1}>Celebrating User Success</div>
         <TestimonialsSlider/>
+      </div>
+      <div className={styles.prompt}>
+        <span className={styles.text1}>
+          Streamline Your Job Search
+        </span>
+        <span className={styles.text2}>
+          Ditch the messy spreadsheets and take control of your job search with ease. Our intuitive one-click tools and drag-and-drop features make tracking applications seamless and stress-free. Focus less on organizing and more on landing your dream job!
+        </span>
+        <Link href="/signup" className={styles.signup}>
+          Sign up for free
+        </Link>
       </div>
       <Steps/>
     </div>
