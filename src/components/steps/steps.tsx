@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from "./steps.module.css"
+import AuthenticationForm from '../authentication/form/form'
 
 const Steps = () => {
   return (
@@ -9,7 +10,7 @@ const Steps = () => {
           How to Get Started
         </div>
         <div className={styles.rightContainer}>
-
+          <AuthenticationForm/>
         </div>
       </div>
     </div>
