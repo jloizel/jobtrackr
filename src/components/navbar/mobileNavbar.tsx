@@ -1,7 +1,7 @@
 "use client";
 
 import { GiFishing } from "react-icons/gi";
-import Authentication from "../authentication/authentication";
+import Authentication from "../authentication/buttons/buttons";
 import ThemeToggle from "../themeToggle/themeToggle";
 import styles from "./navbar.module.css";
 import { useSession } from "next-auth/react";

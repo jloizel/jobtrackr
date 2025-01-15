@@ -1,10 +1,10 @@
 "use client"
 
-import styles from "./authentication.module.css"
+import styles from "./buttons.module.css"
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
-const Authentication = () => {
+const AuthenticationButtons = () => {
   const { status } = useSession();
 
   return (
@@ -29,5 +29,5 @@ const Authentication = () => {
   );
 }
 
-export default Authentication
+export default AuthenticationButtons
 

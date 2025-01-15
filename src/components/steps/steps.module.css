@@ -1,0 +1,20 @@
+.wrapper {
+  width: 100vw;
+  background-color: #7e8aadc1;
+}
+
+.container {
+  width: 80%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: row;
+  justify-self: center;
+}
+
+.leftContainer {
+  width: 50%;
+}
+
+.rightContainer {
+  width: 50%;
+}
