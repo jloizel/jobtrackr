@@ -11,6 +11,7 @@ import Link from "next/link";
 import Testimonials from "@/components/testimonials/testimonials";
 import Features from "@/components/features/features";
 import TestimonialsSlider from "@/components/testimonials/testimonialsSlider";
+import Steps from "@/components/steps/steps";
 
 export default function Home() {
   const { theme } = useContext(ThemeContext);
@@ -52,7 +53,7 @@ export default function Home() {
       </div>
       <Features/>
       {/* <Testimonials/> */}
-      <section className={styles.testimonials}>
+      <div className={styles.testimonials}>
         <div className={styles.testimonialsContent}>
           <div className={styles.header} >
             {/* <span style={{color: "#008489"}}>Talented people </span> */}
@@ -61,7 +62,8 @@ export default function Home() {
         </div>
         {/* <Testimonials/> */}
         <TestimonialsSlider/>
-      </section>
+      </div>
+      <Steps/>
     </div>
   );
 }
