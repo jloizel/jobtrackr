@@ -57,7 +57,7 @@ const Features = () => {
                 className={styles.button}
                 style={{
                   border: `solid 2px ${feature.borderColor}`,
-                  backgroundColor: hoveredButtonId === feature.id ? feature.backgroundColor : "",
+                  backgroundColor: hoveredButtonId === feature.id ? feature.borderColor : "",
                   color: hoveredButtonId === feature.id ? "#fff" : feature.borderColor,
                 }}
                 onClick={handleOnClick}
