@@ -50,7 +50,7 @@ const TestimonialsSlider: React.FC = ({}) => {
         slidesPerView={1}
         centeredSlides={true}
         initialSlide={1}
-        spaceBetween={20}
+        spaceBetween={60}
         modules={[Navigation]}
         className={styles.swiper}
         speed={800}
