@@ -14,11 +14,11 @@ const Steps = () => {
               <span>Create a JobTrackr account for free.</span>
             </div>
             <div className={styles.step}>
-              <span>1. Start Tracking</span>
+              <span>2. Start Tracking</span>
               <span>Begin organizing your job applications effortlessly.</span>
             </div>
             <div className={styles.step}>
-              <span>1. Upload your Files</span>
+              <span>3. Upload your Files</span>
               <span>Easily store and manage your documents.</span>
             </div>
           </div>

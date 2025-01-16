@@ -35,8 +35,12 @@
   text-align: center;
   position: relative;
   align-content: center;
-  padding: 30px;
+  padding: 20px;
   height: 100%;
+
+  @media (min-width: 768px) {
+    padding: 30px;
+  }
 }
 
 .testimonialContainer {
@@ -45,22 +49,22 @@
 }
 
 .testimonial {
-  font-size: 14px;
   font-weight: 400;
-  padding: 10px 20px;
+  padding: 10px 26px;
   color: var(--primary-text-color);
 
   @media (min-width: 768px) {
     font-size: 24px;
+    padding: 10px 20px;
   }
 }
 
 .quoteIcon {
-  font-size: 30px;
+  font-size: 24px;
   color: var(--primary-text-color);
 
   @media (min-width: 768px) {
-    font-size: 35px;
+    font-size: 36px;
   }
 }
 
@@ -78,7 +82,6 @@
 .quoter {
   color: var(--primary-text-color);
   font-weight: 600;
-  font-size: 15px;
   
   @media (min-width: 768px) {
     font-size: 22px;
@@ -89,7 +92,7 @@
   color: var(--primary-text-color);
   font-weight: 400;
   font-family: "Poppins", sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   
   @media (min-width: 768px) and (max-width: 1023px) {
     font-size: 16px;
