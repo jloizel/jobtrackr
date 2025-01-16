@@ -131,7 +131,7 @@
 
 .text1 {
   font-weight: 600;
-  font-size: 26px;
+  font-size: 28px;
   text-align: center;
 
   @media (min-width: 768px) {
@@ -143,13 +143,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px;
+  padding: 40px 0;
+
+  @media (min-width: 768px) {
+    padding: 40px;
+  }
 }
 
 .text2 {
   color: var(--mytracker-search-color);
-  font-size: 26px;
+  font-size: 22px;
   text-align: center;
+  margin-top: 20px;
   margin-bottom: 40px;
   width: 90%;
+
+  @media (min-width: 768px) {
+    font-size: 26px;
+  }
 }
