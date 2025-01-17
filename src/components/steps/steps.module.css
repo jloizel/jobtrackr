@@ -1,20 +1,27 @@
 .wrapper {
   width: 100vw;
-  background-color: #06283D;
+  background-color: var(--foreground-color);
 }
 
 .container {
   width: 80%;
   max-width: 1000px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-self: center;
   padding: 60px 0;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 }
 
 .leftContainer {
-  width: 50%;
   color: var(--secondary-text-color);
+
+  @media (min-width: 768px) {
+    width: 50%;
+  }
 }
 
 .header {
@@ -45,5 +52,7 @@
 }
 
 .rightContainer {
-  width: 50%;
+  @media (min-width: 768px) {
+    width: 50%;
+  }
 }

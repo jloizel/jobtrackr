@@ -7,16 +7,19 @@
   min-height: 90vh;
 }
 
-.toggleContainer {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+.topBar {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed; 
+  top: 0;  
+  padding: 25px;
+  max-width: 1200px;
 }
 
 .logoContainer {
-  position: absolute;
-  top: 0;
-  left: 20px;
   display: flex;
   flex-direction: row;
   gap: 5px;
@@ -24,7 +27,6 @@
   color: var(--primary-text-color);
   cursor: pointer;
   width: max-content;
-  padding: 20px 0px;
 }
 
 .icon {

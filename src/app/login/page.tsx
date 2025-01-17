@@ -27,14 +27,14 @@ const LoginPage = () => {
   
   return (
     <div className={styles.container}>
-      <Link className={styles.logoContainer} href="/">
-        <GiFishing className={styles.icon}/>
-        <div className={styles.text}>
-          <span>Job</span>
-          <span>Trackr</span> 
-        </div>
-      </Link>
-      <div className={styles.toggleContainer}>
+      <div className={styles.topBar}>
+        <Link className={styles.logoContainer} href="/">
+          <GiFishing className={styles.icon}/>
+          <div className={styles.text}>
+            <span>Job</span>
+            <span>Trackr</span> 
+          </div>
+        </Link>
         <ThemeToggle/>
       </div>
       <div className={styles.wrapper}>
