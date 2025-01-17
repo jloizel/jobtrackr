@@ -2,16 +2,28 @@
   background-color: var(--background-color);
   border-radius: 8px;
   min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   @media (min-width: 768px) {
     min-height: 700px;
   }
 }
 
+.content {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px;
+}
+
 .header {
-  font-size: 40px;
-  font-weight: 800;
+  font-size: 32px;
+  font-weight: 600;
   margin-bottom: 40px;
+  text-align: center;
 }
 
 .buttonsContainer {

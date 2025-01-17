@@ -2,7 +2,6 @@ import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
 const BASE_URL = 'https://jobtrackr-server.vercel.app/'; 
 
-// Create an Axios instance with custom configurations
 const api: AxiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
@@ -10,12 +9,25 @@ const api: AxiosInstance = axios.create({
   },
 });
 
-// Function to get the user email from localStorage
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('authToken'); 
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`; // add Bearer token
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+export default api;
+
 const getUserEmail = (): string | null => {
   return localStorage.getItem('userEmail'); 
 };
 
-// Axios request interceptor to add Authorization header with the email
 api.interceptors.request.use((config) => {
   const email = getUserEmail(); 
   if (email) {
@@ -26,7 +38,6 @@ api.interceptors.request.use((config) => {
   return Promise.reject(error);
 });
 
-// Define types for request data and response data
 export interface Job {
   _id: string;
   userEmail?: string;
@@ -42,7 +53,6 @@ export interface Job {
   updatedAt: string
 }
 
-// Create a new job
 export const createJob = async (jobData: {
   status: string;  
   title: string;
@@ -62,7 +72,7 @@ export const createJob = async (jobData: {
 };
 
 
-// Get a job by ID
+// get a job by ID
 export const getJobById = async (jobId: string): Promise<Job | null> => {
   try {
     const response: AxiosResponse<{ job: Job }> = await api.get(`/jobs/get/${jobId}`);
@@ -79,7 +89,7 @@ export const getJobById = async (jobId: string): Promise<Job | null> => {
   }
 };
 
-// Get all jobs
+// get all jobs
 export const getAllJobs = async (): Promise<Job[]> => {
   try {
     const response: AxiosResponse<{ jobs: Job[] }> = await api.get('/jobs/get');
@@ -90,7 +100,7 @@ export const getAllJobs = async (): Promise<Job[]> => {
   }
 };
 
-// Update a job
+// update a job
 export const updateJob = async (jobId: string, jobData: {
   status: string;  
   title: string;
@@ -109,7 +119,7 @@ export const updateJob = async (jobId: string, jobData: {
   }
 };
 
-// Delete a job
+// delete a job
 export const deleteJob = async (jobId: string): Promise<{ message: string }> => {
   try {
     const response: AxiosResponse<{ message: string }> = await api.delete(`/jobs/delete/${jobId}`);
@@ -122,11 +132,11 @@ export const deleteJob = async (jobId: string): Promise<{ message: string }> => 
 export interface FileData {
   _id: string;
   fileName: string;
-  fileData: string; // Base64 encoded file data
+  fileData: string;
   uploadDate: string;
 }
 
-// Upload a file (PDF)
+// upload a file (PDF)
 export const uploadCV = async (file: File): Promise<{ message: string }> => {
   try {
     const formData = new FormData();
@@ -148,7 +158,7 @@ export const uploadCV = async (file: File): Promise<{ message: string }> => {
   }
 };
 
-// Get files for the logged-in user
+// get files for the logged-in user
 export const getCVs = async (): Promise<FileData[]> => {
   try {
     const email = getUserEmail();
@@ -176,7 +186,6 @@ export const deleteCV = async (email: string, fileId: string): Promise<{ message
   }
 };
 
-
 export const uploadCL = async (file: File): Promise<{ message: string }> => {
   try {
     const formData = new FormData();
@@ -198,7 +207,7 @@ export const uploadCL = async (file: File): Promise<{ message: string }> => {
   }
 };
 
-// Get files for the logged-in user
+// get files for the logged-in user
 export const getCLs = async (): Promise<FileData[]> => {
   try {
     const email = getUserEmail();
@@ -226,6 +235,52 @@ export const deleteCL = async (email: string, fileId: string): Promise<{ message
   }
 };
 
+// user registration
+export const registerUser = async (userData: {
+  email: string;
+  password: string;
+}): Promise<{ message: string }> => {
+  try {
+    const response: AxiosResponse<{ message: string }> = await api.post('/auth/register', userData);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.message || 'Registration failed');
+    }
+    throw error;
+  }
+};
+
+// login registered user
+export const loginUser = async (userData: {
+  email: string;
+  password: string;
+}): Promise<{ token: string }> => {
+  try {
+    const response: AxiosResponse<{ token: string }> = await api.post('/auth/login', userData);
+    const { token } = response.data;
+
+    // Check if we're on the client side before using localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('userEmail', userData.email);
+    }
+
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.message || 'Login failed');
+    }
+    throw error;
+  }
+};
+
+
+// logout the user
+export const logoutUser = (): void => {
+  localStorage.removeItem('authToken');
+  localStorage.removeItem('userEmail');
+};
 
 
 

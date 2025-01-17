@@ -9,6 +9,7 @@ import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import ThemeToggle from "@/components/themeToggle/themeToggle";
 import ClipLoader from "react-spinners/ClipLoader";
+import Login from "@/components/authentication/form/login";
 
 const LoginPage = () => {
   const { status } = useSession();
@@ -53,6 +54,7 @@ const LoginPage = () => {
           <span>Don't have an account?</span>
           <span>Sign up</span>
         </Link>
+        {/* <Login/> */}
       </div>
     </div>
   );
