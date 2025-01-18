@@ -1,26 +1,23 @@
-import { signIn } from 'next-auth/react';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { loginUser } from '@/app/API';
+import { useContext, useState } from 'react';
+import { useRouter } from "next/navigation";
+import { AuthContext } from '@/providers/AuthProvider';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const router = useRouter();
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext); 
 
   const handleLogin = async () => {
-    // Call NextAuth's signIn method with 'credentials' provider
-    const result = await signIn('credentials', {
-      redirect: false, // Don't automatically redirect
-      email,
-      password,
-    });
-
-    if (result?.error) {
-      setMessage(result.error); // Handle error message if login fails
-    } else {
+    try {
+      const response = await loginUser({ email, password });
       setMessage('Login successful!');
-      router.push('/'); // Redirect after login success
+      setIsLoggedIn(true);
+      router.push('/');
+    } catch (error: any) {
+      setMessage(error.message || 'An error occurred');
     }
   };
 
@@ -40,6 +37,9 @@ const Login = () => {
       />
       <button onClick={handleLogin}>Login</button>
       {message && <p>{message}</p>}
+      {isLoggedIn && (
+        <p>Welcome back! You are logged in.</p>
+      )}
     </div>
   );
 };

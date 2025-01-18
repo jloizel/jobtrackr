@@ -13,7 +13,6 @@ import Login from "@/components/authentication/form/login";
 
 const LoginPage = () => {
   const { status } = useSession();
-
   const router = useRouter();
 
   useEffect(() => {
@@ -54,7 +53,7 @@ const LoginPage = () => {
           <span>Don't have an account?</span>
           <span>Sign up</span>
         </Link>
-        {/* <Login/> */}
+        <Login/>
       </div>
     </div>
   );

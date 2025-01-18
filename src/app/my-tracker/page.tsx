@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, FormEvent, useRef } from 'react';
+import { useEffect, useState, FormEvent, useRef, useContext } from 'react';
 import styles from "./mytracker.module.css"
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -25,6 +25,7 @@ import { RiDragMove2Fill } from "react-icons/ri";
 import { jobStatuses } from '@/constants/jobStatuses';
 import Search from '@/components/mytrackerComponents/search/search';
 import Statistics from '@/components/mytrackerComponents/statistics/statistics';
+import { AuthContext } from '@/providers/AuthProvider';
 // import 'react-calendar/dist/Calendar.css';
 
 
@@ -45,6 +46,7 @@ export type Job = {
 
 const MyTrackerPage: React.FC = () => {
   const { data: session, status } = useSession();
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext); 
   const router = useRouter();
 
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -75,9 +77,9 @@ const MyTrackerPage: React.FC = () => {
   const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
   useEffect(() => {
-    if (status === 'unauthenticated') {
+    if (!isLoggedIn) {
       router.push('/'); // redirect to homepage if not authenticated
-    } else if (status === 'authenticated') {
+    } else {
       const fetchJobs = async () => {
         setLoading(true);
         try {
@@ -312,7 +314,7 @@ const MyTrackerPage: React.FC = () => {
     setShowTracker(false)
   }
 
-  if (status === 'authenticated') {
+  if (isLoggedIn) {
     return (
       <div className={styles.tracker}>
         <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>

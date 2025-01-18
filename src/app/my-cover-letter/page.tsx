@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./mycoverletter.module.css";
 import { useSession } from "next-auth/react";
 import { FileData, getCLs, deleteCL, uploadCL } from "../API";
@@ -13,12 +13,17 @@ import { ImBin } from "react-icons/im";
 import { formatDistanceToNow } from "date-fns";
 import { IoMdDownload } from "react-icons/io";
 import UploadForm from "@/components/fileUploadForm/fileUploadForm";
+import { useRouter } from "next/navigation";
+import { AuthContext } from "@/providers/AuthProvider";
 
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const MyCoverLetterPage = () => {
   const { data: session } = useSession();
+  const { isLoggedIn } = useContext(AuthContext); 
+  const router = useRouter();
+
   const [files, setFiles] = useState<FileData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [pdfPageCounts, setPdfPageCounts] = useState<Record<string, number>>({});
@@ -27,9 +32,13 @@ const MyCoverLetterPage = () => {
   const [canUpload, setCanUpload] = useState(false)
   const [numFiles, setNumFiles] = useState(0);
   const [hoveredDownloadButton, setHoveredDownloadButton] = useState<string | null>(null);
-
-
   const maxFiles = 2;
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push("/");
+    }
+  }, [isLoggedIn, router]);
 
   const fetchFiles = async () => {
     if (!session?.user?.email) return;
@@ -37,7 +46,8 @@ const MyCoverLetterPage = () => {
     try {
       const fileData = await getCLs();
       setFiles(fileData);
-      setCanUpload(fileData.length < maxFiles); 
+      setNumFiles(fileData.length);
+      setCanUpload(fileData.length < maxFiles);
     } catch (error) {
       console.error("Error fetching files:", error);
     } finally {
@@ -48,10 +58,6 @@ const MyCoverLetterPage = () => {
   useEffect(() => {
     fetchFiles();
   }, [session?.user?.email]);
-
-  useEffect(() => {
-    setNumFiles(files.length)
-  }, [files])
 
   const calculateFileSize = (base64: string) => {
     const stringLength = base64.length - 'data:application/pdf;base64,'.length;
@@ -156,7 +162,7 @@ const MyCoverLetterPage = () => {
           </div>
           
           <div className={`${styles.formContainer} ${numFiles === 0 ? styles.emptyFormContainer : styles.notEmptyFormContainer}`}>
-            {canUpload && <UploadForm onFileUpload={fetchFiles} uploadHandler={uploadCL} numFiles={numFiles}/>}
+          {(!files.length || canUpload) && <UploadForm onFileUpload={fetchFiles} uploadHandler={uploadCL} numFiles={numFiles}/>}
           </div>
         </div>
       )}

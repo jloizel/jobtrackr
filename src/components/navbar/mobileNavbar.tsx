@@ -6,12 +6,14 @@ import ThemeToggle from "../themeToggle/themeToggle";
 import styles from "./navbar.module.css";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Hamburger from "hamburger-react";
 import Drawer from "@mui/material/Drawer";
+import { AuthContext } from "@/providers/AuthProvider";
 
 const MobileNavbar = () => {
   const { data: session } = useSession();
+  const { isLoggedIn } = useContext(AuthContext); 
   const [menuOpen, setMenuOpen] = useState(false);
 
   // const links = [
@@ -86,7 +88,7 @@ const MobileNavbar = () => {
       >
         <div className={styles.drawerContent}>
           <div className={styles.linkContainer}>
-            {session && links.map((link) => (
+            {(session || isLoggedIn) && links.map((link) => (
               <div key={link.name} onClick={closeMenu}>
                 <Link href={link.path} className={styles.link}>
                   {link.name}
