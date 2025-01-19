@@ -187,6 +187,11 @@
 
 .jobs {
   margin-top: 20px;
+  min-height: 400px;
+
+  @media (min-width: 768px) {
+    min-height: 350px;
+  }
 }
 
 .jobCard {

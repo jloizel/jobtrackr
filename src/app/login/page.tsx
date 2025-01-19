@@ -9,7 +9,7 @@ import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import ThemeToggle from "@/components/themeToggle/themeToggle";
 import ClipLoader from "react-spinners/ClipLoader";
-import Login from "@/components/authentication/form/login";
+import Login from "@/components/authentication/login/login";
 
 const LoginPage = () => {
   const { status } = useSession();

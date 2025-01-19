@@ -26,16 +26,49 @@
   text-align: center;
 }
 
-.buttonsContainer {
-  width: 100%;
+.inputsContainer {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  width: 70%;
   align-items: center;
+  justify-content: center;
+  gap: 40px;
 }
 
-.socialButton {
-  background-color: white;
+.inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  gap: 5px;
+}
+
+.input input {
+  font-family: "Roboto", sans-serif;
+  box-shadow: rgba(25, 4, 69, 0.05) 0px 3px 6px;
+  border: 1px solid rgba(25, 4, 69, 0.15);
+  border-radius: 10px;
+  padding: 10px;
+  outline: none;
+  font-size: 16px;
+}
+
+.error {
+  color: #ff3c63;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.button {
+  background-color: #00a6ff;
   height: 40px;
   border-radius: 10px;
   box-shadow: rgba(25, 4, 69, 0.05) 0px 3px 6px;
@@ -46,36 +79,18 @@
   justify-content: center;
   gap: 10px;
   cursor: pointer;
-  display: flex;
-  width: 80%;
-
-  @media (min-width: 768px) {
-    width: 100%;
-  }
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  color: #fbfbff;
+  font-size: 16px;
+  font-weight: 500;
+  width: 100%;
 }
 
-.socialButton:hover {
+.button:hover {
   border: solid 2px #00a6ff;
-}
-
-.socialButton span {
-  color: #06283D;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.socialIcon {
-  height: 20px;
-}
-
-.githubIcon {
-  font-size: 20px;
-  color: #171515;
-}
-
-.socialButton span {
-  font-size: 14px;
-  font-weight: 500;
+  background-color: transparent;
+  color: #00a6ff;
 }
 
 .textContainer {
@@ -86,8 +101,12 @@
 }
 
 .textContainer span {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
 }
 
 .textContainer span:last-child {
