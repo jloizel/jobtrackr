@@ -52,7 +52,53 @@
 }
 
 .rightContainer {
+  background-color: var(--background-color);
+  border-radius: 8px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   @media (min-width: 768px) {
+    min-height: 700px;
     width: 50%;
   }
+}
+
+.header {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.content {
+  padding: 40px;
+}
+
+.formContainer {
+  width: 70%;
+  justify-self: center;
+}
+
+.textContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.textContainer span {
+  font-size: 16px;
+  font-weight: 500;
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
+}
+
+.textContainer span:last-child {
+  color: #00a6ff;
 }

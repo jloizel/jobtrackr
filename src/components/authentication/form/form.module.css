@@ -1,35 +1,14 @@
 .container {
-  background-color: var(--background-color);
-  border-radius: 8px;
-  min-height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  @media (min-width: 768px) {
-    min-height: 700px;
-  }
-}
-
-.content {
-  height: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 40px;
-}
-
-.header {
-  font-size: 32px;
-  font-weight: 600;
-  margin-bottom: 40px;
-  text-align: center;
+  width: 100%;
 }
 
 .inputsContainer {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 100%;
   align-items: center;
   justify-content: center;
   gap: 40px;
@@ -46,19 +25,46 @@
 .input {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   width: 100%;
   gap: 5px;
+  position: relative;
 }
 
-.input input {
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+  width: 100%;
+}
+
+.inputWrapper span {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.inputWrapper input {
   font-family: "Roboto", sans-serif;
   box-shadow: rgba(25, 4, 69, 0.05) 0px 3px 6px;
   border: 1px solid rgba(25, 4, 69, 0.15);
   border-radius: 10px;
   padding: 10px;
+  padding-right: 40px; 
   outline: none;
   font-size: 16px;
+  flex: 1; 
+}
+
+.iconButton {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.passwordIcon {
+  font-size: 18px;
 }
 
 .error {
@@ -66,6 +72,7 @@
   font-size: 14px;
   margin-left: 5px;
 }
+
 
 .button {
   background-color: #00a6ff;
@@ -90,25 +97,5 @@
 .button:hover {
   border: solid 2px #00a6ff;
   background-color: transparent;
-  color: #00a6ff;
-}
-
-.textContainer {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  margin-top: 20px;
-}
-
-.textContainer span {
-  font-size: 16px;
-  font-weight: 500;
-
-  @media (min-width: 768px) {
-    font-size: 14px;
-  }
-}
-
-.textContainer span:last-child {
   color: #00a6ff;
 }

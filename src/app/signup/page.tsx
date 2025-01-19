@@ -3,16 +3,21 @@
 import { signIn, useSession } from "next-auth/react";
 import styles from "./signUp.module.css";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GiFishing } from "react-icons/gi";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import ThemeToggle from "@/components/themeToggle/themeToggle";
+import AuthenticationForm from "@/components/authentication/form/form";
+import { IoMailOutline } from "react-icons/io5";
+import { ClipLoader } from "react-spinners";
+
 
 const SignupPage = () => {
   const { status } = useSession();
-
   const router = useRouter();
+
+  const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -21,7 +26,11 @@ const SignupPage = () => {
   }, [status, router]);
 
   if (status === "loading") {
-    return <div className={styles.loading}>Loading...</div>;
+    return <div className={styles.container}><ClipLoader color={"#00a6ff"}/></div>;
+  }
+
+  const handleClick = () => {
+    setShowForm((prev) => !prev)
   }
   
   return (
@@ -39,6 +48,7 @@ const SignupPage = () => {
       <div className={styles.wrapper}>
         <div className={styles.header}>Sign Up</div>
         <div className={styles.subHeader}>Track and organise your job search for free.</div>
+        {!showForm ? (
         <div className={styles.buttonsContainer}>
           <div className={`${styles.socialButton} ${styles.googleButton}`} onClick={() => signIn("google")}>
             <img src="/icons8-google.svg" className={styles.socialIcon}/>
@@ -48,12 +58,25 @@ const SignupPage = () => {
             <FaGithub className={styles.githubIcon}/>
             <span>Continue with Github</span>
           </div>
+          <div className={styles.separatorContainer}>
+            <div/>
+            <span>or</span>
+            <div/>
+          </div>
+          <div className={`${styles.socialButton} ${styles.githubButton}`} onClick={handleClick}>
+            <IoMailOutline className={styles.githubIcon}/>
+            <span>Continue with Email</span>
+          </div>
         </div>
+        ) : (
+          <AuthenticationForm/>
+        )}
         <Link className={styles.textContainer} href="/login">
           <span>Already have an account?</span>
           <span>Log in</span>
         </Link>
       </div>
+      
     </div>
   );
 };

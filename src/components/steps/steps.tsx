@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from "./steps.module.css"
 import AuthenticationForm from '../authentication/form/form'
+import Link from 'next/link'
 
 const Steps = () => {
   return (
@@ -24,7 +25,18 @@ const Steps = () => {
           </div>
         </div>
         <div className={styles.rightContainer}>
-          <AuthenticationForm/>
+          <div className={styles.content}>
+            <div className={styles.header}>
+              Register for free & start organising your job search
+            </div>
+            <div className={styles.formContainer}>
+              <AuthenticationForm/>
+            </div>
+            <Link className={styles.textContainer} href="/login">
+              <span>Already have an account?</span>
+              <span>Log in</span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
