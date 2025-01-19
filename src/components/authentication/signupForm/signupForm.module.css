@@ -1,0 +1,97 @@
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+  position: relative;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+  width: 100%;
+}
+
+.inputWrapper span {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.inputWrapper input {
+  font-family: "Roboto", sans-serif;
+  box-shadow: rgba(25, 4, 69, 0.05) 0px 3px 6px;
+  border: 1px solid rgba(25, 4, 69, 0.15);
+  border-radius: 10px;
+  padding: 10px;
+  padding-right: 40px; 
+  outline: none;
+  font-size: 16px;
+  flex: 1; 
+}
+
+.iconButton {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.passwordIcon {
+  font-size: 18px;
+}
+
+.error {
+  color: #ff3c63;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+
+.button {
+  background-color: #00a6ff;
+  height: 40px;
+  border-radius: 10px;
+  box-shadow: rgba(25, 4, 69, 0.05) 0px 3px 6px;
+  border: 1px solid rgba(25, 4, 69, 0.15);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  color: #fbfbff;
+  font-size: 16px;
+  font-weight: 500;
+  width: 100%;
+}
+
+.button:hover {
+  border: solid 2px #00a6ff;
+  background-color: transparent;
+  color: #00a6ff;
+}

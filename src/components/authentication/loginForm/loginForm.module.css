@@ -1,11 +1,6 @@
-.container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-}
 
-.inputsContainer {
+
+.container {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -58,6 +53,7 @@
 .iconButton {
   position: absolute;
   right: 10px;
+  bottom: 8px;
   background: none;
   border: none;
   cursor: pointer;

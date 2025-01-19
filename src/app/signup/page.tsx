@@ -8,9 +8,10 @@ import { GiFishing } from "react-icons/gi";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import ThemeToggle from "@/components/themeToggle/themeToggle";
-import AuthenticationForm from "@/components/authentication/form/form";
+import AuthenticationForm from "@/components/authentication/signupForm/signupForm";
 import { IoMailOutline } from "react-icons/io5";
 import { ClipLoader } from "react-spinners";
+import { MdKeyboardArrowLeft } from "react-icons/md";
 
 
 const SignupPage = () => {
@@ -49,27 +50,33 @@ const SignupPage = () => {
         <div className={styles.header}>Sign Up</div>
         <div className={styles.subHeader}>Track and organise your job search for free.</div>
         {!showForm ? (
-        <div className={styles.buttonsContainer}>
-          <div className={`${styles.socialButton} ${styles.googleButton}`} onClick={() => signIn("google")}>
-            <img src="/icons8-google.svg" className={styles.socialIcon}/>
-            <span>Continue with Google</span>
+          <div className={styles.buttonsContainer}>
+            <div className={`${styles.socialButton} ${styles.googleButton}`} onClick={() => signIn("google")}>
+              <img src="/icons8-google.svg" className={styles.socialIcon}/>
+              <span>Continue with Google</span>
+            </div>
+            <div className={`${styles.socialButton} ${styles.githubButton}`} onClick={() => signIn("github")}>
+              <FaGithub className={styles.githubIcon}/>
+              <span>Continue with Github</span>
+            </div>
+            <div className={styles.separatorContainer}>
+              <div/>
+              <span>or</span>
+              <div/>
+            </div>
+            <div className={`${styles.socialButton} ${styles.githubButton}`} onClick={handleClick}>
+              <IoMailOutline className={styles.githubIcon}/>
+              <span>Continue with Email</span>
+            </div>
           </div>
-          <div className={`${styles.socialButton} ${styles.githubButton}`} onClick={() => signIn("github")}>
-            <FaGithub className={styles.githubIcon}/>
-            <span>Continue with Github</span>
-          </div>
-          <div className={styles.separatorContainer}>
-            <div/>
-            <span>or</span>
-            <div/>
-          </div>
-          <div className={`${styles.socialButton} ${styles.githubButton}`} onClick={handleClick}>
-            <IoMailOutline className={styles.githubIcon}/>
-            <span>Continue with Email</span>
-          </div>
-        </div>
         ) : (
-          <AuthenticationForm/>
+          <div className={styles.formContainer}>
+            <span className={styles.back} onClick={handleClick}>
+              <MdKeyboardArrowLeft className={styles.arrow}/> 
+              Back
+            </span>
+            <AuthenticationForm/>
+          </div>
         )}
         <Link className={styles.textContainer} href="/login">
           <span>Already have an account?</span>

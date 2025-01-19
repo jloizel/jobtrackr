@@ -3,18 +3,20 @@
 import { signIn, useSession } from "next-auth/react";
 import styles from "./logIn.module.css";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GiFishing } from "react-icons/gi";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import ThemeToggle from "@/components/themeToggle/themeToggle";
 import ClipLoader from "react-spinners/ClipLoader";
-import Login from "@/components/authentication/login/login";
+import Login from "@/components/authentication/loginForm/loginForm";
 
 const LoginPage = () => {
   const { status } = useSession();
   const router = useRouter();
 
+  const [showForm, setShowForm] = useState(false)
+  
   useEffect(() => {
     if (status === "authenticated") {
       router.push("/");
@@ -48,12 +50,17 @@ const LoginPage = () => {
             <FaGithub className={styles.githubIcon}/>
             <span>Continue with Github</span>
           </div>
+          <div className={styles.separatorContainer}>
+            <div/>
+              <span>or</span>
+            <div/>
+          </div>
+          <Login/>
         </div>
         <Link className={styles.textContainer} href="/signup">
           <span>Don't have an account?</span>
           <span>Sign up</span>
         </Link>
-        <Login/>
       </div>
     </div>
   );

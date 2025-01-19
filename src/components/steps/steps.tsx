@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from "./steps.module.css"
-import AuthenticationForm from '../authentication/form/form'
+import AuthenticationForm from '../authentication/signupForm/signupForm'
 import Link from 'next/link'
 
 const Steps = () => {

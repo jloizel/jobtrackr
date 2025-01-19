@@ -8,6 +8,16 @@
   width: 100vw;
 }
 
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 90vh;
+}
+
+
 .topBar {
   width: 90%;
   display: flex;
@@ -60,10 +70,22 @@
 .header {
   font-size: 40px;
   font-weight: 800;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
+}
+
+.subHeader {
+  font-size: 20px;
+  text-align: center;
+  font-weight: 400;
+  width: 80%;
+
+  @media (min-width: 768px) {
+    width: max-content;
+  }
 }
 
 .buttonsContainer {
+  margin-top: 40px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -83,7 +105,6 @@
   justify-content: center;
   gap: 10px;
   cursor: pointer;
-  display: flex;
   width: 80%;
 
   @media (min-width: 768px) {
@@ -97,8 +118,12 @@
 
 .socialButton span {
   color: #06283D;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
 }
 
 .socialIcon {
@@ -110,18 +135,58 @@
   color: #171515;
 }
 
-.socialButton span {
-  font-size: 14px;
+.separatorContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.separatorContainer span {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #7e8aad9c; 
+  font-size: 20px;
+  position: relative;
+  font-style: italic;
   font-weight: 500;
+  margin: 0 10px;
 }
 
-/* .googleButton {
-  background-color: #ff5555;
+.separatorContainer div {
+  width: 100%;
+  height: 1px;
+  background-color: #7e8aad57;
 }
 
-.githubButton {
-  background-color: #111;
-} */
+.formContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+.back {
+  position: absolute;
+  top: -1px;
+  left: -100px;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.arrow {
+  font-size: 18px;
+  display: flex;
+  padding: 0;
+}
 
 .textContainer {
   display: flex;
@@ -131,8 +196,12 @@
 }
 
 .textContainer span {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
 }
 
 .textContainer span:last-child {
