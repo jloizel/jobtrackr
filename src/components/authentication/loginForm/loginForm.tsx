@@ -15,6 +15,7 @@ const Login = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [message, setMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [type, setType] = useState('password');
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [disableButton, setDisabledButton] = useState(true);
@@ -52,7 +53,7 @@ const Login = () => {
       setIsLoggedIn(true);
       router.push('/');
     } catch (error: any) {
-      setMessage(error.message || 'An error occurred');
+      setErrorMessage(error.message || 'An error occurred');
     }
   };
   
@@ -109,9 +110,11 @@ const Login = () => {
           </div>
           {passwordError && <p className={styles.error}>{passwordError}</p>}
         </div>
-
-        <button onClick={handleLogin} className={styles.button}>Login</button>
-        {message && <p className={styles.error}>{message}</p>}
+        <div className={styles.submitButtonContainer}>
+          <button onClick={handleLogin} className={styles.button}>Login</button>
+          {message && <span className={styles.message}>{message}</span>}
+          {errorMessage && <span className={styles.errorMessage}>{errorMessage}</span>}
+        </div>
       </div>
     </div>
   );

@@ -5,14 +5,18 @@ import { registerUser } from '@/app/API'
 import PasswordStrengthBar from 'react-password-strength-bar';
 import { IoMdEyeOff } from "react-icons/io";
 import { IoMdEye } from "react-icons/io";
+import { useRouter } from 'next/navigation';
 
 
 const SignUpForm = () => {
+  const router = useRouter();
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [message, setMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [type, setType] = useState('password');
   const [passwordFocused, setPasswordFocused] = useState(false);
 
@@ -46,9 +50,10 @@ const SignUpForm = () => {
 
     try {
       const response = await registerUser({ email, password });
-      setMessage(response.message);
+      setMessage('Successfully signed up!');
+      router.push('/login');
     } catch (error: any) {
-      setMessage(error.message || 'An error occurred');
+      setErrorMessage(error.message || 'An error occurred');
     }
   };
 
@@ -106,11 +111,15 @@ const SignUpForm = () => {
           {passwordError && <p className={styles.error}>{passwordError}</p>}
         </div>
 
-        
         {password && <PasswordStrengthBar password={password}/>}
         
       </div>
-      <button onClick={handleRegister} className={styles.button}>Sign up</button>
+      <div className={styles.submitButtonContainer}>
+        <button onClick={handleRegister} className={styles.button}>Sign up</button>
+        {message && <span className={styles.message}>{message}</span>}
+        {errorMessage && <span className={styles.errorMessage}>{errorMessage}</span>}
+      </div>
+      
     </div>
   )
 }

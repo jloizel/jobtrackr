@@ -3,22 +3,24 @@
 import { signIn, useSession } from "next-auth/react";
 import styles from "./logIn.module.css";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GiFishing } from "react-icons/gi";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import ThemeToggle from "@/components/themeToggle/themeToggle";
 import ClipLoader from "react-spinners/ClipLoader";
 import Login from "@/components/authentication/loginForm/loginForm";
+import { AuthContext } from "@/providers/AuthProvider";
 
 const LoginPage = () => {
   const { status } = useSession();
   const router = useRouter();
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext); 
 
   const [showForm, setShowForm] = useState(false)
   
   useEffect(() => {
-    if (status === "authenticated") {
+    if (isLoggedIn) {
       router.push("/");
     }
   }, [status, router]);
