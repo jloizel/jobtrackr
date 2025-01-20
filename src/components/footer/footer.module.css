@@ -11,9 +11,9 @@
   display: flex;
   flex-direction: row;
   padding: 30px;
-  justify-content: space-between;
+  justify-content: center;
   width: 80%;
-  /* gap: 100px; */
+  gap: 60px;
 
   @media (min-width: 768px) {
     gap: 200px;

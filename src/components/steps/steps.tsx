@@ -8,7 +8,7 @@ const Steps = () => {
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <div className={styles.leftContainer}>
-          <span className={styles.header}>How to Get Started</span>
+          <span className={styles.header1}>How to Get Started</span>
           <div className={styles.steps}>
             <div className={styles.step}>
               <span>1. Sign Up</span>
@@ -26,7 +26,7 @@ const Steps = () => {
         </div>
         <div className={styles.rightContainer}>
           <div className={styles.content}>
-            <div className={styles.header}>
+            <div className={styles.header2}>
               Register for free & start organising your job search
             </div>
             <div className={styles.formContainer}>
