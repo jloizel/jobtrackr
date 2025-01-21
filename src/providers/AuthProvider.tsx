@@ -1,3 +1,5 @@
+"use client"
+
 import React, { createContext, useState, useEffect, ReactNode } from "react";
 import { SessionProvider, useSession } from "next-auth/react";
 
@@ -12,7 +14,7 @@ export const AuthContext = createContext({
 
 const getIsLoggedIn = (): boolean => {
   const storedValue = localStorage.getItem("isLoggedIn");
-  return storedValue === "true"; // Converts "true" string back to boolean
+  return storedValue === "true"; // converts "true" string back to boolean
 };
 
 const setIsLoggedInLocal = (value: boolean) => {
@@ -38,7 +40,7 @@ const AuthWrapper: React.FC<{ children: ReactNode }> = ({ children }) => {
   useEffect(() => {
     const authenticated = status === "authenticated";
     setIsLoggedIn(authenticated);
-    setIsLoggedInLocal(authenticated);  // Save the state in localStorage
+    setIsLoggedInLocal(authenticated); 
 
     if (authenticated && session?.user?.email) {
       setUserEmail(session.user.email);
