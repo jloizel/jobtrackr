@@ -46,7 +46,7 @@ export type Job = {
 
 const MyTrackerPage: React.FC = () => {
   const { data: session, status } = useSession();
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext); 
+  const { isLoggedIn } = useContext(AuthContext); 
   const router = useRouter();
 
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -113,6 +113,7 @@ const MyTrackerPage: React.FC = () => {
   }
   
   const handleCreateJob = async (e: FormEvent) => {
+    // e.preventDefault();
     setLoading(true);
     try {
       const jobData = {

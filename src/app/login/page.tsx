@@ -13,14 +13,14 @@ import Login from "@/components/authentication/loginForm/loginForm";
 import { AuthContext } from "@/providers/AuthProvider";
 
 const LoginPage = () => {
-  const { status } = useSession();
+  const { status, data: session } = useSession();
   const router = useRouter();
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext); 
 
   const [showForm, setShowForm] = useState(false)
   
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn || session) {
       router.push("/");
     }
   }, [status, router]);

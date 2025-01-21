@@ -12,6 +12,9 @@ const AuthenticationButtons = () => {
   
   const handleSignOut = async () => {
     await signOut(); 
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userEmail');
+    
     setIsLoggedIn(false);
   };
 

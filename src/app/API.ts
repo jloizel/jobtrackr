@@ -13,7 +13,7 @@ api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('authToken'); 
     if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`; // add Bearer token
+      config.headers['Authorization'] = `Bearer ${token}`; 
     }
     return config;
   },
@@ -21,8 +21,6 @@ api.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-
-export default api;
 
 const getUserEmail = (): string | null => {
   return localStorage.getItem('userEmail'); 
@@ -37,6 +35,9 @@ api.interceptors.request.use((config) => {
 }, (error) => {
   return Promise.reject(error);
 });
+
+export default api;
+
 
 export interface Job {
   _id: string;

@@ -51,6 +51,11 @@ const Login = () => {
       const response = await loginUser({ email, password });
       setMessage('Login successful!');
       setIsLoggedIn(true);
+
+      // save email to local storage
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userEmail', email);
+
       router.push('/');
     } catch (error: any) {
       setErrorMessage(error.message || 'An error occurred');
