@@ -21,8 +21,6 @@ export default function Home() {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  console.log(isLoggedIn)
-
   return (
     <div className={styles.page}>
       <div className={styles.headerContent}>

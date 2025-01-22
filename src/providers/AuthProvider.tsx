@@ -13,23 +13,33 @@ export const AuthContext = createContext({
 });
 
 const getIsLoggedIn = (): boolean => {
-  const storedValue = localStorage.getItem("isLoggedIn");
-  return storedValue === "true"; // converts "true" string back to boolean
+  if (typeof window !== "undefined") {
+    const storedValue = localStorage.getItem("isLoggedIn");
+    return storedValue === "true"; // converts "true" string back to boolean
+  }
+  return false;
 };
 
 const setIsLoggedInLocal = (value: boolean) => {
-  localStorage.setItem("isLoggedIn", value ? "true" : "false");
+  if (typeof window !== "undefined") {
+    localStorage.setItem("isLoggedIn", value ? "true" : "false");
+  }
 };
 
 const getUserEmail = (): string | null => {
-  return localStorage.getItem("userEmail");
+  if (typeof window !== "undefined") {
+    return localStorage.getItem("userEmail");
+  }
+  return null;
 };
 
 const setUserEmail = (email: string | null) => {
-  if (email) {
-    localStorage.setItem("userEmail", email);
-  } else {
-    localStorage.removeItem("userEmail");
+  if (typeof window !== "undefined") {
+    if (email) {
+      localStorage.setItem("userEmail", email);
+    } else {
+      localStorage.removeItem("userEmail");
+    }
   }
 };
 

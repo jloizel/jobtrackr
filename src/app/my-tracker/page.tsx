@@ -77,25 +77,32 @@ const MyTrackerPage: React.FC = () => {
   const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      router.push('/'); // redirect to homepage if not authenticated
-    } else {
+    if (status === 'loading') {
+      // during loading, don't do anything yet
+      return;
+    }
+  
+    if (status === 'unauthenticated' || !isLoggedIn) {
+      router.push('/'); 
+    } else if (status === 'authenticated' || isLoggedIn) {
       const fetchJobs = async () => {
         setLoading(true);
         try {
           const userJobs = await getAllJobs();
           setJobs(userJobs);
-          setFilteredJobs(userJobs)
+          setFilteredJobs(userJobs);
         } catch (err) {
           setError('Failed to fetch jobs.');
         } finally {
           setLoading(false);
         }
       };
-
+  
       fetchJobs();
     }
-  }, [status]);
+  }, [status, isLoggedIn, router]);
+  
+  
 
   const handleSearch = (query: string) => {
     const filtered = jobs.filter(
@@ -113,7 +120,7 @@ const MyTrackerPage: React.FC = () => {
   }
   
   const handleCreateJob = async (e: FormEvent) => {
-    // e.preventDefault();
+    e.preventDefault();
     setLoading(true);
     try {
       const jobData = {
@@ -128,9 +135,13 @@ const MyTrackerPage: React.FC = () => {
       };
   
       const job = await createJob(jobData);
-      setJobs((prevJobs) => [...prevJobs, job]); 
-      setFilteredJobs((prevJobs) => [...prevJobs, job]); 
+      
+      // Re-fetch jobs after creating a new one
+      const userJobs = await getAllJobs();
+      setJobs(userJobs);  // Update jobs state
+      setFilteredJobs(userJobs);  // Update filtered jobs state
   
+      // Clear input fields
       setTitle('');
       setCompany('');
       setSalary('');
@@ -148,6 +159,7 @@ const MyTrackerPage: React.FC = () => {
       setLoading(false);
     }
   };
+  
 
   useEffect(() => {
     setFilteredJobs(jobs);
@@ -173,7 +185,6 @@ const MyTrackerPage: React.FC = () => {
     }
   };
   
-
   const toggleRejectedVisibility = () => {
     setRejectedVisible((prev) => !prev);
   };
@@ -182,7 +193,6 @@ const MyTrackerPage: React.FC = () => {
     setSelectedJob(job);
     setUpdateModalOpen(true);
   };
-
 
   const handleUpdateJob = async (updatedJob: Job) => {
     setLoading(true);
