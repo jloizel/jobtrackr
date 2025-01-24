@@ -17,49 +17,49 @@ const Login = () => {
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [disableButton, setDisabledButton] = useState(true);
 
-  const handleLogin = async () => {
-    let hasError = false;
+  // const handleLogin = async () => {
+  //   let hasError = false;
   
-    // validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email.trim()) {
-      setEmailError('Email cannot be empty');
-      hasError = true;
-    } else if (!emailRegex.test(email)) {
-      setEmailError('Please enter a valid email address');
-      hasError = true;
-    } else {
-      setEmailError(''); 
-    }
+  //   // validate email format
+  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   if (!email.trim()) {
+  //     setEmailError('Email cannot be empty');
+  //     hasError = true;
+  //   } else if (!emailRegex.test(email)) {
+  //     setEmailError('Please enter a valid email address');
+  //     hasError = true;
+  //   } else {
+  //     setEmailError(''); 
+  //   }
   
-    // validate password
-    if (!password.trim()) {
-      setPasswordError('Password cannot be empty');
-      hasError = true;
-    } else {
-      setPasswordError(''); 
-    }
+  //   // validate password
+  //   if (!password.trim()) {
+  //     setPasswordError('Password cannot be empty');
+  //     hasError = true;
+  //   } else {
+  //     setPasswordError(''); 
+  //   }
   
-    if (hasError) {
-      return; 
-    }
+  //   if (hasError) {
+  //     return; 
+  //   }
   
-    try {
-      const response = await loginUser({ email, password });
-      setMessage('Login successful!');
-      setIsLoggedIn(true);
+  //   try {
+  //     const response = await loginUser({ email, password });
+  //     setMessage('Login successful!');
+  //     setIsLoggedIn(true);
 
-      // save email to local storage
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('userEmail', email);
+  //     // save email to local storage
+  //     localStorage.setItem('isLoggedIn', 'true');
+  //     localStorage.setItem('userEmail', email);
 
-      console.log(localStorage.getItem("userEmail"))
+  //     console.log(localStorage.getItem("userEmail"))
 
-      router.push('/');
-    } catch (error: any) {
-      setErrorMessage(error.message || 'An error occurred');
-    }
-  };
+  //     router.push('/');
+  //   } catch (error: any) {
+  //     setErrorMessage(error.message || 'An error occurred');
+  //   }
+  // };
   
 
   const handleToggle = () => {
@@ -115,7 +115,7 @@ const Login = () => {
           {passwordError && <p className={styles.error}>{passwordError}</p>}
         </div>
         <div className={styles.submitButtonContainer}>
-          <button onClick={handleLogin} className={styles.button}>Login</button>
+          {/* <button onClick={handleLogin} className={styles.button}>Login</button> */}
           {message && <span className={styles.message}>{message}</span>}
           {errorMessage && <span className={styles.errorMessage}>{errorMessage}</span>}
         </div>

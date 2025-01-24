@@ -50,12 +50,12 @@ const LoginPage = () => {
             <FaGithub className={styles.githubIcon}/>
             <span>Continue with Github</span>
           </div>
-          <div className={styles.separatorContainer}>
+          {/* <div className={styles.separatorContainer}>
             <div/>
               <span>or</span>
             <div/>
           </div>
-          <Login/>
+          <Login/> */}
         </div>
         <Link className={styles.textContainer} href="/signup">
           <span>Don't have an account?</span>

@@ -59,7 +59,7 @@ const SignupPage = () => {
               <FaGithub className={styles.githubIcon}/>
               <span>Continue with Github</span>
             </div>
-            <div className={styles.separatorContainer}>
+            {/* <div className={styles.separatorContainer}>
               <div/>
               <span>or</span>
               <div/>
@@ -67,7 +67,7 @@ const SignupPage = () => {
             <div className={`${styles.socialButton} ${styles.githubButton}`} onClick={handleClick}>
               <IoMailOutline className={styles.githubIcon}/>
               <span>Continue with Email</span>
-            </div>
+            </div> */}
           </div>
         ) : (
           <div className={styles.formContainer}>
