@@ -76,15 +76,24 @@ const MyTrackerPage: React.FC = () => {
 
   const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
+  console.log("isloggedIn", isLoggedIn)
+  console.log("session", session)
+  
+  useEffect(() => {
+    if (session?.user) {
+      console.log("email", session.user.email)
+    }
+  })
+
   useEffect(() => {
     if (status === 'loading') {
       // during loading, don't do anything yet
       return;
     }
   
-    if (status === 'unauthenticated' || !isLoggedIn) {
+    if (!isLoggedIn) {
       router.push('/'); 
-    } else if (status === 'authenticated' || isLoggedIn) {
+    } else if (isLoggedIn) {
       const fetchJobs = async () => {
         setLoading(true);
         try {
@@ -101,7 +110,6 @@ const MyTrackerPage: React.FC = () => {
       fetchJobs();
     }
   }, [status, isLoggedIn, router]);
-  
   
 
   const handleSearch = (query: string) => {

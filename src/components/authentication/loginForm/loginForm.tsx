@@ -56,6 +56,8 @@ const Login = () => {
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('userEmail', email);
 
+      console.log(localStorage.getItem("userEmail"))
+
       router.push('/');
     } catch (error: any) {
       setErrorMessage(error.message || 'An error occurred');

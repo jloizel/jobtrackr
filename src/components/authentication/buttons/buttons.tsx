@@ -5,17 +5,20 @@ import styles from "./buttons.module.css"
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useContext } from "react";
+import { useRouter } from "next/navigation";
 
 const AuthenticationButtons = () => {
   const { status } = useSession();
+  const router = useRouter();
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   
   const handleSignOut = async () => {
     await signOut(); 
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('userEmail');
-    
+
     setIsLoggedIn(false);
+    router.push('/'); 
   };
 
   return (
