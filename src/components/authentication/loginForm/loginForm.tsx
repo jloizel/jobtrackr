@@ -1,14 +1,11 @@
-import { loginUser } from '@/app/API';
 import { useContext, useState } from 'react';
 import { useRouter } from "next/navigation";
-import { AuthContext } from '@/providers/AuthProvider';
 import styles from "./loginForm.module.css"
 import { IoMdEyeOff } from "react-icons/io";
 import { IoMdEye } from "react-icons/io";
 
 const Login = () => {
   const router = useRouter();
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext); 
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

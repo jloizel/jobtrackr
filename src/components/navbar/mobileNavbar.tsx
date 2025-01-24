@@ -9,11 +9,9 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import Hamburger from "hamburger-react";
 import Drawer from "@mui/material/Drawer";
-import { AuthContext } from "@/providers/AuthProvider";
 
 const MobileNavbar = () => {
   const { data: session } = useSession();
-  const { isLoggedIn } = useContext(AuthContext); 
   const [menuOpen, setMenuOpen] = useState(false);
 
   // const links = [
@@ -88,7 +86,7 @@ const MobileNavbar = () => {
       >
         <div className={styles.drawerContent}>
           <div className={styles.linkContainer}>
-            {(session || isLoggedIn) && links.map((link) => (
+            {(session) && links.map((link) => (
               <div key={link.name} onClick={closeMenu}>
                 <Link href={link.path} className={styles.link}>
                   {link.name}

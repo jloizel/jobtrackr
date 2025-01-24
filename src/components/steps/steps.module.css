@@ -96,7 +96,7 @@
   text-align: center;
 
   @media (max-width: 767px) {
-    width: 90%;
+    /* width: 90%; */
     justify-self: center;
   }
 

@@ -1,11 +1,9 @@
 import React, { useContext } from "react";
 import styles from "./footer.module.css";
 import { useSession } from "next-auth/react";
-import { AuthContext } from "@/providers/AuthProvider";
 
 const Footer = () => {
   const { data: session } = useSession();
-  const { isLoggedIn } = useContext(AuthContext);
 
   const links1 = [
     {
@@ -59,7 +57,7 @@ const Footer = () => {
     },
   ];
 
-  const renderedLinks = isLoggedIn ? links1 : links2;
+  const renderedLinks = session ? links1 : links2;
   
   return (
     <div className={styles.container}>

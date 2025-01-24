@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, FormEvent, useRef, useContext } from 'react';
+import { useEffect, useState, FormEvent, useRef } from 'react';
 import styles from "./mytracker.module.css"
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -25,7 +25,6 @@ import { RiDragMove2Fill } from "react-icons/ri";
 import { jobStatuses } from '@/constants/jobStatuses';
 import Search from '@/components/mytrackerComponents/search/search';
 import Statistics from '@/components/mytrackerComponents/statistics/statistics';
-import { AuthContext } from '@/providers/AuthProvider';
 // import 'react-calendar/dist/Calendar.css';
 
 
@@ -46,7 +45,6 @@ export type Job = {
 
 const MyTrackerPage: React.FC = () => {
   const { data: session, status } = useSession();
-  const { isLoggedIn } = useContext(AuthContext); 
   const router = useRouter();
 
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -76,41 +74,26 @@ const MyTrackerPage: React.FC = () => {
 
   const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
-  console.log("isloggedIn", isLoggedIn)
-  console.log("session", session)
-  
   useEffect(() => {
-    if (session?.user) {
-      console.log("email", session.user.email)
-    }
-  })
-
-  useEffect(() => {
-    if (status === 'loading') {
-      // during loading, don't do anything yet
-      return;
-    }
-  
-    if (!isLoggedIn) {
-      router.push('/'); 
-    } else if (isLoggedIn) {
+    if (status === 'unauthenticated') {
+      router.push('/'); // redirect to homepage if not authenticated
+    } else if (status === 'authenticated') {
       const fetchJobs = async () => {
         setLoading(true);
         try {
           const userJobs = await getAllJobs();
           setJobs(userJobs);
-          setFilteredJobs(userJobs);
+          setFilteredJobs(userJobs)
         } catch (err) {
           setError('Failed to fetch jobs.');
         } finally {
           setLoading(false);
         }
       };
-  
+
       fetchJobs();
     }
-  }, [status, isLoggedIn, router]);
-  
+  }, [status]);
 
   const handleSearch = (query: string) => {
     const filtered = jobs.filter(
@@ -128,7 +111,6 @@ const MyTrackerPage: React.FC = () => {
   }
   
   const handleCreateJob = async (e: FormEvent) => {
-    e.preventDefault();
     setLoading(true);
     try {
       const jobData = {
@@ -143,13 +125,9 @@ const MyTrackerPage: React.FC = () => {
       };
   
       const job = await createJob(jobData);
-      
-      // Re-fetch jobs after creating a new one
-      const userJobs = await getAllJobs();
-      setJobs(userJobs);  // Update jobs state
-      setFilteredJobs(userJobs);  // Update filtered jobs state
+      setJobs((prevJobs) => [...prevJobs, job]); 
+      setFilteredJobs((prevJobs) => [...prevJobs, job]); 
   
-      // Clear input fields
       setTitle('');
       setCompany('');
       setSalary('');
@@ -167,7 +145,6 @@ const MyTrackerPage: React.FC = () => {
       setLoading(false);
     }
   };
-  
 
   useEffect(() => {
     setFilteredJobs(jobs);
@@ -193,6 +170,7 @@ const MyTrackerPage: React.FC = () => {
     }
   };
   
+
   const toggleRejectedVisibility = () => {
     setRejectedVisible((prev) => !prev);
   };
@@ -201,6 +179,7 @@ const MyTrackerPage: React.FC = () => {
     setSelectedJob(job);
     setUpdateModalOpen(true);
   };
+
 
   const handleUpdateJob = async (updatedJob: Job) => {
     setLoading(true);
@@ -333,7 +312,7 @@ const MyTrackerPage: React.FC = () => {
     setShowTracker(false)
   }
 
-  if (isLoggedIn) {
+  if (status === 'authenticated') {
     return (
       <div className={styles.tracker}>
         <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>

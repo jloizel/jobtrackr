@@ -11,11 +11,9 @@ import Link from "next/link";
 import Features from "@/components/features/features";
 import TestimonialsSlider from "@/components/testimonials/testimonialsSlider";
 import Steps from "@/components/steps/steps";
-import { AuthContext } from "@/providers/AuthProvider";
 
 export default function Home() {
   const { theme } = useContext(ThemeContext);
-  const { isLoggedIn } = useContext(AuthContext); 
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);

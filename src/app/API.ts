@@ -1,7 +1,9 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import { getSession } from 'next-auth/react';
 
 const BASE_URL = 'https://jobtrackr-server.vercel.app/'; 
 
+// Create an Axios instance with custom configurations
 const api: AxiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
@@ -9,12 +11,21 @@ const api: AxiosInstance = axios.create({
   },
 });
 
+// Function to get the user email from localStorage
+const getUserEmail = (): string | null => {
+  return localStorage.getItem('userEmail'); 
+};
+
+// Axios request interceptor to add Authorization header with the email
 api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('authToken'); 
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`; 
+  async (config) => {
+    const session = await getSession(); // Get the session using NextAuth
+    const email = session?.user?.email; // Extract the user's email
+
+    if (email) {
+      config.headers['Authorization'] = `email ${email}`; // Add email to headers
     }
+
     return config;
   },
   (error) => {
@@ -22,23 +33,9 @@ api.interceptors.request.use(
   }
 );
 
-const getUserEmail = (): string | null => {
-  return localStorage.getItem('userEmail'); 
-};
-
-api.interceptors.request.use((config) => {
-  const email = getUserEmail(); 
-  if (email) {
-    config.headers['Authorization'] = `email ${email}`; 
-  }
-  return config;
-}, (error) => {
-  return Promise.reject(error);
-});
-
 export default api;
 
-
+// Define types for request data and response data
 export interface Job {
   _id: string;
   userEmail?: string;
@@ -54,6 +51,7 @@ export interface Job {
   updatedAt: string
 }
 
+// Create a new job
 export const createJob = async (jobData: {
   status: string;  
   title: string;
@@ -73,7 +71,7 @@ export const createJob = async (jobData: {
 };
 
 
-// get a job by ID
+// Get a job by ID
 export const getJobById = async (jobId: string): Promise<Job | null> => {
   try {
     const response: AxiosResponse<{ job: Job }> = await api.get(`/jobs/get/${jobId}`);
@@ -90,7 +88,7 @@ export const getJobById = async (jobId: string): Promise<Job | null> => {
   }
 };
 
-// get all jobs
+// Get all jobs
 export const getAllJobs = async (): Promise<Job[]> => {
   try {
     const response: AxiosResponse<{ jobs: Job[] }> = await api.get('/jobs/get');
@@ -101,7 +99,7 @@ export const getAllJobs = async (): Promise<Job[]> => {
   }
 };
 
-// update a job
+// Update a job
 export const updateJob = async (jobId: string, jobData: {
   status: string;  
   title: string;
@@ -120,7 +118,7 @@ export const updateJob = async (jobId: string, jobData: {
   }
 };
 
-// delete a job
+// Delete a job
 export const deleteJob = async (jobId: string): Promise<{ message: string }> => {
   try {
     const response: AxiosResponse<{ message: string }> = await api.delete(`/jobs/delete/${jobId}`);
@@ -133,11 +131,11 @@ export const deleteJob = async (jobId: string): Promise<{ message: string }> => 
 export interface FileData {
   _id: string;
   fileName: string;
-  fileData: string;
+  fileData: string; // Base64 encoded file data
   uploadDate: string;
 }
 
-// upload a file (PDF)
+// Upload a file (PDF)
 export const uploadCV = async (file: File): Promise<{ message: string }> => {
   try {
     const formData = new FormData();
@@ -159,7 +157,7 @@ export const uploadCV = async (file: File): Promise<{ message: string }> => {
   }
 };
 
-// get files for the logged-in user
+// Get files for the logged-in user
 export const getCVs = async (): Promise<FileData[]> => {
   try {
     const email = getUserEmail();
@@ -176,10 +174,10 @@ export const getCVs = async (): Promise<FileData[]> => {
   }
 };
 
-export const deleteCV = async (email: string, fileId: string): Promise<{ message: string }> => {
+export const deleteCV = async (email: string, fileName?: string): Promise<{ message: string }> => {
   try {
     const response = await api.delete('/cv/delete', {
-      data: { email, id: fileId },
+      data: { email, fileName }, 
     });
     return response.data;
   } catch (error) {
@@ -208,7 +206,7 @@ export const uploadCL = async (file: File): Promise<{ message: string }> => {
   }
 };
 
-// get files for the logged-in user
+// Get files for the logged-in user
 export const getCLs = async (): Promise<FileData[]> => {
   try {
     const email = getUserEmail();
@@ -225,64 +223,15 @@ export const getCLs = async (): Promise<FileData[]> => {
   }
 };
 
-export const deleteCL = async (email: string, fileId: string): Promise<{ message: string }> => {
+export const deleteCL = async (email: string, fileName?: string): Promise<{ message: string }> => {
   try {
     const response = await api.delete('/cl/delete', {
-      data: { email, id: fileId }, 
+      data: { email, fileName }, 
     });
     return response.data;
   } catch (error) {
     throw error;
   }
 };
-
-// user registration
-export const registerUser = async (userData: {
-  email: string;
-  password: string;
-}): Promise<{ message: string }> => {
-  try {
-    const response: AxiosResponse<{ message: string }> = await api.post('/auth/register', userData);
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response) {
-      throw new Error(error.response.data.message || 'Registration failed');
-    }
-    throw error;
-  }
-};
-
-// login registered user
-export const loginUser = async (userData: {
-  email: string;
-  password: string;
-}): Promise<{ token: string }> => {
-  try {
-    const response: AxiosResponse<{ token: string }> = await api.post('/auth/login', userData);
-    const { token } = response.data;
-
-    // Check if we're on the client side before using localStorage
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('authToken', token);
-      localStorage.setItem('userEmail', userData.email);
-    }
-
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response) {
-      throw new Error(error.response.data.message || 'Login failed');
-    }
-    throw error;
-  }
-};
-
-
-// logout the user
-export const logoutUser = (): void => {
-  localStorage.removeItem('authToken');
-  localStorage.removeItem('userEmail');
-};
-
-
 
 

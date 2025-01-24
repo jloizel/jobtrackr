@@ -10,17 +10,15 @@ import Link from "next/link";
 import ThemeToggle from "@/components/themeToggle/themeToggle";
 import ClipLoader from "react-spinners/ClipLoader";
 import Login from "@/components/authentication/loginForm/loginForm";
-import { AuthContext } from "@/providers/AuthProvider";
 
 const LoginPage = () => {
   const { status, data: session } = useSession();
   const router = useRouter();
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext); 
 
   const [showForm, setShowForm] = useState(false)
   
   useEffect(() => {
-    if (isLoggedIn || session) {
+    if (session) {
       router.push("/");
     }
   }, [status, router]);

@@ -7,12 +7,10 @@ import styles from "./navbar.module.css"
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useContext } from "react";
-import { AuthContext } from "@/providers/AuthProvider";
 
 const Navbar = () => {
   
   const { data: session } = useSession();
-  const { isLoggedIn } = useContext(AuthContext); 
 
 
   // const links = [
@@ -37,7 +35,7 @@ const Navbar = () => {
         </div>
       </Link>
       <div className={styles.linkContainer}>
-        { (session || isLoggedIn) && links.map((link) => (
+        { session && links.map((link) => (
           <div key={link.name}>
             <Link href={link.path} className={styles.link}>
               {link.name}

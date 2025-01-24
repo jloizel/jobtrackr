@@ -16,14 +16,12 @@ import { format, formatDistanceToNow } from "date-fns";
 import { IoMdDownload } from "react-icons/io";
 import UploadForm from "@/components/fileUploadForm/fileUploadForm";
 import { useRouter } from "next/navigation";
-import { AuthContext } from "@/providers/AuthProvider";
 
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const MyCVPage = () => {
   const { data: session } = useSession();
-  const { isLoggedIn } = useContext(AuthContext); 
   const router = useRouter();
 
   const [files, setFiles] = useState<FileData[]>([]);
@@ -37,10 +35,10 @@ const MyCVPage = () => {
   const maxFiles = 2;
 
    useEffect(() => {
-      if (!isLoggedIn) {
+      if (!session) {
         router.push("/");
       }
-    }, [isLoggedIn, router]);
+    }, [session, router]);
 
   const fetchFiles = async () => {
     if (!session?.user?.email) return;
