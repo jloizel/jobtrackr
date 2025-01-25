@@ -2,7 +2,7 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/jloizel/hackrApp">
+  <a href="https://github.com/jloizel/jobtrackr">
     <img src="" alt="Logo" width="auto" height="300">
   </a>
 
