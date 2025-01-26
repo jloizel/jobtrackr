@@ -15,7 +15,6 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [type, setType] = useState('password');
   const [passwordFocused, setPasswordFocused] = useState(false);
-  const [disableButton, setDisabledButton] = useState(true);
 
   // const handleLogin = async () => {
   //   let hasError = false;
