@@ -21,7 +21,7 @@ import { useRouter } from "next/navigation";
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const MyCVPage = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
 
   const [files, setFiles] = useState<FileData[]>([]);
@@ -34,11 +34,12 @@ const MyCVPage = () => {
   const [hoveredDownloadButton, setHoveredDownloadButton] = useState<string | null>(null);
   const maxFiles = 2;
 
-   useEffect(() => {
-      if (!session) {
-        router.push("/");
-      }
-    }, [session, router]);
+  useEffect(() => {
+    if (status === "loading") return;
+    if (!session) {
+      router.push("/"); 
+    }
+  }, [session, status, router]);
 
   const fetchFiles = async () => {
     if (!session?.user?.email) return;
@@ -109,7 +110,7 @@ const MyCVPage = () => {
   return (
     <div className={styles.pageContainer}>
       <div className={styles.pageHeader}>My CV Files</div>
-      {isLoading ? (
+      {isLoading || status === "loading"? (
         <div className={styles.loaderContainer}>
           <ClipLoader color={"#00a6ff"}/>
         </div>
