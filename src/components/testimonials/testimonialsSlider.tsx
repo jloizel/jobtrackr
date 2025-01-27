@@ -56,6 +56,7 @@ const TestimonialsSlider: React.FC = ({}) => {
         speed={800}
         onSwiper={setSwiperInstance}
         loop={true}
+        autoHeight={true}
       >
         {data.map((testimonial, index) => (
           <SwiperSlide key={testimonial.id} className={styles.swiperSlide}>
