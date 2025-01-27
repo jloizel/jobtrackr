@@ -141,7 +141,8 @@ export const uploadCV = async (file: File): Promise<{ message: string }> => {
     const formData = new FormData();
     formData.append('file', file);
 
-    const email = getUserEmail();
+    const session = await getSession();
+    const email = session?.user?.email; 
     if (email) {
       formData.append('email', email);
     } else {
@@ -160,7 +161,8 @@ export const uploadCV = async (file: File): Promise<{ message: string }> => {
 // Get files for the logged-in user
 export const getCVs = async (): Promise<FileData[]> => {
   try {
-    const email = getUserEmail();
+    const session = await getSession();
+    const email = session?.user?.email; 
     if (!email) {
       throw new Error('User email is not available');
     }
@@ -174,8 +176,14 @@ export const getCVs = async (): Promise<FileData[]> => {
   }
 };
 
-export const deleteCV = async (email: string, fileName?: string): Promise<{ message: string }> => {
+export const deleteCV = async (fileName: string): Promise<{ message: string }> => {
   try {
+    const session = await getSession();
+    const email = session?.user?.email; 
+    if (!email) {
+      throw new Error('User email is not available');
+    }
+
     const response = await api.delete('/cv/delete', {
       data: { email, fileName }, 
     });
@@ -190,7 +198,8 @@ export const uploadCL = async (file: File): Promise<{ message: string }> => {
     const formData = new FormData();
     formData.append('file', file);
 
-    const email = getUserEmail();
+    const session = await getSession();
+    const email = session?.user?.email; 
     if (email) {
       formData.append('email', email);
     } else {
@@ -209,7 +218,8 @@ export const uploadCL = async (file: File): Promise<{ message: string }> => {
 // Get files for the logged-in user
 export const getCLs = async (): Promise<FileData[]> => {
   try {
-    const email = getUserEmail();
+    const session = await getSession();
+    const email = session?.user?.email; 
     if (!email) {
       throw new Error('User email is not available');
     }
@@ -223,8 +233,14 @@ export const getCLs = async (): Promise<FileData[]> => {
   }
 };
 
-export const deleteCL = async (email: string, fileName?: string): Promise<{ message: string }> => {
+export const deleteCL = async (fileName: string): Promise<{ message: string }> => {
   try {
+    const session = await getSession();
+    const email = session?.user?.email; 
+    if (!email) {
+      throw new Error('User email is not available');
+    }
+
     const response = await api.delete('/cl/delete', {
       data: { email, fileName }, 
     });

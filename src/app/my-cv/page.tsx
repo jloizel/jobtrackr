@@ -78,7 +78,7 @@ const MyCVPage = () => {
   
     setIsLoading(true);
     try {
-      const response = await deleteCV(session.user.email, fileId);
+      const response = await deleteCV(fileId);
   
       const updatedFiles = files.filter((file) => file._id !== fileId);
       setFiles(updatedFiles);
@@ -187,7 +187,12 @@ const MyCVPage = () => {
           </div>
           
           <div className={`${styles.formContainer} ${numFiles === 0 ? styles.emptyFormContainer : styles.notEmptyFormContainer}`}>
-          {(!files.length || canUpload) && <UploadForm onFileUpload={fetchFiles} uploadHandler={uploadCV} numFiles={numFiles}/>}
+          {(!files.length || canUpload) && session?.user?.email &&
+            <UploadForm 
+              onFileUpload={fetchFiles} 
+              uploadHandler={uploadCV}
+              numFiles={numFiles}
+            />}
           </div>
         </div>
       )}
