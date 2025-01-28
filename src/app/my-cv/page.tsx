@@ -35,7 +35,8 @@ const MyCVPage = () => {
   const maxFiles = 2;
 
   useEffect(() => {
-    if (status === "loading") return;
+    if (status === "loading") 
+      return;
     if (!session) {
       router.push("/"); 
     }
@@ -97,14 +98,6 @@ const MyCVPage = () => {
       ...prev,
       [fileName]: pdf.numPages,
     }));
-  };
-
-  const prevPage = () => {
-    setPageNumber(pageNumber <= 1 ? 1 : pageNumber - 1);
-  };
-
-  const nextPage = () => {
-    setPageNumber(pageNumber >= Math.max(...Object.values(pdfPageCounts)) ? pageNumber : pageNumber + 1);
   };
 
   return (

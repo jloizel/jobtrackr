@@ -33,10 +33,12 @@ const MyCoverLetterPage = () => {
   const maxFiles = 2;
 
   useEffect(() => {
-    if (!session) {
-      router.push("/");
-    }
-  }, [session, router]);
+      if (status === "loading") 
+        return;
+      if (!session) {
+        router.push("/"); 
+      }
+    }, [session, status, router]);
 
   const fetchFiles = async () => {
     if (!session?.user?.email) return;
@@ -100,7 +102,7 @@ const MyCoverLetterPage = () => {
   return (
     <div className={styles.pageContainer}>
       <div className={styles.pageHeader}>My Cover Letter Files</div>
-      {isLoading ? (
+      {isLoading || status === "loading"? (
         <div className={styles.loaderContainer}>
           <ClipLoader color={"#00a6ff"}/>
         </div>
@@ -160,7 +162,12 @@ const MyCoverLetterPage = () => {
           </div>
           
           <div className={`${styles.formContainer} ${numFiles === 0 ? styles.emptyFormContainer : styles.notEmptyFormContainer}`}>
-          {(!files.length || canUpload) && <UploadForm onFileUpload={fetchFiles} uploadHandler={uploadCL} numFiles={numFiles}/>}
+          {(!files.length || canUpload) && session?.user?.email &&
+            <UploadForm 
+              onFileUpload={fetchFiles} 
+              uploadHandler={uploadCL}
+              numFiles={numFiles}
+            />}
           </div>
         </div>
       )}
