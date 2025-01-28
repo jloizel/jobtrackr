@@ -76,7 +76,7 @@ const MyCoverLetterPage = () => {
   
     setIsLoading(true);
     try {
-      const response = await deleteCL(session.user.email, fileId);
+      const response = await deleteCL(fileId);
   
       const updatedFiles = files.filter((file) => file._id !== fileId);
       setFiles(updatedFiles);
