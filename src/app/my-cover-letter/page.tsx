@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const MyCoverLetterPage = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
 
   const [files, setFiles] = useState<FileData[]>([]);
