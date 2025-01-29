@@ -25,22 +25,7 @@ type JobModalProps = {
   jobStatus: string;
 };
 
-export const JobModal: React.FC<JobModalProps> = ({
-  open,
-  onClose,
-  onSubmit,
-  title,
-  setTitle,
-  setCompany,
-  setLogoUrl,
-  salary,
-  setSalary,
-  location,
-  setLocation,
-  postUrl,
-  setPostUrl,
-  jobStatus
-}) => {
+export const JobModal: React.FC<JobModalProps> = ({open, onClose, onSubmit, title, setTitle, setCompany, setLogoUrl, salary, setSalary, location, setLocation, postUrl, setPostUrl, jobStatus}) => {
   
   const handleCompanySelect = (data: { value: string; query?: { name: string; domain: string; icon: string } }) => {
     if (data.query) {
@@ -81,13 +66,25 @@ export const JobModal: React.FC<JobModalProps> = ({
 
   const jobStatusDetails = getJobStatusDetails(jobStatus);
 
+  const resetForm = () => {
+    setTitle("");
+    setSalary("");
+    setLocation("");
+    setPostUrl("");
+  }
+
+  const handleModalClose = () => {
+    onClose();
+    resetForm();
+  }
+
   return (
-    <Modal open={open} className={styles.modalWrapper} onClose={onClose} disableScrollLock>
+    <Modal open={open} className={styles.modalWrapper} onClose={handleModalClose} disableScrollLock>
       <div className={styles.modalContent}>
         <form onSubmit={onSubmit}>
           <div className={styles.modalHeader}>
             Add Job
-            <IoMdClose className={styles.closeIcon} onClick={onClose} />
+            <IoMdClose className={styles.closeIcon} onClick={handleModalClose} />
           </div>
           <div className={styles.formContent}>
             {jobStatusDetails && (

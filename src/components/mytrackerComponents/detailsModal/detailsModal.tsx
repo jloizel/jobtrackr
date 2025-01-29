@@ -33,25 +33,7 @@ type DetailsModalProps = {
   handleDeleteJob: (jobId: string) => void
 };
 
-export const DetailsModal: React.FC<DetailsModalProps> = ({
-  open,
-  onClose,
-  job,
-  createdAt,
-  updatedAt,
-  title,
-  setTitle,
-  company,
-  setCompany,
-  logoUrl,
-  setLogoUrl,
-  salary,
-  setSalary,
-  location,
-  setLocation,
-  postUrl,
-  setPostUrl,
-}) => {
+export const DetailsModal: React.FC<DetailsModalProps> = ({open, onClose, job, createdAt, updatedAt, title, setTitle, company, setCompany, logoUrl, setLogoUrl, salary, setSalary, location, setLocation, postUrl, setPostUrl}) => {
 
   useEffect(() => {
     if (job && open) {
