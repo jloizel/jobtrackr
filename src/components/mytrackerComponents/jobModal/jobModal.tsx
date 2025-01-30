@@ -33,7 +33,7 @@ export const JobModal: React.FC<JobModalProps> = ({open, onClose, onSubmit, titl
     if (data.query) {
       setCompany(data.query.name);
       setLogoUrl(data.query.icon);
-      console.log(`https://cdn.brandfetch.io/${data.query.domain}?c=${apiKey}`)
+      // console.log(`https://cdn.brandfetch.io/${data.query.domain}?c=${apiKey}`)
     }
   };
 
