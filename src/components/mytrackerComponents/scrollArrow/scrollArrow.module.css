@@ -10,7 +10,7 @@
   align-items: center;
   width: 3em ; 
   height: 3em;
-  background-color: white; 
+  background-color: var(--scrollarrow-bg-color); 
 }
 
 .arrowContainer.show {

@@ -21,7 +21,8 @@
   --footer-color: #7e8aad;
   --credit-bar-bg: #06283D;
   --disabled-arrow-color: #7e8aad9c;
-  --feature-bg-color: #f5f5f59a;
+  --feature-bg-color: #d3d3d3a7;
+  --scrollarrow-bg-color: #a9a9a934;
 }
 
 [data-theme="dark"] {
@@ -41,6 +42,7 @@
   --credit-bar-bg: #fbfbff;
   --disabled-arrow-color: #f5f5f59a;
   --feature-bg-color: #0f3851a1;
+  --scrollarrow-bg-color: #283452;
 }
 
 html,
