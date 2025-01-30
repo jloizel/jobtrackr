@@ -25,12 +25,15 @@ type JobModalProps = {
   jobStatus: string;
 };
 
+const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
+
 export const JobModal: React.FC<JobModalProps> = ({open, onClose, onSubmit, title, setTitle, setCompany, setLogoUrl, salary, setSalary, location, setLocation, postUrl, setPostUrl, jobStatus}) => {
   
   const handleCompanySelect = (data: { value: string; query?: { name: string; domain: string; icon: string } }) => {
     if (data.query) {
       setCompany(data.query.name);
       setLogoUrl(data.query.icon);
+      console.log(`https://cdn.brandfetch.io/${data.query.domain}?c=${apiKey}`)
     }
   };
 

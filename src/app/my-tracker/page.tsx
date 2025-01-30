@@ -343,6 +343,8 @@ const MyTrackerPage: React.FC = () => {
             setTitle={setTitle}
             setCompany={setCompany}
             setLogoUrl={setLogoUrl}
+            // domain={domain}
+            // setDomain={setDomain}
             salary={salary}
             setSalary={setSalary}
             location={location}
