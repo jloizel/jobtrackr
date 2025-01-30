@@ -15,6 +15,7 @@
   width: 100%;
   box-shadow: var(--mytracker-bs-color) 0px 3px 6px;
   margin-bottom: 40px;
+  /* position: relative; */
 }
 
 .headerContainer {

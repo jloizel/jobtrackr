@@ -46,7 +46,7 @@ const MobileNavbar = () => {
   };
 
   return (
-    <div className={styles.navbar}>
+    <div className={styles.navbar} id="navbar">
       <Link className={styles.title} href={"/"}>
         <GiFishing className={styles.icon} />
         <div className={styles.text}>

@@ -25,6 +25,7 @@ import { RiDragMove2Fill } from "react-icons/ri";
 import { jobStatuses } from '@/constants/jobStatuses';
 import Search from '@/components/mytrackerComponents/search/search';
 import Statistics from '@/components/mytrackerComponents/statistics/statistics';
+import ScrollArrow from '@/components/mytrackerComponents/scrollArrow/scrollArrow';
 // import 'react-calendar/dist/Calendar.css';
 
 
@@ -314,9 +315,9 @@ const MyTrackerPage: React.FC = () => {
     setShowTracker(false)
   }
 
-  if (status === 'authenticated') {
+  if (session) {
     return (
-      <div className={styles.tracker}>
+      <div className={styles.tracker} id="tracker">
         <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
           <div className={styles.headerContainer}>
             <div 
@@ -536,6 +537,7 @@ const MyTrackerPage: React.FC = () => {
             <Statistics jobs={jobs}/>
           )}
         </DragDropContext>
+        <ScrollArrow/>
       </div>
     );
   }
