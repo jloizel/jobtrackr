@@ -45,8 +45,8 @@ export const Autocomplete = ({ onSubmit, placeholder, initialValue }: IAutocompl
   const handleClick = (query: TQuery) => {
     onSubmit({ value: value.text, query, queries });
     setValue({ text: query.name, active: false });
-    // setIcon({ text: `https://cdn.brandfetch.io/${query.domain}c=${apiKey}`, active: true });
-    setIcon({ text: query.icon, active: true });
+    setIcon({ text: `https://cdn.brandfetch.io/${query.domain}?c=${apiKey}`, active: true });
+    // setIcon({ text: query.icon, active: true });
   };
 
   const reset = () => {

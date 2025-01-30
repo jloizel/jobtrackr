@@ -75,9 +75,11 @@ const MyTrackerPage: React.FC = () => {
   const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
   useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/'); // redirect to homepage if not authenticated
-    } else if (status === 'authenticated') {
+    if (status === "loading") 
+      return;
+    if (!session) {
+      router.push("/"); 
+    } else if (session) {
       const fetchJobs = async () => {
         setLoading(true);
         try {
@@ -276,7 +278,7 @@ const MyTrackerPage: React.FC = () => {
   };
   
   
-  if (status === 'loading') {
+  if (loading || status === 'loading') {
     return <div className={styles.loading}><ClipLoader color={"#00a6ff"}/></div>;
   }
 
