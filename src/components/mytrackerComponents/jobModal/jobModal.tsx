@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { Modal } from "@mui/material";
 import { IoMdClose } from "react-icons/io";
 import { Autocomplete } from "@/components/mytrackerComponents/autocomplete/autocomplete";
@@ -6,6 +6,7 @@ import styles from "./jobModal.module.css";
 import { MdEvent } from "react-icons/md";
 import { FaPaperPlane, FaHandshake, FaTimes } from "react-icons/fa";
 import { jobStatuses } from "@/constants/jobStatuses";
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
 
 type JobModalProps = {
@@ -23,11 +24,12 @@ type JobModalProps = {
   postUrl: string;
   setPostUrl: React.Dispatch<React.SetStateAction<string>>;
   jobStatus: string;
+  jobTitles: string[];
 };
 
 const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
-export const JobModal: React.FC<JobModalProps> = ({open, onClose, onSubmit, title, setTitle, setCompany, setLogoUrl, salary, setSalary, location, setLocation, postUrl, setPostUrl, jobStatus}) => {
+export const JobModal: React.FC<JobModalProps> = ({open, onClose, onSubmit, title, setTitle, setCompany, setLogoUrl, salary, setSalary, location, setLocation, postUrl, setPostUrl, jobStatus, jobTitles}) => {
   
   const handleCompanySelect = (data: { value: string; query?: { name: string; domain: string; icon: string } }) => {
     if (data.query) {
@@ -80,6 +82,34 @@ export const JobModal: React.FC<JobModalProps> = ({open, onClose, onSubmit, titl
     resetForm();
   }
 
+  const jobTitleOptions = [...new Set(jobTitles)].map((title, index) => ({
+    id: index + 1,
+    name: title,
+  }));
+
+  const handleOnSearch = (string: string, results: any) => {
+    if (string.length < 3) return; // prevent search before 3 characters
+    console.log(string, results);
+  };
+
+  const handleOnHover = (result: { id: number; name: string; }) => {
+    // the item hovered
+    console.log(result)
+  }
+
+  const handleOnSelect = (item: any) => {
+    // the item selected
+    console.log(item)
+  }
+
+  const formatResult = (item: any) => {
+    return (
+      <span className={styles.itemName}>
+        {item.name}
+      </span>
+    )
+  }
+
   return (
     <Modal open={open} className={styles.modalWrapper} onClose={handleModalClose} disableScrollLock>
       <div className={styles.modalContent}>
@@ -108,6 +138,24 @@ export const JobModal: React.FC<JobModalProps> = ({open, onClose, onSubmit, titl
                 className={styles.input}
                 placeholder="Enter the job title"
                 required
+              />
+              <ReactSearchAutocomplete
+                items={jobTitleOptions}
+                onSearch={handleOnSearch}
+                onSelect={handleOnSelect}
+                formatResult={formatResult}
+                fuseOptions={{minMatchCharLength: 3, threshold: 3}}
+                showIcon={false}
+                placeholder={"Enter the job title"}
+                showNoResults={false}
+                showClear={false}
+                autoFocus={false}
+                styling={{
+                  backgroundColor: "",
+                  hoverBackgroundColor: "",
+                  borderRadius: "5",
+                  boxShadow: "rgba(25, 4, 69, 0.05) 0px 1px 4px",
+                }}              
               />
             </div>
             <div className={styles.formInput}>

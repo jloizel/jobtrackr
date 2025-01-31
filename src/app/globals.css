@@ -172,3 +172,59 @@ a {
   position: fixed  !important;
   width: 100%;
 }
+
+/* autocomplete in job modal */
+
+.irCRfw .wrapper {
+  border: 1px solid #dfdfe2b4;
+  box-shadow: rgba(25, 4, 69, 0.05) 0px 1px 4px;
+  border-radius: 5px;
+  background-color: var(--mytracker-bg-color);
+}
+
+.dYrfwz {
+  font-size: 14px;
+  border-radius: 5px;
+  width: 100%;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  color: var(--primary-text-color);
+  background: none;
+  min-height: 10px !important;
+  background-color: var(--mytracker-bg-color);
+}
+
+.dYrfwz:hover {
+  box-shadow: none !important;
+}
+
+.dYrfwz input {
+  padding: 10px 10px !important;
+  border-radius: 5px;
+}
+
+.dYrfwz input:focus {
+  outline: solid 2px #00a6ff;
+}
+
+.dYrfwz input::placeholder { 
+  font-family: "Roboto", sans-serif !important;
+  color: #7e8aad !important;
+}
+
+.htUpZj div.line {
+  border-top: none !important;
+  margin-top: 10px !important;
+}
+
+.htUpZj ul li {
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:-ms-flexbox;
+  display:flex;
+  -webkit-align-items:left !important;
+  -webkit-box-align:left !important;
+  -ms-flex-align:left !important;
+  align-items:left !important;
+  padding:4px 0 4px 0;
+}

@@ -89,6 +89,17 @@
   color: var(--primary-text-color);
 }
 
+.itemName {
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--primary-text-color);
+  text-align: left;
+  align-items: left;
+  display: flex;
+  align-items: flex-start;
+  justify-content: left;
+}
+
 .input {
   font-size: 14px;
   display: flex;

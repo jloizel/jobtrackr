@@ -72,6 +72,7 @@ const MyTrackerPage: React.FC = () => {
   const [showStats, setShowStats] = useState(false);
   const [showTracker, setShowTracker] = useState(true);
   const [draggedJobId, setDraggedJobId] = useState<string | null>(null);
+  const [jobTitles, setJobTitles] = useState([""]);
 
   const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
@@ -97,6 +98,14 @@ const MyTrackerPage: React.FC = () => {
       fetchJobs();
     }
   }, [status]);
+
+  useEffect(() => {
+    if (jobs) {
+      setJobTitles([...new Set(jobs.map(job => job.title))])
+    }
+  }, [jobs])
+
+  console.log(jobTitles)
 
   const handleSearch = (query: string) => {
     const filtered = jobs.filter(
@@ -355,6 +364,7 @@ const MyTrackerPage: React.FC = () => {
             postUrl={postUrl}
             setPostUrl={setPostUrl}
             jobStatus={jobStatus}
+            jobTitles={jobTitles}
           />
 
           <UpdateModal
