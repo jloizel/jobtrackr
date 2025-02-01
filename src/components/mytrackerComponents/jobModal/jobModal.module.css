@@ -93,11 +93,14 @@
   font-weight: 500;
   font-size: 15px;
   color: var(--primary-text-color);
-  text-align: left;
-  align-items: left;
+  padding: 5px 10px;
   display: flex;
-  align-items: flex-start;
-  justify-content: left;
+  width: 100%;
+  cursor: pointer;
+}
+
+.itemName:hover {
+  background: var(--mytracker-card-border-color);
 }
 
 .input {

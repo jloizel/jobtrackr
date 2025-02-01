@@ -89,18 +89,7 @@ export const JobModal: React.FC<JobModalProps> = ({open, onClose, onSubmit, titl
 
   const handleOnSearch = (string: string, results: any) => {
     if (string.length < 3) return; // prevent search before 3 characters
-    console.log(string, results);
   };
-
-  const handleOnHover = (result: { id: number; name: string; }) => {
-    // the item hovered
-    console.log(result)
-  }
-
-  const handleOnSelect = (item: any) => {
-    // the item selected
-    console.log(item)
-  }
 
   const formatResult = (item: any) => {
     return (
@@ -131,20 +120,28 @@ export const JobModal: React.FC<JobModalProps> = ({open, onClose, onSubmit, titl
             </div>
             <div className={styles.formInput}>
               <span>Job Title</span>
-              <input
+              {/* <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className={styles.input}
                 placeholder="Enter the job title"
                 required
-              />
+              /> */}
               <ReactSearchAutocomplete
                 items={jobTitleOptions}
-                onSearch={handleOnSearch}
-                onSelect={handleOnSelect}
+                inputSearchString={title}
+                onSearch={(string, results) => setTitle(string)} 
+                onSelect={(item) => setTitle(item.name)}
                 formatResult={formatResult}
-                fuseOptions={{minMatchCharLength: 3, threshold: 3}}
+                fuseOptions={{
+                  minMatchCharLength: 3,
+                  threshold: 0.2,
+                  distance: 100,
+                  findAllMatches: false, 
+                  useExtendedSearch: true,
+                  keys: ["name"],
+                }}
                 showIcon={false}
                 placeholder={"Enter the job title"}
                 showNoResults={false}

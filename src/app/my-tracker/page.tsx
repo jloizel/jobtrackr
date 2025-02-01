@@ -99,13 +99,11 @@ const MyTrackerPage: React.FC = () => {
     }
   }, [status]);
 
-  useEffect(() => {
-    if (jobs) {
-      setJobTitles([...new Set(jobs.map(job => job.title))])
-    }
-  }, [jobs])
-
-  console.log(jobTitles)
+  // useEffect(() => {
+  //   if (jobs) {
+  //     setJobTitles([...new Set(jobs.map(job => job.title))])
+  //   }
+  // }, [jobs])
 
   const handleSearch = (query: string) => {
     const filtered = jobs.filter(
@@ -138,7 +136,8 @@ const MyTrackerPage: React.FC = () => {
   
       const job = await createJob(jobData);
       setJobs((prevJobs) => [...prevJobs, job]); 
-      setFilteredJobs((prevJobs) => [...prevJobs, job]); 
+      setFilteredJobs((prevJobs) => [...prevJobs, job]);
+      setJobTitles((prevTitles) => [...new Set([...prevTitles, job.title])]); 
   
       setTitle('');
       setCompany('');
