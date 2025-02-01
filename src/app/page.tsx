@@ -11,6 +11,7 @@ import Link from "next/link";
 import Features from "@/components/features/features";
 import TestimonialsSlider from "@/components/testimonials/testimonialsSlider";
 import Steps from "@/components/steps/steps";
+import Slide from "@/components/scrollAnimations/slide";
 
 export default function Home() {
   const { theme } = useContext(ThemeContext);
@@ -43,9 +44,11 @@ export default function Home() {
         </div>
       </div>
       <FeaturesBoard/>
-      <div className={styles.title}>
+      <Slide className={styles.title}>
+      {/* <div className={styles.title}> */}
         JobTrackr’s intuitive tools will help you <span>stay on top</span> of your job applications. Easily <span>manage and track</span> every detail of your job search, so you can focus on <span>what matters most</span>.
-      </div>
+      {/* </div> */}
+      </Slide>
       <Features/>
       {/* <Testimonials/> */}
       <div className={styles.testimonials}>

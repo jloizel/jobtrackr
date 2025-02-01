@@ -3,6 +3,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styles from "./features.module.css"
 import { ThemeContext } from '@/utils/theme';
+import Bounce from '../scrollAnimations/bounce';
 
 
 const Features = () => {
@@ -41,10 +42,14 @@ const Features = () => {
         const selectedImage = theme === 'dark' ? feature.darkImage : feature.lightImage;
 
         return (
-          <div
+          <Bounce 
             key={feature.id}
             className={styles.featureContainer}
           >
+          {/* <div
+            key={feature.id}
+            className={styles.featureContainer}
+          > */}
             <div className={styles.imageBackground} style={{border: `solid 2px ${feature.borderColor}`}}>
               <div className={styles.imageContainer}>
                 <img src={selectedImage} alt={feature.header} />
@@ -66,7 +71,8 @@ const Features = () => {
               >{feature.buttonText}
               </button>
             </div>
-          </div>
+          {/* </div> */}
+          </Bounce>
         );
       })}
     </div>

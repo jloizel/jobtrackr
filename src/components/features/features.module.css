@@ -29,6 +29,16 @@
   }
 }
 
+.bounce {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 30px;
+}
+
+.bounce:nth-child(odd) {
+  flex-direction: row;
+}
+
 .imageBackground {
   /* width: 65%; */
   border-radius: 8px;
