@@ -176,7 +176,7 @@ export const getCVs = async (): Promise<FileData[]> => {
   }
 };
 
-export const deleteCV = async (fileName: string): Promise<{ message: string }> => {
+export const deleteCV = async (id: string): Promise<{ message: string }> => {
   try {
     const session = await getSession();
     const email = session?.user?.email; 
@@ -185,7 +185,7 @@ export const deleteCV = async (fileName: string): Promise<{ message: string }> =
     }
 
     const response = await api.delete('/cv/delete', {
-      data: { email, fileName }, 
+      data: { email, id }, 
     });
     return response.data;
   } catch (error) {
@@ -233,7 +233,7 @@ export const getCLs = async (): Promise<FileData[]> => {
   }
 };
 
-export const deleteCL = async (fileName: string): Promise<{ message: string }> => {
+export const deleteCL = async (id: string): Promise<{ message: string }> => {
   try {
     const session = await getSession();
     const email = session?.user?.email; 
@@ -242,7 +242,7 @@ export const deleteCL = async (fileName: string): Promise<{ message: string }> =
     }
 
     const response = await api.delete('/cl/delete', {
-      data: { email, fileName }, 
+      data: { email, id }, 
     });
     return response.data;
   } catch (error) {

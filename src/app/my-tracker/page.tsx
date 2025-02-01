@@ -73,37 +73,40 @@ const MyTrackerPage: React.FC = () => {
   const [showTracker, setShowTracker] = useState(true);
   const [draggedJobId, setDraggedJobId] = useState<string | null>(null);
   const [jobTitles, setJobTitles] = useState([""]);
+  const [refreshJobs, setRefreshJobs] = useState(false);
 
   const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
   useEffect(() => {
-    if (status === "loading") 
-      return;
-    if (!session) {
-      router.push("/"); 
-    } else if (session) {
-      const fetchJobs = async () => {
-        setLoading(true);
-        try {
-          const userJobs = await getAllJobs();
-          setJobs(userJobs);
-          setFilteredJobs(userJobs)
-        } catch (err) {
-          setError('Failed to fetch jobs.');
-        } finally {
-          setLoading(false);
-        }
-      };
+      if (status === "loading") 
+        return;
+      if (!session) {
+        router.push("/"); 
+      }
+    }, [session, status, router]);
 
-      fetchJobs();
+  const fetchJobs = async () => {
+    setLoading(true);
+    try {
+      const userJobs = await getAllJobs();
+      setJobs(userJobs);
+      setFilteredJobs(userJobs)
+    } catch (err) {
+      setError('Failed to fetch jobs.');
+    } finally {
+      setLoading(false);
     }
-  }, [status]);
+  };
 
-  // useEffect(() => {
-  //   if (jobs) {
-  //     setJobTitles([...new Set(jobs.map(job => job.title))])
-  //   }
-  // }, [jobs])
+  useEffect(() => {
+    fetchJobs();
+  }, [session]);
+
+  useEffect(() => {
+    if (jobs) {
+      setJobTitles([...new Set(jobs.map(job => job.title))])
+    }
+  }, [jobs])
 
   const handleSearch = (query: string) => {
     const filtered = jobs.filter(
@@ -138,7 +141,9 @@ const MyTrackerPage: React.FC = () => {
       setJobs((prevJobs) => [...prevJobs, job]); 
       setFilteredJobs((prevJobs) => [...prevJobs, job]);
       setJobTitles((prevTitles) => [...new Set([...prevTitles, job.title])]); 
-  
+
+      await fetchJobs();
+
       setTitle('');
       setCompany('');
       setSalary('');
@@ -154,6 +159,7 @@ const MyTrackerPage: React.FC = () => {
       console.error(error);
     } finally {
       setLoading(false);
+      setRefreshJobs(false)
     }
   };
 
@@ -167,8 +173,7 @@ const MyTrackerPage: React.FC = () => {
     try {
       await deleteJob(jobId); 
   
-      const updatedJobs = await getAllJobs();
-      setJobs(updatedJobs);
+      await fetchJobs();
   
       setMessage('Job deleted successfully.');
     } catch (error) {
@@ -197,8 +202,8 @@ const MyTrackerPage: React.FC = () => {
     try {
       const { _id, ...jobData } = updatedJob; 
       await updateJob(_id, jobData);
-      const updatedJobs = await getAllJobs(); 
-      setJobs(updatedJobs);
+      await fetchJobs();
+
     } catch (error) {
       setMessage('Error updating job.');
       console.error(error);

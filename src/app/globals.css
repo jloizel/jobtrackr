@@ -175,6 +175,10 @@ a {
 
 /* autocomplete in job modal */
 
+.irCRfw {
+  height: 38px !important;
+}
+
 .irCRfw .wrapper {
   border: 1px solid #dfdfe2b4;
   box-shadow: rgba(25, 4, 69, 0.05) 0px 1px 4px;
