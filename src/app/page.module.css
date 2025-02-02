@@ -31,6 +31,10 @@
   }
 }
 
+.rightContainer {
+  position: relative;
+}
+
 .headerText {
   display: flex;
   flex-direction: column;
