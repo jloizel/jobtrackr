@@ -12,6 +12,8 @@ import Features from "@/components/features/features";
 import TestimonialsSlider from "@/components/testimonials/testimonialsSlider";
 import Steps from "@/components/steps/steps";
 import Slide from "@/components/scrollAnimations/slide";
+import SplineScene from "@/components/splineScene/splineScene";
+import Spline from "@splinetool/react-spline";
 
 export default function Home() {
   const { theme } = useContext(ThemeContext);
@@ -42,6 +44,13 @@ export default function Home() {
             </Link>
           {/* )} */}
         </div>
+        <div className={styles.rightContainer}>
+          <SplineScene/>
+        </div>
+        {/* <video autoPlay loop muted playsInline className={styles.demoVideo}>
+            <source src="/demo.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video> */}
       </div>
       <FeaturesBoard/>
       <Slide className={styles.title}>
