@@ -17,6 +17,10 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  @media (max-width: 767px) {
+    gap: 40px;
+  }
   
   @media (min-width: 768px) {
     flex-direction: row;
@@ -31,8 +35,12 @@
   }
 }
 
+.leftContainer {
+  z-index: 10;
+}
+
 .rightContainer {
-  position: relative;
+  /* z-index: -1; */
 }
 
 .headerText {

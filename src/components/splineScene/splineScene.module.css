@@ -1,4 +1,11 @@
-/* .container {
-  width: 100% !important;
-  height: 50% !important;
-} */
+.container {
+  height: auto !important;
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 130% !important;
+  }
+
+  @media (min-width: 1024px) {
+    width: 120% !important;
+  }
+}
