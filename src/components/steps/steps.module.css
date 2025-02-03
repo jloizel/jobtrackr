@@ -20,6 +20,7 @@
 
 .leftContainer {
   color: var(--secondary-text-color);
+  width: 100%;
 
   @media (min-width: 768px) {
     width: 50%;
@@ -77,6 +78,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 
   @media (min-width: 768px) {
     min-height: 700px;

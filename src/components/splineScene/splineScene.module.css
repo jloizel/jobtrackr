@@ -1,5 +1,6 @@
 .container {
   height: auto !important;
+  width: 105% !important;
 
   @media (min-width: 768px) and (max-width: 1023px) {
     width: 130% !important;
