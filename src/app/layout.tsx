@@ -7,6 +7,7 @@ import Navbar from "@/components/navbar/navbar";
 import { ConditionalNavbar, ConditionalFooter } from "./conditionalRender";
 import Footer from "@/components/footer/footer";
 import CreditBar from "@/components/creditBar/creditBar";
+import { GA } from "@/components/GA/GA";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -32,6 +33,7 @@ export default function RootLayout({
                 </div>
             </div>
             <CreditBar/>
+            <GA/>
           </ThemeProvider>
         </AuthProvider>
       </body>
