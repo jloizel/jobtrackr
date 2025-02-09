@@ -11,7 +11,7 @@ const AuthenticationButtons = () => {
   const router = useRouter();
   
   const handleSignOut = async () => {
-    await signOut(); 
+    await signOut({ callbackUrl: '/', redirect:true }); 
     localStorage.removeItem('userEmail');
   };
 

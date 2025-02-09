@@ -52,7 +52,7 @@ const SignupPage = () => {
         {!showForm ? (
           <div className={styles.buttonsContainer}>
             <div className={`${styles.socialButton} ${styles.googleButton}`} onClick={() => signIn("google")}>
-              <img src="/icons8-google.svg" className={styles.socialIcon}/>
+              <img src="/google.svg" className={styles.socialIcon}/>
               <span>Continue with Google</span>
             </div>
             <div className={`${styles.socialButton} ${styles.githubButton}`} onClick={() => signIn("github")}>
