@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/jloizel/jobtrackr">
-    <img src="" alt="Logo" width="auto" height="300">
+    <img src="public/share.png" alt="Logo" width="auto" height="300">
   </a>
 
 <h2 align="center">JobTrackr</h2>
@@ -12,7 +12,7 @@
     Hackr is an interactive coding challenge app designed to help you develop your programming skills through engaging daily coding puzzles.
     <br />
     <br />
-    <a href="https://github.com/jloizel/hackrApp"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/jloizel/jobtrackr"><strong>Explore the docs »</strong></a>
     <br />
     <br />
   </p>
