@@ -5,9 +5,14 @@ import { Autocomplete } from "@/components/mytrackerComponents/autocomplete/auto
 import styles from "./jobModal.module.css";
 import { MdEvent } from "react-icons/md";
 import { FaPaperPlane, FaHandshake, FaTimes } from "react-icons/fa";
-import { jobStatuses } from "@/constants/jobStatuses";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
+interface JobStatus {
+  id: string;
+  name: string;
+  icon: string;
+  color: string;
+}
 
 type JobModalProps = {
   open: boolean;
@@ -25,11 +30,12 @@ type JobModalProps = {
   setPostUrl: React.Dispatch<React.SetStateAction<string>>;
   jobStatus: string;
   jobTitles: string[];
+  jobStatuses: JobStatus[];
 };
 
 const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
-export const JobModal: React.FC<JobModalProps> = ({open, onClose, onSubmit, title, setTitle, setCompany, setLogoUrl, salary, setSalary, location, setLocation, postUrl, setPostUrl, jobStatus, jobTitles}) => {
+export const JobModal: React.FC<JobModalProps> = ({open, onClose, onSubmit, title, setTitle, setCompany, setLogoUrl, salary, setSalary, location, setLocation, postUrl, setPostUrl, jobStatus, jobTitles, jobStatuses}) => {
   
   const handleCompanySelect = (data: { value: string; query?: { name: string; domain: string; icon: string } }) => {
     if (data.query) {

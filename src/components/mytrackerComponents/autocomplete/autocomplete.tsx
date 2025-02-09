@@ -66,7 +66,7 @@ export const Autocomplete = ({ onSubmit, placeholder, initialValue }: IAutocompl
           setQueries(data);
         }
       } catch (err) {
-        console.log("Something went wrong, try again later.");
+        // console.log("Something went wrong, try again later.");
       }
       return;
     }

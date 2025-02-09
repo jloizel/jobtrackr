@@ -22,11 +22,9 @@ import { BiSolidShow, BiSolidHide } from "react-icons/bi";
 import { SlOptions } from "react-icons/sl";
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
 import { RiDragMove2Fill } from "react-icons/ri";
-import { jobStatuses } from '@/constants/jobStatuses';
 import Search from '@/components/mytrackerComponents/search/search';
 import Statistics from '@/components/mytrackerComponents/statistics/statistics';
 import ScrollArrow from '@/components/mytrackerComponents/scrollArrow/scrollArrow';
-// import 'react-calendar/dist/Calendar.css';
 
 
 export type Job = {
@@ -64,7 +62,6 @@ const MyTrackerPage: React.FC = () => {
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [detailsModalOpen, setDetailsModalOpen] = useState(false);
-  const [recentlyUpdated, setRecentlyUpdated] = useState(false);
   const [rejectedVisible, setRejectedVisible] = useState(false);
   const [showOptions, setShowOptions] = useState<string | null>(null);
   const optionsRef = useRef<HTMLDivElement | null>(null);
@@ -73,7 +70,14 @@ const MyTrackerPage: React.FC = () => {
   const [showTracker, setShowTracker] = useState(true);
   const [draggedJobId, setDraggedJobId] = useState<string | null>(null);
   const [jobTitles, setJobTitles] = useState([""]);
-  const [refreshJobs, setRefreshJobs] = useState(false);
+  const [jobStatuses, setJobStatuses] = useState([
+    {
+      id: "",
+      name: "",
+      icon: "",
+      color: ""
+    }
+  ]);
 
   const apiKey = process.env.NEXT_PUBLIC_BRANDFETCH_API_KEY;
 
@@ -84,6 +88,16 @@ const MyTrackerPage: React.FC = () => {
         router.push("/"); 
       }
     }, [session, status, router]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('/data/jobStatuses.json');
+      const data = await response.json();
+      setJobStatuses(data);
+    };
+
+    fetchData();
+  }, []);
 
   const fetchJobs = async () => {
     setLoading(true);
@@ -159,7 +173,6 @@ const MyTrackerPage: React.FC = () => {
       console.error(error);
     } finally {
       setLoading(false);
-      setRefreshJobs(false)
     }
   };
 
@@ -369,6 +382,7 @@ const MyTrackerPage: React.FC = () => {
             setPostUrl={setPostUrl}
             jobStatus={jobStatus}
             jobTitles={jobTitles}
+            jobStatuses={jobStatuses}
           />
 
           <UpdateModal
@@ -387,6 +401,7 @@ const MyTrackerPage: React.FC = () => {
             location={location}
             postUrl={postUrl}
             handleDeleteJob={handleDeleteJob}
+            jobStatuses={jobStatuses}
           />
 
           <DetailsModal

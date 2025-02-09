@@ -7,7 +7,13 @@ import { Job } from "@/app/API";
 import { ImBin } from "react-icons/im";
 import { MdEvent } from "react-icons/md";
 import { FaPaperPlane, FaHandshake, FaTimes } from "react-icons/fa";
-import { jobStatuses } from "@/constants/jobStatuses";
+
+interface JobStatus {
+  id: string;
+  name: string;
+  icon: string;
+  color: string;
+}
 
 type UpdateModalProps = {
   open: boolean;
@@ -22,6 +28,7 @@ type UpdateModalProps = {
   location: string;
   postUrl: string;
   handleDeleteJob: (jobId: string) => void
+  jobStatuses: JobStatus[];
 };
 
 export const UpdateModal: React.FC<UpdateModalProps> = ({
@@ -33,7 +40,8 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
   salary,
   location,
   postUrl,
-  handleDeleteJob
+  handleDeleteJob,
+  jobStatuses
 }) => {
   const [formData, setFormData] = React.useState({
     title: "",
