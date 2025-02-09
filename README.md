@@ -6,15 +6,19 @@
     <img src="public/share.png" alt="Logo" width="auto" height="300">
   </a>
 
-<h2 align="center">JobTrackr</h2>
+<h3 align="center">JobTrackr</h3>
 
   <p align="center">
-    Hackr is an interactive coding challenge app designed to help you develop your programming skills through engaging daily coding puzzles.
+    JobTrackr is an easy to use job tracking app, allowing users to organise and track their job applications. 
+    <br />
+    <a href=""><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/jloizel/jobtrackr"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
+    <a href="https://github.com/jloizel/metroguessr-client">View Live Project</a>
+    ·
+    <a href="https://github.com/jloizel/metroguessr-client/issues/new?labels=bug&template=bug-report---.md">Leave some feedback</a>
+<!--     ·
+    <a href="https://github.com/jloizel/metroguessr-client/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a> -->
   </p>
 </div>
 
