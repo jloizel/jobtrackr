@@ -39,7 +39,7 @@ The development of this project improved my experience with user authentication 
 <code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/mongodb-color.svg" alt="mongodb" height="35px"/></code>
 <code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/nextdotjs-color.svg" alt="nextJS" height="35px"/></code>
 <code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/NextAuth.svg" alt="nexAuth" height="35px"/></code>
-<code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/Brandfetch%20Logo.svg" alt="brandfetch" height="35px"/></code>
+<code><img src="https://github.com/jloizel/jloizel/blob/main/Assets/Brandfetch%20Symbol.svg" alt="brandfetch" height="35px"/></code>
 
 </br>
 
