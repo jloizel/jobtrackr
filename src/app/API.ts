@@ -3,7 +3,6 @@ import { getSession } from 'next-auth/react';
 
 const BASE_URL = 'https://jobtrackr-server.vercel.app/'; 
 
-// Create an Axios instance with custom configurations
 const api: AxiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
@@ -11,19 +10,17 @@ const api: AxiosInstance = axios.create({
   },
 });
 
-// Function to get the user email from localStorage
 const getUserEmail = (): string | null => {
   return localStorage.getItem('userEmail'); 
 };
 
-// Axios request interceptor to add Authorization header with the email
 api.interceptors.request.use(
   async (config) => {
-    const session = await getSession(); // Get the session using NextAuth
-    const email = session?.user?.email; // Extract the user's email
+    const session = await getSession();
+    const email = session?.user?.email;
 
     if (email) {
-      config.headers['Authorization'] = `email ${email}`; // Add email to headers
+      config.headers['Authorization'] = `email ${email}`; 
     }
 
     return config;
@@ -35,7 +32,7 @@ api.interceptors.request.use(
 
 export default api;
 
-// Define types for request data and response data
+// define types for request data and response data
 export interface Job {
   _id: string;
   userEmail?: string;
@@ -51,7 +48,7 @@ export interface Job {
   updatedAt: string
 }
 
-// Create a new job
+// create a new job
 export const createJob = async (jobData: {
   status: string;  
   title: string;
@@ -71,7 +68,7 @@ export const createJob = async (jobData: {
 };
 
 
-// Get a job by ID
+// get a job by ID
 export const getJobById = async (jobId: string): Promise<Job | null> => {
   try {
     const response: AxiosResponse<{ job: Job }> = await api.get(`/jobs/get/${jobId}`);
@@ -88,7 +85,7 @@ export const getJobById = async (jobId: string): Promise<Job | null> => {
   }
 };
 
-// Get all jobs
+// get all jobs
 export const getAllJobs = async (): Promise<Job[]> => {
   try {
     const response: AxiosResponse<{ jobs: Job[] }> = await api.get('/jobs/get');
@@ -99,7 +96,7 @@ export const getAllJobs = async (): Promise<Job[]> => {
   }
 };
 
-// Update a job
+// update a job
 export const updateJob = async (jobId: string, jobData: {
   status: string;  
   title: string;
@@ -118,7 +115,7 @@ export const updateJob = async (jobId: string, jobData: {
   }
 };
 
-// Delete a job
+// delete a job
 export const deleteJob = async (jobId: string): Promise<{ message: string }> => {
   try {
     const response: AxiosResponse<{ message: string }> = await api.delete(`/jobs/delete/${jobId}`);
@@ -131,11 +128,11 @@ export const deleteJob = async (jobId: string): Promise<{ message: string }> => 
 export interface FileData {
   _id: string;
   fileName: string;
-  fileData: string; // Base64 encoded file data
+  fileData: string; 
   uploadDate: string;
 }
 
-// Upload a file (PDF)
+// upload a file (PDF)
 export const uploadCV = async (file: File): Promise<{ message: string }> => {
   try {
     const formData = new FormData();
@@ -158,7 +155,7 @@ export const uploadCV = async (file: File): Promise<{ message: string }> => {
   }
 };
 
-// Get files for the logged-in user
+// get files for the logged-in user
 export const getCVs = async (): Promise<FileData[]> => {
   try {
     const session = await getSession();
@@ -215,7 +212,7 @@ export const uploadCL = async (file: File): Promise<{ message: string }> => {
   }
 };
 
-// Get files for the logged-in user
+// get files for the logged-in user
 export const getCLs = async (): Promise<FileData[]> => {
   try {
     const session = await getSession();

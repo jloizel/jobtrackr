@@ -27,7 +27,7 @@ const UploadForm: React.FC<UploadFormProps> = ({ onFileUpload, uploadHandler, nu
 
     try {
       const response = await uploadHandler(selectedFile);
-      onFileUpload(); // Update the files list
+      onFileUpload(); // update the files list
     } catch (error) {
       console.error("Error uploading file:", error);
     }

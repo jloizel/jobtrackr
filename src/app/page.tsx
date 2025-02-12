@@ -1,8 +1,6 @@
 'use client'
 
-import Image from "next/image";
 import styles from "./page.module.css";
-import Navbar from "@/components/navbar/navbar";
 import { useContext, useEffect } from "react";
 import { ThemeContext } from "../utils/theme";
 import { useSession } from "next-auth/react";
@@ -13,7 +11,6 @@ import TestimonialsSlider from "@/components/testimonials/testimonialsSlider";
 import Steps from "@/components/steps/steps";
 import Slide from "@/components/scrollAnimations/slide";
 import SplineScene from "@/components/splineScene/splineScene";
-import Spline from "@splinetool/react-spline";
 
 export default function Home() {
   const { theme } = useContext(ThemeContext);
@@ -47,10 +44,6 @@ export default function Home() {
         <div className={styles.rightContainer}>
           <SplineScene/>
         </div>
-        {/* <video autoPlay loop muted playsInline className={styles.demoVideo}>
-            <source src="/demo.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video> */}
       </div>
       <FeaturesBoard/>
       <Slide className={styles.title}>
@@ -59,7 +52,6 @@ export default function Home() {
       {/* </div> */}
       </Slide>
       <Features/>
-      {/* <Testimonials/> */}
       <div className={styles.testimonials}>
         <div className={styles.text1}>Celebrating User Success</div>
         <TestimonialsSlider/>

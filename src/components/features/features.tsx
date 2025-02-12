@@ -46,10 +46,6 @@ const Features = () => {
             key={feature.id}
             className={styles.featureContainer}
           >
-          {/* <div
-            key={feature.id}
-            className={styles.featureContainer}
-          > */}
             <div className={styles.imageBackground} style={{border: `solid 2px ${feature.borderColor}`}}>
               <div className={styles.imageContainer}>
                 <img src={selectedImage} alt={feature.header} />
@@ -71,7 +67,6 @@ const Features = () => {
               >{feature.buttonText}
               </button>
             </div>
-          {/* </div> */}
           </Bounce>
         );
       })}

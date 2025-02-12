@@ -1,5 +1,4 @@
 import styles from "./featuresBoard.module.css";
-import { HiOutlineBriefcase } from "react-icons/hi2";
 import { CgFileDocument } from "react-icons/cg";
 import { FaRegEnvelope } from "react-icons/fa";
 import { PiBriefcaseBold } from "react-icons/pi";
@@ -9,7 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Pagination, Navigation } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import { NextArrow, PrevArrow } from "../swiperArrows/swiperArrows";
 
 
@@ -152,7 +151,6 @@ const FeaturesBoard = () => {
             spaceBetween={120}
             slidesPerView={1.5} 
             modules={[ Navigation]}
-            // pagination={{ clickable: true }}
             slidesOffsetAfter={120}
             onSlideChange={handleSlideChange}
             onSwiper={setSwiperInstance}
