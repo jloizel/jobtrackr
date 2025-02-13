@@ -84,7 +84,6 @@ export const DetailsModal: React.FC<DetailsModalProps> = ({open, onClose, job, c
 
   const daysAgo = calculateDaysAgo(updatedAt);
 
-
   return (
     <Modal open={open} className={styles.modalWrapper} onClose={onClose} disableScrollLock>
       <div className={styles.modalContent}>

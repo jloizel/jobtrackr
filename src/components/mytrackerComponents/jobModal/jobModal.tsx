@@ -41,8 +41,6 @@ export const JobModal: React.FC<JobModalProps> = ({open, onClose, onSubmit, titl
     if (data.query) {
       setCompany(data.query.name);
       setLogoUrl(`https://cdn.brandfetch.io/${data.query.domain}?c=${apiKey}`);
-
-      // console.log(`https://cdn.brandfetch.io/${data.query.domain}?c=${apiKey}`)
     }
   };
 
@@ -128,14 +126,6 @@ export const JobModal: React.FC<JobModalProps> = ({open, onClose, onSubmit, titl
             </div>
             <div className={styles.formInput}>
               <span>Job Title</span>
-              {/* <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className={styles.input}
-                placeholder="Enter the job title"
-                required
-              /> */}
               <ReactSearchAutocomplete
                 items={jobTitleOptions}
                 inputSearchString={title}

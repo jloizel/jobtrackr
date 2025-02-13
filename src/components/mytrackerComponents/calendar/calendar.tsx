@@ -111,7 +111,7 @@ const CalendarComponent = () => {
       if (jobDates.includes(dateString)) {
         classes.push(`${styles.jobDateClass}`);
   
-        // Add active class if this date is the selectedDate
+        // add active class if this date is the selectedDate
         if (isSameDay(date, selectedDate)) {
           classes.push(`${styles.activeJobDateClass}`);
         }

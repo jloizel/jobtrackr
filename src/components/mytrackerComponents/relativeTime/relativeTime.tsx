@@ -15,7 +15,7 @@ const RelativeTime: React.FC<{ date: string | number | Date }> = ({ date }) => {
         const diffMs = now.getTime() - past.getTime();
   
         if (diffMs < 0) {
-          // Handle future dates
+          // handle future dates
           return "Just now";
         }
   

@@ -25,7 +25,7 @@ export default function Slide({ children, delay = 0, className }: Props) {
   return (
     <motion.div ref={ref} className={className} style={{ position: 'relative', overflow: 'hidden' }}>
 
-      {/* Pink Curtain Reveal */}
+      {/* Curtain Reveal */}
       <motion.div
         initial={{ translateX: "-100%" }} 
         animate={isInView ? { translateX: "101%" } : {}} 
