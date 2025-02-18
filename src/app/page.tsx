@@ -47,9 +47,7 @@ export default function Home() {
       </div>
       <FeaturesBoard/>
       <Slide className={styles.title}>
-      {/* <div className={styles.title}> */}
         JobTrackr’s intuitive tools will help you <span>stay on top</span> of your job applications. Easily <span>manage and track</span> every detail of your job search, so you can focus on <span>what matters most</span>.
-      {/* </div> */}
       </Slide>
       <Features/>
       <div className={styles.testimonials}>
